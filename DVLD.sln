@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36623.8
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DVLD 3", "DVLD 3\DVLD 3.csproj", "{A3C96A33-8B32-4862-B53B-A1803B7F473A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DVLD_PresentationLayer", "DVLD 3\DVLD_PresentationLayer.csproj", "{A3C96A33-8B32-4862-B53B-A1803B7F473A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DVLD_BusienessLayer", "DVLD_BusienessLayer\DVLD_BusienessLayer.csproj", "{3956BA9D-CD17-46DF-B2A4-CFAC252A80B5}"
 EndProject
