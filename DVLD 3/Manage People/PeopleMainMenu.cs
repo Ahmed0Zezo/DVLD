@@ -184,11 +184,6 @@ namespace DVLD_3
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Test test = new Test();
-
-            test.ShowDialog();
-        }
+       
     }
 }

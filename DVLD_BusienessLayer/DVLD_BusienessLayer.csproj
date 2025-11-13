@@ -41,8 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="clsApplication.cs" />
+    <Compile Include="clsApplicationType.cs" />
     <Compile Include="clsCountry.cs" />
+    <Compile Include="clsLicenseClass.cs" />
     <Compile Include="clsPerson.cs" />
+    <Compile Include="clsTestType.cs" />
     <Compile Include="clsUser.cs" />
     <Compile Include="clsGlobalInformations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

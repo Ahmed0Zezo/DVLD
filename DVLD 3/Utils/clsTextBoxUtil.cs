@@ -27,6 +27,28 @@ namespace DVLD_3
             txtBox.Text = NewText.ToString();
         }
 
+        public static void MakeTextBoxesHaveOnlyMoneyCharacters(TextBox txtBox)
+        {
+
+            StringBuilder NewText = new StringBuilder();
+
+            for (int i = 0; i <= txtBox.Text.Length - 1; i++)
+            {
+                if ((txtBox.Text[i] >= '0' && txtBox.Text[i] <= '9'))
+                {
+                    NewText.Append(txtBox.Text[i]);
+                }
+
+                if ((txtBox.Text[i] == '.' && txtBox.Text.Count() > 0
+                    && !NewText.ToString().Contains('.')))
+                {
+                    NewText.Append(txtBox.Text[i]);
+                }
+            }
+
+            txtBox.Text = NewText.ToString();
+        }
+
         public static bool LinkTextBoxWithErrorProvider(TextBox txtBox, string ErrorMessage, bool ErrorCondition
             , ErrorProvider errorProvider, CancelEventArgs e)
         {

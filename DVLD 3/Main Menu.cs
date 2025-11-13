@@ -1,4 +1,6 @@
-﻿using DVLD_3.Users;
+﻿using DVLD_3.Applications;
+using DVLD_3.Tests.TestTypes;
+using DVLD_3.Users;
 using DVLD_BusienessLayer;
 using System;
 using System.Collections.Generic;
@@ -17,15 +19,6 @@ namespace DVLD_3
         public Main_Menu()
         {
             InitializeComponent();
-        }
-
-
-
-
-        private void applicationsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("We will add this form in near feature", "Didn't Compeleted Form", MessageBoxButtons.OK
-                , MessageBoxIcon.Error);
         }
 
         private void peopleToolStripMenuItem_Click(object sender, EventArgs e)
@@ -76,6 +69,20 @@ namespace DVLD_3
             }
 
             
+        }
+
+        private void manageApplicationTypesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmApplicationTypes frmApplicationTypes = new frmApplicationTypes();
+
+            frmApplicationTypes.ShowDialog();
+        }
+
+        private void manageTestTypesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmTestTypes testTypes = new frmTestTypes();
+
+            testTypes.ShowDialog();
         }
     }
 }

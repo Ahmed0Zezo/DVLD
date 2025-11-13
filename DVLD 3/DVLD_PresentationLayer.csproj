@@ -46,6 +46,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Applications\Applications Types\frmApplicationTypes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Applications\Applications Types\frmApplicationTypes.Designer.cs">
+      <DependentUpon>frmApplicationTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Applications\Applications Types\frmUpdateApplicationTypes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Applications\Applications Types\frmUpdateApplicationTypes.Designer.cs">
+      <DependentUpon>frmUpdateApplicationTypes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login\frmLoginScreen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,6 +102,18 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests\TestTypes\frmTestTypes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tests\TestTypes\frmTestTypes.Designer.cs">
+      <DependentUpon>frmTestTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tests\TestTypes\frmUpdateTestType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tests\TestTypes\frmUpdateTestType.Designer.cs">
+      <DependentUpon>frmUpdateTestType.cs</DependentUpon>
+    </Compile>
     <Compile Include="User Controls\DataGridViewFilter.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -142,6 +166,12 @@
     <Compile Include="Utils\clsEnumsUtil.cs" />
     <Compile Include="Utils\clsFilesUtil.cs" />
     <Compile Include="Utils\clsTextBoxUtil.cs" />
+    <EmbeddedResource Include="Applications\Applications Types\frmApplicationTypes.resx">
+      <DependentUpon>frmApplicationTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Applications\Applications Types\frmUpdateApplicationTypes.resx">
+      <DependentUpon>frmUpdateApplicationTypes.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login\frmLoginScreen.resx">
       <DependentUpon>frmLoginScreen.cs</DependentUpon>
     </EmbeddedResource>
@@ -173,6 +203,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Tests\TestTypes\frmTestTypes.resx">
+      <DependentUpon>frmTestTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tests\TestTypes\frmUpdateTestType.resx">
+      <DependentUpon>frmUpdateTestType.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="User Controls\DataGridViewFilter.resx">
       <DependentUpon>DataGridViewFilter.cs</DependentUpon>
     </EmbeddedResource>
@@ -564,5 +600,6 @@
       <Name>DVLD_BusienessLayer</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
