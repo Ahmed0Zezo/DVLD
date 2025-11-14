@@ -12,14 +12,9 @@ namespace DVLD_DataAccessLayer
 {
     public class clsApplicationsDataAccess
     {
-        public static bool FindApplicationByID(int ApplicationID,
-            ref int ApplicantPersonID,
-            ref DateTime ApplicationDate,
-            ref int ApplicationTypeID,
-            ref byte ApplicationStatus,
-            ref DateTime LastStatusDate,
-            ref decimal PaidFees,
-            ref int CreatedByUserID)
+        public static bool FindApplicationByID(int ApplicationID,ref int ApplicantPersonID,ref DateTime ApplicationDate
+            ,ref int ApplicationTypeID,ref byte ApplicationStatus,ref DateTime LastStatusDate
+            ,ref decimal PaidFees,ref int CreatedByUserID)
         {
             bool IsFound = false;
             SqlConnection connection = new SqlConnection(clsPublicSystemInfos.ConnectionString);
@@ -57,14 +52,8 @@ namespace DVLD_DataAccessLayer
             return IsFound;
         }
 
-        public static bool InsertNewApplication(ref int ApplicationID,
-            int ApplicantPersonID,
-            DateTime ApplicationDate,
-            int ApplicationTypeID,
-            byte ApplicationStatus,
-            DateTime LastStatusDate,
-            decimal PaidFees,
-            int CreatedByUserID)
+        public static bool InsertNewApplication(ref int ApplicationID,int ApplicantPersonID,DateTime ApplicationDate
+            ,int ApplicationTypeID,byte ApplicationStatus,DateTime LastStatusDate,decimal PaidFees,int CreatedByUserID)
         {
             string Quere = @"INSERT INTO Applications
                 (ApplicantPersonID, ApplicationDate, ApplicationTypeID, ApplicationStatus, LastStatusDate, PaidFees, CreatedByUserID)
@@ -86,14 +75,8 @@ namespace DVLD_DataAccessLayer
             return clsCRUD.AddNewRecordToTable(ref ApplicationID, clsPublicSystemInfos.ConnectionString, Quere, parameters);
         }
 
-        public static bool UpdateApplication(int ApplicationID,
-            int ApplicantPersonID,
-            DateTime ApplicationDate,
-            int ApplicationTypeID,
-            byte ApplicationStatus,
-            DateTime LastStatusDate,
-            decimal PaidFees,
-            int CreatedByUserID)
+        public static bool UpdateApplication(int ApplicationID,int ApplicantPersonID,DateTime ApplicationDate
+            ,int ApplicationTypeID,byte ApplicationStatus,DateTime LastStatusDate,decimal PaidFees,int CreatedByUserID)
         {
             string Quere = @"UPDATE Applications SET
                 ApplicantPersonID = @ApplicantPersonID,

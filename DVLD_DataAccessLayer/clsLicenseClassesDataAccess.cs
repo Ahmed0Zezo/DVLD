@@ -57,6 +57,44 @@ namespace DVLD_DataAccessLayer
             }
 
             return IsFound;
+            
         }
+
+        public static bool GetLiceseClassNameByItsID(int LicenseClasseID,ref string ClassName)
+        {
+            bool IsFound = false;
+
+            SqlConnection connection = new SqlConnection(clsPublicSystemInfos.ConnectionString);
+
+            string Quere = @"select ClassName from LicenseClasses
+                             where LicenseClassID = @LicenseClassID";
+
+            SqlCommand command = new SqlCommand(Quere, connection);
+            command.Parameters.AddWithValue("@LicenseClasseID", LicenseClasseID);
+
+            try
+            {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    ClassName = (string)reader["ClassName"];
+                    IsFound = true;
+                }
+            }
+            catch
+            {
+                // Handle exceptions if necessary
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return IsFound;
+        }
+
+
     }
 }

@@ -176,5 +176,41 @@ namespace DVLD_DataAccessLayer
         {
             return clsCRUD.IsRecordExistInTableByID(NationalNo, "NationalNo", "People", clsPublicSystemInfos.ConnectionString);
         }
+
+        public static bool IsPersonHasActiveLocalDrivingLicenseApplicationWithClassID(int PersonID , int ClassID)
+        {
+            string Quere = @"select Count(LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID)
+                            from LocalDrivingLicenseApplications inner join Applications 
+                            on LocalDrivingLicenseApplications.ApplicationID = Applications.ApplicationID
+                            where Applications.ApplicantPersonID = @PersonID and LocalDrivingLicenseApplications.LicenseClassID = @LicenseClassID 
+                            and Applications.ApplicationStatus = 1; ";
+
+            //Applications.ApplicationStatus = 1  => New
+            
+
+            List<SqlParameter> parameters = new List<SqlParameter>
+            { Parameters.MakeParameter("PersonID", PersonID, false),
+              Parameters.MakeParameter("LicenseClassID", ClassID, false)
+            };
+
+            return clsCRUD.IsRecordExistInByQuereCondition(Quere,parameters,clsPublicSystemInfos.ConnectionString);
+        }
+
+        public static bool IsPersonHasActiveLicenseWithClassID(int PersonID , int ClassID)
+        {
+            string Quere = @"select Count(LicenseID) from Licenses
+                            where DriverID in 
+                            (select Drivers.DriverID from
+                            People inner join Drivers on People.PersonID = Drivers.PersonID
+                            where Drivers.PersonID = @PersonID)
+                            and LicenseClass = @LicenseClassID and IsActive = 1";
+
+            List<SqlParameter> parameters = new List<SqlParameter>
+            { Parameters.MakeParameter("PersonID", PersonID, false),
+              Parameters.MakeParameter("LicenseClassID", ClassID, false)
+            };
+
+            return clsCRUD.IsRecordExistInByQuereCondition(Quere, parameters, clsPublicSystemInfos.ConnectionString);
+        }
     }
 }

@@ -48,6 +48,7 @@
     <Compile Include="clsApplicationTypesDataAccess.cs" />
     <Compile Include="clsCountriesDataAccess.cs" />
     <Compile Include="clsLicenseClassesDataAccess.cs" />
+    <Compile Include="clsLocalAppsDataAccess.cs" />
     <Compile Include="clsPublicSystemInfos.cs" />
     <Compile Include="clsPeopleDataAccess.cs" />
     <Compile Include="clsTestTypesDataAccess.cs" />

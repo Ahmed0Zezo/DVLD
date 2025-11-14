@@ -284,5 +284,15 @@ namespace DVLD_BusienessLayer
         {
             return clsPeopleDataAccess.DeletePersonFromDataBase(PersonID);
         }
+
+        public static bool IsPersonHasLocalNewDrivingLicenseAppWithClassID(int PersonID,int ClassID)
+        {
+            return clsPeopleDataAccess.IsPersonHasActiveLocalDrivingLicenseApplicationWithClassID(PersonID, ClassID);
+        }
+
+        public static bool IsPersonHasActiveLicenseWithClassID(int PersonID , int ClassID)
+        {
+            return clsPeopleDataAccess.IsPersonHasActiveLicenseWithClassID(PersonID, ClassID);
+        }
     }
 }
