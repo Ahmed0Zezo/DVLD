@@ -46,6 +46,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Applications\Controls\ctrlApplicationInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Applications\Controls\ctrlApplicationInfo.Designer.cs">
+      <DependentUpon>ctrlApplicationInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Applications\Controls\ctrlLDApplicationInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Applications\Controls\ctrlLDApplicationInfo.Designer.cs">
+      <DependentUpon>ctrlLDApplicationInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Applications\LocalDrivingLicenseApplication\AddEditLocalDrivingLicenseApplication.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Applications\LocalDrivingLicenseApplication\AddEditLocalDrivingLicenseApplication.Designer.cs">
+      <DependentUpon>AddEditLocalDrivingLicenseApplication.cs</DependentUpon>
+    </Compile>
     <Compile Include="Applications\Applications Types\frmApplicationTypes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -57,6 +75,30 @@
     </Compile>
     <Compile Include="Applications\Applications Types\frmUpdateApplicationTypes.Designer.cs">
       <DependentUpon>frmUpdateApplicationTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Applications\LocalDrivingLicenseApplication\ManageLocalApplications.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Applications\LocalDrivingLicenseApplication\ManageLocalApplications.Designer.cs">
+      <DependentUpon>ManageLocalApplications.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Drivers\frmDriversDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Drivers\frmDriversDetails.Designer.cs">
+      <DependentUpon>frmDriversDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Licenses\Controls\ctrlLicneseInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Licenses\Controls\ctrlLicneseInfo.Designer.cs">
+      <DependentUpon>ctrlLicneseInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Licenses\frmLicenseInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Licenses\frmLicenseInfo.Designer.cs">
+      <DependentUpon>frmLicenseInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="Login\frmLoginScreen.cs">
       <SubType>Form</SubType>
@@ -102,6 +144,18 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests\Controls\ctrlSceduleTest.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tests\Controls\ctrlSceduleTest.Designer.cs">
+      <DependentUpon>ctrlSceduleTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tests\Controls\ctrlTestAppointment.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tests\Controls\ctrlTestAppointment.Designer.cs">
+      <DependentUpon>ctrlTestAppointment.cs</DependentUpon>
+    </Compile>
     <Compile Include="Tests\TestTypes\frmTestTypes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -172,6 +226,27 @@
     <EmbeddedResource Include="Applications\Applications Types\frmUpdateApplicationTypes.resx">
       <DependentUpon>frmUpdateApplicationTypes.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Applications\Controls\ctrlApplicationInfo.resx">
+      <DependentUpon>ctrlApplicationInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Applications\Controls\ctrlLDApplicationInfo.resx">
+      <DependentUpon>ctrlLDApplicationInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Applications\LocalDrivingLicenseApplication\AddEditLocalDrivingLicenseApplication.resx">
+      <DependentUpon>AddEditLocalDrivingLicenseApplication.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Applications\LocalDrivingLicenseApplication\ManageLocalApplications.resx">
+      <DependentUpon>ManageLocalApplications.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Drivers\frmDriversDetails.resx">
+      <DependentUpon>frmDriversDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Licenses\Controls\ctrlLicneseInfo.resx">
+      <DependentUpon>ctrlLicneseInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Licenses\frmLicenseInfo.resx">
+      <DependentUpon>frmLicenseInfo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login\frmLoginScreen.resx">
       <DependentUpon>frmLoginScreen.cs</DependentUpon>
     </EmbeddedResource>
@@ -203,6 +278,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Tests\Controls\ctrlSceduleTest.resx">
+      <DependentUpon>ctrlSceduleTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tests\Controls\ctrlTestAppointment.resx">
+      <DependentUpon>ctrlTestAppointment.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Tests\TestTypes\frmTestTypes.resx">
       <DependentUpon>frmTestTypes.cs</DependentUpon>
     </EmbeddedResource>

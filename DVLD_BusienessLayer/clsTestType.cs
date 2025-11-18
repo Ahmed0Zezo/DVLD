@@ -10,6 +10,7 @@ namespace DVLD_BusienessLayer
 {
     public class clsTestType
     {
+        
         public int TestTypeID { get; set; }
         public string TestTypeTitle { get; set; }
         public string TestTypeDescription { get; set; }
@@ -42,6 +43,28 @@ namespace DVLD_BusienessLayer
             }
         }
 
+        public static clsTestType WhatTestTypeToTakeByLocalAppID(int LocalAppID)
+        {
+            int? TestTypeID = clsLocalAppsDataAccess.GetLastPassedTestTypeIDByLocalAppID(LocalAppID);
+
+            if (TestTypeID == null)
+            {
+                // if there is no Passed Tests at all then will return Vision Test
+                return FindTestTypeByID(1);
+            }
+            else if (TestTypeID == 1 || TestTypeID == 2)
+            {
+                //return the next of the current Test to take
+                return FindTestTypeByID((int)TestTypeID + 1);
+            }
+            else
+            {
+                //if the valu isn't 1 or 2 then it's 3 (The Person Passed all Tests) so there isn't test to take
+                return null;
+            }
+
+        }
+
         public static DataTable GetAllTestTypes()
         {
             return clsTestTypesDataAccess.GetAllTestTypes();
@@ -53,5 +76,7 @@ namespace DVLD_BusienessLayer
                 TestTypeID, TestTypeTitle, TestTypeDescription, TestTypeFees
             );
         }
+
+
     }
 }

@@ -21,14 +21,15 @@ namespace DVLD_BusienessLayer
         public int CreatedByUserID { get; set; }
 
 
-        public clsApplication()
+        public clsApplication(int ApplicationTypeID)
         {
             ApplicationID = 0;
             ApplicantPersonID = 0;
-            ApplicationDate = DateTime.MinValue;
-            ApplicationTypeID = 0;
+            ApplicationDate = DateTime.Now;
+            this.ApplicationTypeID = ApplicationTypeID;
+            ApplicationType = clsApplicationType.FindApplicationTypeByID(ApplicationTypeID);
             ApplicationStatus = ApplicationStatusEnum.New;
-            LastStatusDate = DateTime.MinValue;
+            LastStatusDate = DateTime.Now;
             PaidFees = 0;
             CreatedByUserID = 0;
         }
@@ -61,6 +62,22 @@ namespace DVLD_BusienessLayer
             return (byte)status;
         }
 
+        public static string StatusEnumToString(ApplicationStatusEnum status)
+        {
+            switch (status)
+            {
+                case ApplicationStatusEnum.New:
+                    return "New";
+                case ApplicationStatusEnum.Cancled:
+                    return "Cancled";
+                case ApplicationStatusEnum.Completed:
+                    return "Completed";
+                default:
+                    return "Error";
+            }
+
+        }
+
         public static ApplicationStatusEnum ByteToStatusEnum(byte status)
         {
             switch (status)
@@ -79,7 +96,7 @@ namespace DVLD_BusienessLayer
             if (clsApplicationsDataAccess.InsertNewApplication(ref NewID,ApplicantPersonID,ApplicationDate,ApplicationTypeID
                 ,StatusEnumToByte(ApplicationStatus),LastStatusDate,PaidFees,CreatedByUserID))
             {
-                this.ApplicantPersonID = NewID;
+                this.ApplicationID = NewID;
                 return true;
             }
             else

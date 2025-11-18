@@ -122,11 +122,16 @@ namespace DVLD_3.UserControls
                 _targerFormToClose.Close();
         }
 
-
+        private void _refereshData()
+        {
+            dataGridView.DataSource = _data;
+            lblRecordsNumber.Text = _data.Rows.Count.ToString();
+        }
 
         private void PublicFormsPanel_Load(object sender, EventArgs e)
         {
             dataGridViewFilter1.FilterChanged += _filterChanged;
+            dataGridViewFilter1.ChoosedNoneIndex += _refereshData;
         }
 
 

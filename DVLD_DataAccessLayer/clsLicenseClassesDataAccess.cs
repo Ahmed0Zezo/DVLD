@@ -70,7 +70,7 @@ namespace DVLD_DataAccessLayer
                              where LicenseClassID = @LicenseClassID";
 
             SqlCommand command = new SqlCommand(Quere, connection);
-            command.Parameters.AddWithValue("@LicenseClasseID", LicenseClasseID);
+            command.Parameters.AddWithValue("@LicenseClassID", LicenseClasseID);
 
             try
             {

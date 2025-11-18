@@ -17,6 +17,7 @@ namespace DVLD_3.UserControls
 
         public event Action<string, Type, string> FilterChanged;
 
+        public event Action ChoosedNoneIndex;
 
         public DataGridViewFilter()
         {
@@ -135,6 +136,7 @@ namespace DVLD_3.UserControls
             {
                 txtFilteredValue.Visible = false;
                 cbFilterValue.Visible = false;
+                ChoosedNoneIndex?.Invoke();
                 return;
             }
 

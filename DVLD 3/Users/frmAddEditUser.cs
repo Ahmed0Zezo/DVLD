@@ -62,21 +62,13 @@ namespace DVLD_3.Users
         private void _personSelectedChanged(int PersonID)
         {
 
-            if (PersonID != -1)
-            {
-                if(clsUser.IsUserExistByPersonID(PersonID))
-                {
-                    btnSave.Enabled = false;
-                    _enableUserInfoControls(false);
-                }
-                
-            }
-            else
+            if (PersonID == -1 || clsUser.IsUserExistByPersonID(PersonID))
             {
                 btnSave.Enabled = false;
                 _enableUserInfoControls(false);
-                
+
             }
+            
         }
         private void _prepareUIForAddMode()
         {

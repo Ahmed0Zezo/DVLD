@@ -100,6 +100,19 @@ namespace DVLD_DataAccessLayer
             return clsCRUD.UpdateAndDeleteRecordFromTable(clsPublicSystemInfos.ConnectionString, Quere, parameters) > 0;
         }
 
+        public static int GetPassedTestsByLocalAppID(int LocalAppID)
+        {
+            string Quere = @"select Count(TestID) from Tests
+                                where TestAppointmentID in
+                                (select TestAppointments.TestAppointmentID from
+                                TestAppointments inner join LocalDrivingLicenseApplications
+                                on TestAppointments.LocalDrivingLicenseApplicationID = LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID
+                                where LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID = @LocalAppID) and TestResult = 1";
+
+            List<SqlParameter> parameters = new List<SqlParameter> { Parameters.MakeParameter("LocalAppID", LocalAppID, false) };
+
+            return clsCRUD.ReturnIntValueFromTableByQuere(Quere ,parameters,clsPublicSystemInfos.ConnectionString);
+        }
         public static bool DeleteLocalDrivingLicenseApplication(int LocalDrivingLicenseApplicationID)
         {
             string Quere = @"DELETE FROM LocalDrivingLicenseApplications WHERE LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplicationID";
@@ -114,6 +127,32 @@ namespace DVLD_DataAccessLayer
         public static DataTable GetAllLocalDrivingLicenseApplication()
         {
             return clsCRUD.GetAllDataFromTable("LocalDrivingLicenseApplications_View", clsPublicSystemInfos.ConnectionString);
+        }
+
+
+
+        public static int? GetLastPassedTestTypeIDByLocalAppID(int LocalAppID)
+        {
+            int? LastPassedTestTypeID = null;
+
+            //get Last passed Test Type ID
+            string Quere = @"select distinct top 1 TestAppointments.TestTypeID 
+                            from TestAppointments inner join Tests on TestAppointments.TestAppointmentID = Tests.TestAppointmentID
+                            where TestAppointments.LocalDrivingLicenseApplicationID = @LocalAppID and Tests.TestResult = 1
+                            order by TestAppointments.TestTypeID desc";
+
+            List<SqlParameter> parameters = new List<SqlParameter> { Parameters.MakeParameter("LocalAppID", LocalAppID, false) };
+
+            Commands.Scalar scalar = new Commands.Scalar(clsPublicSystemInfos.ConnectionString, Quere, parameters);
+
+            scalar.Execute();
+
+            if (scalar.IsExecutedSuccessfully)
+            {
+                LastPassedTestTypeID = (int?)scalar.Result;
+            }
+
+            return LastPassedTestTypeID;
         }
     }
 }

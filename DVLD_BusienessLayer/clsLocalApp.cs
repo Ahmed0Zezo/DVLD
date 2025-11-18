@@ -9,14 +9,22 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace DVLD_BusienessLayer
 {
-    internal class clsLocalApp
+    public class clsLocalApp
     {
         public delegate void AddingLocalAppProccessFaild(string FailingMessage);
-        public event AddingLocalAppProccessFaild AddingLocalAppFaild;
+        public event AddingLocalAppProccessFaild SavingLocalDrivingLicenseAppFaild;
         public int LocalDrivingLicenseApplicationID { get; set; }
         public int ApplicationID { get; set; }
 
-        
+        public int PassedTests
+        {
+            get
+            {
+                return clsLocalAppsDataAccess.GetPassedTestsByLocalAppID(this.LocalDrivingLicenseApplicationID);
+            }
+        }
+
+
         public clsApplication Application { set; get; }
         public int LicenseClassID { get; set; }
 
@@ -28,7 +36,7 @@ namespace DVLD_BusienessLayer
             LocalDrivingLicenseApplicationID = 0;
             ApplicationID = 0;
             LicenseClassID = 0;
-            Application = new clsApplication();
+            Application = new clsApplication(1);
         }
 
         // Private constructor: full object
@@ -46,28 +54,30 @@ namespace DVLD_BusienessLayer
 
             if (clsPerson.IsPersonHasLocalNewDrivingLicenseAppWithClassID(this.Application.ApplicantPersonID, this.LicenseClassID))
             {
-                AddingLocalAppFaild?.Invoke($@"The Person with ID ({this.Application.ApplicantPersonID}) has a new L.D.L Application 
-                                            with License Class Type ({clsLicenseClass.GetLiceseClassNameByItsID(this.LicenseClassID)} already
-                                            please choose another class)");
+                SavingLocalDrivingLicenseAppFaild?.Invoke($@"The Person with ID ({this.Application.ApplicantPersonID}) has a new L.D.L Application 
+with License Class Type ({clsLicenseClass.GetLiceseClassNameByItsID(this.LicenseClassID)})  already
+please choose another class");
                 return false;
             }
 
 
             if (clsPerson.IsPersonHasActiveLicenseWithClassID(this.Application.ApplicantPersonID,this.LicenseClassID))
             {
-                AddingLocalAppFaild?.Invoke($@"The Person with ID ({this.Application.ApplicantPersonID}) has an active License
-                                            with License Class Type ({clsLicenseClass.GetLiceseClassNameByItsID(this.LicenseClassID)} already
-                                            please choose another class)");
+                SavingLocalDrivingLicenseAppFaild?.Invoke($@"The Person with ID ({this.Application.ApplicantPersonID}) has an active License
+with License Class Type ({clsLicenseClass.GetLiceseClassNameByItsID(this.LicenseClassID)}) already
+please choose another class");
                 return false;
             }
 
             if(!this.Application.Add())
             {
-                AddingLocalAppFaild?.Invoke($@"Something went wrong during saving the application,Contact the admin!");
+                SavingLocalDrivingLicenseAppFaild?.Invoke($@"Something went wrong during saving the application,Contact the admin!");
                 return false;
             }
-           
-                 
+
+            ApplicationID = Application.ApplicationID;
+
+
             if (clsLocalAppsDataAccess.InsertNewLocalDrivingLicenseApplication(ref newID, ApplicationID, LicenseClassID))
             {
                 LocalDrivingLicenseApplicationID = newID;
@@ -77,15 +87,56 @@ namespace DVLD_BusienessLayer
             else
             {
                 LocalDrivingLicenseApplicationID = -1;
-                AddingLocalAppFaild?.Invoke($@"Something went wrong during saving the L.D.L Application ,Contact the admin!");
+                SavingLocalDrivingLicenseAppFaild?.Invoke($@"Something went wrong during saving the L.D.L Application ,Contact the admin!");
                 clsApplication.DeleteApplicationByID(this.ApplicationID);
                 return false;
             }
         }
 
-        public bool Update()
+        public bool UpdateLicenseClassID(int LicenseClassID)
         {
-            return clsLocalAppsDataAccess.UpdateLocalDrivingLicenseApplicationLicenseClassID(LocalDrivingLicenseApplicationID, LicenseClassID);
+            if(this.Application.ApplicationStatus != clsApplication.ApplicationStatusEnum.New)
+            {
+                SavingLocalDrivingLicenseAppFaild?.Invoke($@"Either the application was canseled or completed you can edit new applicatoins only");
+                return false;
+            }
+
+            if (this.LicenseClassID == LicenseClassID)
+            {
+                SavingLocalDrivingLicenseAppFaild?.Invoke($@"You choosed the same License Class,Please choose another one");
+                return false;
+            }
+
+            if (clsPerson.IsPersonHasLocalNewDrivingLicenseAppWithClassID(this.Application.ApplicantPersonID, LicenseClassID))
+            {
+                SavingLocalDrivingLicenseAppFaild?.Invoke($@"The Person with ID ({this.Application.ApplicantPersonID}) has a new L.D.L Application 
+with License Class Type ({clsLicenseClass.GetLiceseClassNameByItsID(LicenseClassID)})  already
+please choose another class");
+                return false;
+            }
+
+
+            if (clsPerson.IsPersonHasActiveLicenseWithClassID(this.Application.ApplicantPersonID, LicenseClassID))
+            {
+                SavingLocalDrivingLicenseAppFaild?.Invoke($@"The Person with ID ({this.Application.ApplicantPersonID}) has an active License
+with License Class Type ({clsLicenseClass.GetLiceseClassNameByItsID(LicenseClassID)}) already
+please choose another class");
+                return false;
+            }
+
+
+            if (clsLocalAppsDataAccess.UpdateLocalDrivingLicenseApplicationLicenseClassID
+                    (LocalDrivingLicenseApplicationID, LicenseClassID))
+            {
+                this.LicenseClassID = LicenseClassID;
+                return true;
+            }
+            else
+            {
+                SavingLocalDrivingLicenseAppFaild?.Invoke($@"Something went wrong during saving the L.D.L Application ,Contact the admin!");
+                return false;
+            }
+            
         }
 
         public bool DeleteByID(int LocalAppID)
@@ -116,5 +167,8 @@ namespace DVLD_BusienessLayer
 
             return new clsLocalApp(localDrivingLicenseApplicationID, applicationID, licenseClassID);
         }
+
+        
+        
     }
 }

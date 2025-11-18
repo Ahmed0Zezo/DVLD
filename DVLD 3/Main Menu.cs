@@ -1,4 +1,6 @@
 ﻿using DVLD_3.Applications;
+using DVLD_3.Applications.LocalDrivingLicenseApplication;
+using DVLD_3.Drivers;
 using DVLD_3.Tests.TestTypes;
 using DVLD_3.Users;
 using DVLD_BusienessLayer;
@@ -30,8 +32,9 @@ namespace DVLD_3
 
         private void DriversToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("We will add this form in near feature", "Didn't Compeleted Form", MessageBoxButtons.OK
-                , MessageBoxIcon.Error);
+            frmDriversDetails driversDetails= new frmDriversDetails();
+
+            driversDetails.ShowDialog();
         }
 
         private void UsersToolStripMenuItem_Click(object sender, EventArgs e)
@@ -83,6 +86,13 @@ namespace DVLD_3
             frmTestTypes testTypes = new frmTestTypes();
 
             testTypes.ShowDialog();
+        }
+
+        private void localDrivingLicenseApplicationsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ManageLocalApplications manageLocalApplications = new ManageLocalApplications();
+
+            manageLocalApplications.ShowDialog();
         }
     }
 }
