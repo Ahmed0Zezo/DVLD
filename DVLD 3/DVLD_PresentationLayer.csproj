@@ -150,6 +150,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Test Appointments\frmTestAppointments.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Test Appointments\frmTestAppointments.Designer.cs">
+      <DependentUpon>frmTestAppointments.cs</DependentUpon>
+    </Compile>
     <Compile Include="Tests\Controls\ctrlSceduleTest.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -287,6 +293,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Test Appointments\frmTestAppointments.resx">
+      <DependentUpon>frmTestAppointments.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Tests\Controls\ctrlSceduleTest.resx">
       <DependentUpon>ctrlSceduleTest.cs</DependentUpon>
     </EmbeddedResource>

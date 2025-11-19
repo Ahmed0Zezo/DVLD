@@ -173,6 +173,24 @@ please choose another class");
             return clsApplicationsDataAccess.GetAppStatusByID(LocalAppID);
         }
         
-        
+        public bool DoesHaveNonLockedTestAppointmentByTestTypeID(int TestTypeID)
+        {
+            return clsLocalAppsDataAccess.DoesApplicationHaveNonLockedTestAppointmentByTestTypeID(this.LocalDrivingLicenseApplicationID, TestTypeID);
+        }
+
+        public static bool DoesApplicaitionHaveNonLockedTestAppointmentByTestTypeID(int LocalAppID,int TestTypeID)
+        {
+            return clsLocalAppsDataAccess.DoesApplicationHaveNonLockedTestAppointmentByTestTypeID(LocalAppID, TestTypeID);
+        }
+
+        public bool DoesHavePassedTestsByTestTypeID(int TestTypeID)
+        {
+            return clsLocalAppsDataAccess.DoesApplicationHavePassTestsByTestTypeID(this.LocalDrivingLicenseApplicationID, TestTypeID);
+        }
+
+        public static bool DoesApplicationHavePassedTestsByTestTypeID(int LocalAppID,int TestTypeID)
+        {
+            return clsLocalAppsDataAccess.DoesApplicationHavePassTestsByTestTypeID(LocalAppID, TestTypeID);
+        }
     }
 }

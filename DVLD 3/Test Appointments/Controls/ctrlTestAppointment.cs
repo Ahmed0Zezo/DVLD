@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DVLD_3.Properties;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,11 @@ namespace DVLD_3.Tests.Controls
         public ctrlTestAppointment()
         {
             InitializeComponent();
+        }
+
+        private void ctrlTestAppointment_Load(object sender, EventArgs e)
+        {
+           
         }
     }
 }

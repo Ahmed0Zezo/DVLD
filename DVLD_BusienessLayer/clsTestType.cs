@@ -16,6 +16,44 @@ namespace DVLD_BusienessLayer
         public string TestTypeDescription { get; set; }
         public decimal TestTypeFees { get; set; }
 
+        public TestTypeEnum Type
+        {
+            get { return TestTypeEnumFromID(TestTypeID); }
+            set { TestTypeID = TestTypeIDFromEnum(value); }
+        }
+
+        public enum TestTypeEnum : byte
+        {
+            Vision = 1,
+            Written = 2,
+            Street = 3
+        }
+
+        public static TestTypeEnum TestTypeEnumFromID(int testTypeID)
+        {
+            switch (testTypeID)
+            {
+                case 1: return TestTypeEnum.Vision;
+                case 2: return TestTypeEnum.Written;
+                case 3: return TestTypeEnum.Street;
+                default: throw new ArgumentOutOfRangeException(nameof(testTypeID), "Invalid TestTypeID value");
+            }
+        }
+
+        public static string TestTypeEnumToString(TestTypeEnum type)
+        {
+            switch (type)
+            {
+                case TestTypeEnum.Vision: return "Vision";
+                case TestTypeEnum.Written: return "Written";
+                case TestTypeEnum.Street: return "Street";
+                default: throw new ArgumentOutOfRangeException(nameof(type), "Invalid TestTypeEnum value");
+            }
+        }
+        public static int TestTypeIDFromEnum(TestTypeEnum type)
+        {
+            return (int)type;
+        }
         public clsTestType(int testTypeID, string testTypeTitle, string testTypeDescription, decimal testTypeFees)
         {
             TestTypeID = testTypeID;

@@ -157,5 +157,33 @@ namespace DVLD_DataAccessLayer
 
             return LastPassedTestTypeID;
         }
+
+        public static bool DoesApplicationHaveNonLockedTestAppointmentByTestTypeID(int LocalAppID, int TestTypeID)
+        {
+            string Quere = @"select Count(TestAppointmentID) from TestAppointments
+                            where LocalDrivingLicenseApplicationID = @LocalAppID and TestTypeID = @TestTypeID and IsLocked = 0";
+
+            List<SqlParameter> parameters = new List<SqlParameter> {
+                Parameters.MakeParameter("LocalAppID" , LocalAppID , false),
+                Parameters.MakeParameter("TestTypeID" , TestTypeID , false)
+            };
+
+            return clsCRUD.IsRecordExistInByQuereCondition(Quere, parameters, clsPublicSystemInfos.ConnectionString);
+        }
+
+        public static bool DoesApplicationHavePassTestsByTestTypeID(int LocalAppID,int TestTypeID)
+        {
+            string Quere = @"select Count(Tests.TestID) 
+                            from Tests inner join TestAppointments on Tests.TestAppointmentID = TestAppointments.TestAppointmentID
+                            where TestAppointments.LocalDrivingLicenseApplicationID = @LocalAppID and TestAppointments.TestTypeID = @TestTypeID
+                            and Tests.TestResult = 1  ";
+
+            List<SqlParameter> parameters = new List<SqlParameter> {
+                Parameters.MakeParameter("LocalAppID" , LocalAppID , false),
+                Parameters.MakeParameter("TestTypeID" , TestTypeID , false)
+            };
+
+            return clsCRUD.IsRecordExistInByQuereCondition(Quere, parameters, clsPublicSystemInfos.ConnectionString);
+        }
     }
 }

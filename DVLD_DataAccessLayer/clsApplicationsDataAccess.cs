@@ -130,5 +130,7 @@ namespace DVLD_DataAccessLayer
 
             return clsCRUD.ReturnbyteValueFromTableByQuere(Quere,parameters,clsPublicSystemInfos.ConnectionString);
         }
+
+        
     }
 }
