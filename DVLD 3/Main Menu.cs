@@ -94,5 +94,13 @@ namespace DVLD_3
 
             manageLocalApplications.ShowDialog();
         }
+
+        private void newLocalDrivingLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddEditLocalDrivingLicenseApplication addEditLocalDrivingLicenseApplication
+                = new AddEditLocalDrivingLicenseApplication();
+
+            addEditLocalDrivingLicenseApplication.ShowDialog();
+        }
     }
 }

@@ -118,5 +118,17 @@ namespace DVLD_DataAccessLayer
         {
             return clsCRUD.GetAllDataFromTable("Applications", clsPublicSystemInfos.ConnectionString);
         }
+
+        public static byte GetAppStatusByID(int ApplicationID)
+        {
+            string Quere = @"select Applications.ApplicationStatus from
+                            LocalDrivingLicenseApplications inner join Applications 
+                            on LocalDrivingLicenseApplications.ApplicationID = Applications.ApplicationID
+                            where LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID = @ApplicationID";
+
+            List<SqlParameter> parameters = new List<SqlParameter> { Parameters.MakeParameter("ApplicationID", ApplicationID,false) };
+
+            return clsCRUD.ReturnbyteValueFromTableByQuere(Quere,parameters,clsPublicSystemInfos.ConnectionString);
+        }
     }
 }

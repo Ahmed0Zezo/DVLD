@@ -181,6 +181,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "ctrlLDApplicationInfo";
             this.Size = new System.Drawing.Size(645, 329);
+            this.Load += new System.EventHandler(this.ctrlLDApplicationInfo_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();

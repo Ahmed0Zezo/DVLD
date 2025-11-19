@@ -81,7 +81,7 @@
             this.lblHeader.TabIndex = 3;
             this.lblHeader.Text = "Test Appointment";
             // 
-            // ctrlSceduleTest
+            // ctrlTestAppointment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -91,8 +91,8 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.publicFormsPanel1);
             this.Controls.Add(this.ctrlLDApplicationInfo1);
-            this.Name = "ctrlSceduleTest";
-            this.Size = new System.Drawing.Size(633, 529);
+            this.Name = "ctrlTestAppointment";
+            this.Size = new System.Drawing.Size(651, 529);
             ((System.ComponentModel.ISupportInitialize)(this.picBoxControlImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

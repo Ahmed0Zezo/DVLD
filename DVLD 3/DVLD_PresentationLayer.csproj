@@ -76,6 +76,12 @@
     <Compile Include="Applications\Applications Types\frmUpdateApplicationTypes.Designer.cs">
       <DependentUpon>frmUpdateApplicationTypes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Applications\LocalDrivingLicenseApplication\frmShowLocalAppInfos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Applications\LocalDrivingLicenseApplication\frmShowLocalAppInfos.Designer.cs">
+      <DependentUpon>frmShowLocalAppInfos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Applications\LocalDrivingLicenseApplication\ManageLocalApplications.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -150,10 +156,10 @@
     <Compile Include="Tests\Controls\ctrlSceduleTest.Designer.cs">
       <DependentUpon>ctrlSceduleTest.cs</DependentUpon>
     </Compile>
-    <Compile Include="Tests\Controls\ctrlTestAppointment.cs">
+    <Compile Include="Test Appointments\Controls\ctrlTestAppointment.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Tests\Controls\ctrlTestAppointment.Designer.cs">
+    <Compile Include="Test Appointments\Controls\ctrlTestAppointment.Designer.cs">
       <DependentUpon>ctrlTestAppointment.cs</DependentUpon>
     </Compile>
     <Compile Include="Tests\TestTypes\frmTestTypes.cs">
@@ -235,6 +241,9 @@
     <EmbeddedResource Include="Applications\LocalDrivingLicenseApplication\AddEditLocalDrivingLicenseApplication.resx">
       <DependentUpon>AddEditLocalDrivingLicenseApplication.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Applications\LocalDrivingLicenseApplication\frmShowLocalAppInfos.resx">
+      <DependentUpon>frmShowLocalAppInfos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Applications\LocalDrivingLicenseApplication\ManageLocalApplications.resx">
       <DependentUpon>ManageLocalApplications.cs</DependentUpon>
     </EmbeddedResource>
@@ -281,7 +290,7 @@
     <EmbeddedResource Include="Tests\Controls\ctrlSceduleTest.resx">
       <DependentUpon>ctrlSceduleTest.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tests\Controls\ctrlTestAppointment.resx">
+    <EmbeddedResource Include="Test Appointments\Controls\ctrlTestAppointment.resx">
       <DependentUpon>ctrlTestAppointment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Tests\TestTypes\frmTestTypes.resx">

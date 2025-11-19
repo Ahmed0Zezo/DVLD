@@ -1,5 +1,6 @@
 ﻿using DVLD_3.Properties;
 using DVLD_3.UserControls;
+using DVLD_3.Utils;
 using DVLD_BusienessLayer;
 using System;
 using System.Collections.Generic;
@@ -100,6 +101,55 @@ namespace DVLD_3.Applications.LocalDrivingLicenseApplication
         private void applicationSaved(int AppID)
         {
             _refresh();
+        }
+
+        private void showApplicationDetilsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmShowLocalAppInfos localAppDetails = new frmShowLocalAppInfos
+                (clsDataGridView.GetID_FromDataGridView(publicFormsPanel1.DataViewer,0));
+
+            localAppDetails.ShowDialog();
+
+            if (localAppDetails.IsPersonDataUpdated)
+            {
+                _refresh();
+            }
+        }
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+            bool IsApplicationNew 
+                = (clsLocalApp.GetAppStatusByLocalAppID(clsDataGridView.GetID_FromDataGridView(publicFormsPanel1.DataViewer, 0)) == 1);
+
+            updateApplicationToolStripMenuItem.Enabled = IsApplicationNew;
+            deleteApplicationToolStripMenuItem.Enabled = IsApplicationNew;
+            cancelApplicationToolStripMenuItem.Enabled = IsApplicationNew;
+            sceduleTestToolStripMenuItem.Enabled = IsApplicationNew;
+
+            if(IsApplicationNew)
+            {
+
+                clsTestType WhatTestTypeIDToTake = clsTestType.WhatTestTypeToTakeByLocalAppID
+                (clsDataGridView.GetID_FromDataGridView(publicFormsPanel1.DataViewer, 0));
+
+                if(WhatTestTypeIDToTake != null)
+                {
+                    sceduleVisionTestToolStripMenuItem.Enabled = WhatTestTypeIDToTake.TestTypeID == 1;
+                    sceduleWrittenTestToolStripMenuItem.Enabled = WhatTestTypeIDToTake.TestTypeID == 2;
+                    sceduleStreetTestToolStripMenuItem.Enabled = WhatTestTypeIDToTake.TestTypeID == 3;
+                }
+                else
+                {
+                    sceduleVisionTestToolStripMenuItem.Enabled = false;
+                    sceduleWrittenTestToolStripMenuItem.Enabled = false;
+                    sceduleStreetTestToolStripMenuItem.Enabled = false;
+                }
+                
+            }
+            
+            //issureDrivingLicenseFirstTimeToolStripMenuItem.Enabled = IsApplicationNew;
+            //showLicenseToolStripMenuItem.Enabled = IsApplicationNew;
+            //showPersonLicensesHistoryToolStripMenuItem.Enabled = IsApplicationNew;
         }
     }
 }

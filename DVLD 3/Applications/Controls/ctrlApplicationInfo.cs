@@ -1,4 +1,5 @@
-﻿using DVLD_BusienessLayer;
+﻿using DVLD_3.MangePeople;
+using DVLD_BusienessLayer;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,7 +14,11 @@ namespace DVLD_3.Applications.Controls
 {
     public partial class ctrlApplicationInfo : UserControl
     {
+        
 
+        public event Action PersonDataUpdated;
+
+        private clsApplication _app;
         public event Action<int> OnApplicationSelected;
         public ctrlApplicationInfo()
         {
@@ -51,23 +56,40 @@ namespace DVLD_3.Applications.Controls
             MessageBox.Show($"Application With ID ({AppID}) is not exist", "App Info", MessageBoxButtons.OK, MessageBoxIcon.Error);
             _refreshDefaultValues();
         }
-        public void LoadApplicationInfo(int AppID)
+        public bool LoadApplicationInfo(int AppID)
         {
             if (AppID == -1)
             {
                 _faildToFindApplication(AppID);
-                return;
+                return false;
             }
-            clsApplication app = clsApplication.FindByID(AppID);
+            _app = clsApplication.FindByID(AppID);
 
-            if (app == null)
+            if (_app == null)
             {
                 _faildToFindApplication(AppID);
-                return;
+                return false;
             }
 
-            _fillControlsWithData(app);
-            OnApplicationSelected?.Invoke(app.ApplicationID);
+            _fillControlsWithData(_app);
+            OnApplicationSelected?.Invoke(_app.ApplicationID);
+
+            return true;
+
+        }
+
+        private void lnklblPersonInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            ShowPersonDetailsForm frmPerson = new ShowPersonDetailsForm(_app.ApplicantPersonID);
+
+            frmPerson.ShowDialog();
+
+            if(frmPerson.IsPersonDataUpdated)
+            {
+                LoadApplicationInfo(_app.ApplicationID);
+                PersonDataUpdated?.Invoke();
+            }
+            
 
         }
     }

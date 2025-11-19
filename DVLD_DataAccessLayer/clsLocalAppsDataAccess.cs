@@ -149,7 +149,10 @@ namespace DVLD_DataAccessLayer
 
             if (scalar.IsExecutedSuccessfully)
             {
-                LastPassedTestTypeID = (int?)scalar.Result;
+                if (scalar.Result == null)
+                    LastPassedTestTypeID = null;
+                else
+                    LastPassedTestTypeID = int.Parse(scalar.Result.ToString());
             }
 
             return LastPassedTestTypeID;

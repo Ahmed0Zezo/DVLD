@@ -168,6 +168,10 @@ please choose another class");
             return new clsLocalApp(localDrivingLicenseApplicationID, applicationID, licenseClassID);
         }
 
+        public static int GetAppStatusByLocalAppID(int LocalAppID)
+        {
+            return clsApplicationsDataAccess.GetAppStatusByID(LocalAppID);
+        }
         
         
     }

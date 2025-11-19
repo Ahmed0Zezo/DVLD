@@ -110,6 +110,7 @@
             this.lnklblPersonInfo.TabIndex = 27;
             this.lnklblPersonInfo.TabStop = true;
             this.lnklblPersonInfo.Text = "View Person Info";
+            this.lnklblPersonInfo.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnklblPersonInfo_LinkClicked);
             // 
             // pictureBox5
             // 
