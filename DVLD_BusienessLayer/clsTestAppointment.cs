@@ -10,18 +10,31 @@ namespace DVLD_BusienessLayer
 {
     public class clsTestAppointment
     {
-        int TestAppointmentID { set; get; }
-        int TestTypeID { set; get; }
-        string TestTypeTitle { set; get; }
-        string LicenseClassName { set; get; }
-        int LocalAppID { set; get; }
-        string FullApplicantName { set; get; }
-        DateTime AppointmentDate { set; get; }
-        double PaidFees { set; get; }
-        int CreatedByUserID { set; get; }
-        bool IsLocked { set; get; }
-        int? RetakeTestApplicationID { set; get; }
+        public int TestAppointmentID { set; get; }
+        public int TestTypeID { set; get; }
+        public string TestTypeTitle { set; get; }
+        public string LicenseClassName { set; get; }
+        public int LocalAppID { set; get; }
+        public string FullApplicantName { set; get; }
+        public DateTime AppointmentDate { set; get; }
+        public double PaidFees { set; get; }
+        public int CreatedByUserID { set; get; }
+        public bool IsLocked { set; get; }
+        public int? RetakeTestApplicationID { set; get; }
 
+        public int Trials
+        {
+            get
+            {
+                if (TestTypeID == -1 || LocalAppID == -1)
+                    return 0;
+
+                else
+                {
+                    return clsTestAppointmentsDataAccess.GetTestAppointmentTrialsByLocalAppIDAndTestTypeID(LocalAppID,TestTypeID);
+                }
+            }
+        }
         private clsTestAppointment(int testAppID , int testTypeID,int localApplicatoinID,DateTime appointmentDate
             , double paidFees , int createdByUserID,bool isLocked,int? retakeTestAppID)
         {

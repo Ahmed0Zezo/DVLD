@@ -434,6 +434,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "frmAddEditTestAppointment";
             this.Text = "frmAddEditTestAppointment";
+            this.Load += new System.EventHandler(this.frmAddEditTestAppointment_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();

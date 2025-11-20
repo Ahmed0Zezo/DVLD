@@ -104,5 +104,21 @@ namespace DVLD_DataAccessLayer
 
             return clsCRUD.UpdateAndDeleteRecordFromTable(clsPublicSystemInfos.ConnectionString, Quere, parameters) > 0;
         }
+
+        public static int GetTestAppointmentTrialsByLocalAppIDAndTestTypeID(int LocalAppID,int TestTypeID)
+        {
+            string Quere = @"select Count(Tests.TestID) as Trials 
+                             from Tests inner join TestAppointments on Tests.TestAppointmentID = TestAppointments.TestAppointmentID
+                             where TestAppointments.LocalDrivingLicenseApplicationID = @LocalAppID and TestAppointments.TestTypeID =@TestTypeID";
+
+            List<SqlParameter> parameters = new List<SqlParameter>
+            {
+                Parameters.MakeParameter("LocalAppID", LocalAppID, false),
+                Parameters.MakeParameter("TestTypeID", TestTypeID, false)
+            };
+
+            return clsCRUD.ReturnIntValueFromTableByQuere(Quere,parameters,clsPublicSystemInfos.ConnectionString);
+        }
+
     }
 }
