@@ -1,4 +1,5 @@
 ﻿using DVLD_3.Properties;
+using DVLD_3.Test_Appointments;
 using DVLD_3.UserControls;
 using DVLD_3.Utils;
 using DVLD_BusienessLayer;
@@ -150,6 +151,30 @@ namespace DVLD_3.Applications.LocalDrivingLicenseApplication
             //issureDrivingLicenseFirstTimeToolStripMenuItem.Enabled = IsApplicationNew;
             //showLicenseToolStripMenuItem.Enabled = IsApplicationNew;
             //showPersonLicensesHistoryToolStripMenuItem.Enabled = IsApplicationNew;
+        }
+
+        private void sceduleVisionTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmManageApplicationTestAppointments frmManageApplicationTestAppointments
+                = new frmManageApplicationTestAppointments(clsDataGridView.GetID_FromDataGridView(publicFormsPanel1.DataViewer,0),1);
+
+            frmManageApplicationTestAppointments.ShowDialog();
+        }
+
+        private void sceduleWrittenTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmManageApplicationTestAppointments frmManageApplicationTestAppointments
+                = new frmManageApplicationTestAppointments(clsDataGridView.GetID_FromDataGridView(publicFormsPanel1.DataViewer, 0), 2);
+
+            frmManageApplicationTestAppointments.ShowDialog();
+        }
+
+        private void sceduleStreetTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmManageApplicationTestAppointments frmManageApplicationTestAppointments
+                = new frmManageApplicationTestAppointments(clsDataGridView.GetID_FromDataGridView(publicFormsPanel1.DataViewer, 0), 3);
+
+            frmManageApplicationTestAppointments.ShowDialog();
         }
     }
 }

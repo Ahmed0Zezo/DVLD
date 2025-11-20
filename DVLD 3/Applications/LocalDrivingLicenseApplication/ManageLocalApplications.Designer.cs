@@ -106,7 +106,7 @@
             this.toolStripSeparator6,
             this.showPersonLicensesHistoryToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(287, 366);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(287, 344);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // showApplicationDetilsToolStripMenuItem
@@ -180,6 +180,7 @@
             this.sceduleVisionTestToolStripMenuItem.Name = "sceduleVisionTestToolStripMenuItem";
             this.sceduleVisionTestToolStripMenuItem.Size = new System.Drawing.Size(214, 38);
             this.sceduleVisionTestToolStripMenuItem.Text = "Scedule Vision Test";
+            this.sceduleVisionTestToolStripMenuItem.Click += new System.EventHandler(this.sceduleVisionTestToolStripMenuItem_Click);
             // 
             // sceduleWrittenTestToolStripMenuItem
             // 
@@ -188,6 +189,7 @@
             this.sceduleWrittenTestToolStripMenuItem.Name = "sceduleWrittenTestToolStripMenuItem";
             this.sceduleWrittenTestToolStripMenuItem.Size = new System.Drawing.Size(214, 38);
             this.sceduleWrittenTestToolStripMenuItem.Text = "Scedule Written Test";
+            this.sceduleWrittenTestToolStripMenuItem.Click += new System.EventHandler(this.sceduleWrittenTestToolStripMenuItem_Click);
             // 
             // sceduleStreetTestToolStripMenuItem
             // 
@@ -196,6 +198,7 @@
             this.sceduleStreetTestToolStripMenuItem.Name = "sceduleStreetTestToolStripMenuItem";
             this.sceduleStreetTestToolStripMenuItem.Size = new System.Drawing.Size(214, 38);
             this.sceduleStreetTestToolStripMenuItem.Text = "Scedule Street Test";
+            this.sceduleStreetTestToolStripMenuItem.Click += new System.EventHandler(this.sceduleStreetTestToolStripMenuItem_Click);
             // 
             // toolStripSeparator4
             // 

@@ -40,7 +40,7 @@ namespace DVLD_3.Applications.Controls
             } 
 
             lblID.Text = app.LocalDrivingLicenseApplicationID.ToString();
-            lblPassedTests.Text = app.PassedTests.ToString();
+            lblPassedTests.Text = $"{app.PassedTests}/3";
             lblAppliedForLicense.Text = clsLicenseClass.GetLiceseClassNameByItsID(app.LicenseClassID);
 
             //handel Show License at another time

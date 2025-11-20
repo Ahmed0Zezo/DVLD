@@ -37,11 +37,19 @@ namespace DVLD_DataAccessLayer
             return clsCRUD.AddNewRecordToTable(ref TestAppointmentID, clsPublicSystemInfos.ConnectionString, Quere, parameters);
         }
 
-        public static DataTable GetAllTestAppointments()
+        public static DataTable GetAllTestAppointmentsByLocalAppIDAndTestTypeID(int LocalAppID,int TestTypeID)
         {
             string Quere = @"select TestAppointmentID as AppointmentID,AppointmentDate,PaidFees as [Paid Fees]
-                            , IsLocked as [Is Locked] from TestAppointments";
-            return clsCRUD.GetAllDataFromTableByQuere(Quere, clsPublicSystemInfos.ConnectionString);
+                            , IsLocked as [Is Locked] from TestAppointments
+                             where LocalDrivingLicenseApplicationID = @LocalAppID and TestTypeID = @TestTypeID";
+
+            List<SqlParameter> parameters = new List<SqlParameter>
+            {
+                Parameters.MakeParameter("LocalAppID",LocalAppID,false),
+                Parameters.MakeParameter("TestTypeID",TestTypeID,false)
+            };
+
+            return clsCRUD.GetAllDataFromTableByQuere(Quere,parameters, clsPublicSystemInfos.ConnectionString);
         }
 
         public static bool UpdateTestAppointmentDateIntoDatabase(int AppointmentID, DateTime AppointmentDate)

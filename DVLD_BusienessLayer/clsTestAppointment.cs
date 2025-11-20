@@ -50,9 +50,9 @@ namespace DVLD_BusienessLayer
         {
             return clsTestAppointmentsDataAccess.UpdateTestAppointmentDateIntoDatabase(this.TestAppointmentID,this.AppointmentDate);
         }
-        public static DataTable GetAll_ForAppointmentsTable()
+        public static DataTable GetAllByApplicationIDAndTestTypeID_ForTable(int localAppID,int testTypeID)
         {
-            return clsTestAppointmentsDataAccess.GetAllTestAppointments();
+            return clsTestAppointmentsDataAccess.GetAllTestAppointmentsByLocalAppIDAndTestTypeID(localAppID,testTypeID);
         }
     }
 }
