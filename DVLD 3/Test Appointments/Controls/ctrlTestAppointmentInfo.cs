@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace DVLD_3.Tests.Controls
 {
-    public partial class ctrlSceduleTest : UserControl
+    public partial class ctrlTestAppointmentInfo : UserControl
     {
-        public ctrlSceduleTest()
+        public ctrlTestAppointmentInfo()
         {
             InitializeComponent();
         }

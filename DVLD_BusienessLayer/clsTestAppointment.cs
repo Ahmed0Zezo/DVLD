@@ -12,7 +12,10 @@ namespace DVLD_BusienessLayer
     {
         int TestAppointmentID { set; get; }
         int TestTypeID { set; get; }
+        string TestTypeTitle { set; get; }
+        string LicenseClassName { set; get; }
         int LocalAppID { set; get; }
+        string FullApplicantName { set; get; }
         DateTime AppointmentDate { set; get; }
         double PaidFees { set; get; }
         int CreatedByUserID { set; get; }
@@ -24,6 +27,14 @@ namespace DVLD_BusienessLayer
         {
             TestAppointmentID = testAppID; TestTypeID = testTypeID; LocalAppID = localApplicatoinID; AppointmentDate = appointmentDate;
             PaidFees = paidFees; CreatedByUserID = createdByUserID; IsLocked = isLocked; RetakeTestApplicationID = retakeTestAppID;
+
+            TestTypeTitle = clsTestType.FindTestTypeByID(TestTypeID).TestTypeTitle;
+
+            clsLocalApp localApp = clsLocalApp.FindByID(LocalAppID);
+
+            FullApplicantName = clsPerson.FindByID(localApp.Application.ApplicantPersonID).FullName;
+            LicenseClassName = clsLicenseClass.FindLicenseClassByID(localApp.LicenseClassID).ClassName;
+
         }
 
         public clsTestAppointment()
@@ -32,6 +43,20 @@ namespace DVLD_BusienessLayer
             PaidFees = 0; CreatedByUserID = -1; IsLocked = false; RetakeTestApplicationID = null;
         }
 
+        public static clsTestAppointment FindTestAppointByID(int testAppointmentID)
+        {
+            int testTypeID = 0; int localAppID = 0; DateTime testAppointmentDate = DateTime.MinValue; double paidFees = 0
+                ; int createdByUserID = 0; bool isLocked = false; int? retakeTestApplicationID = null;
+
+            bool found = clsTestAppointmentsDataAccess.FindTestAppointByID(testAppointmentID, ref testTypeID, ref localAppID
+                , ref testAppointmentDate, ref paidFees, ref createdByUserID, ref isLocked, ref retakeTestApplicationID);
+
+            if (!found)
+                return null;
+
+            return new clsTestAppointment(testAppointmentID, testTypeID, localAppID, testAppointmentDate, paidFees, createdByUserID
+                , isLocked, retakeTestApplicationID);
+        }
         public bool AddNew()
         {
             int NewID = -1;
