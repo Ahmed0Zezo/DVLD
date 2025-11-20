@@ -1,6 +1,6 @@
 ﻿namespace DVLD_3.Test_Appointments
 {
-    partial class frmTestAppointments
+    partial class frmManageApplicationTestAppointments
     {
         /// <summary>
         /// Required designer variable.

@@ -12,11 +12,13 @@ using System.Windows.Forms;
 
 namespace DVLD_3.Test_Appointments
 {
-    public partial class frmTestAppointments : Form
+    public partial class frmManageApplicationTestAppointments : Form
     {
         clsTestType _sceduledTestType;
+        clsLocalApp _localApp;
 
-       
+        int _testTypeID;
+        int _localAppID;
         private void _prepareFormAccourdingToTestType()
         {
             switch (_sceduledTestType.Type)
@@ -33,26 +35,39 @@ namespace DVLD_3.Test_Appointments
             }
         }
 
-        public frmTestAppointments(int LocalAppID,int TestTypeID)
+        public frmManageApplicationTestAppointments(int LocalAppID,int TestTypeID)
         {
             InitializeComponent();
-            _sceduledTestType = clsTestType.FindTestTypeByID(TestTypeID);
-
-            if(_sceduledTestType == null)
-            {
-                this.Close();
-            }
-            else
-            {
-                lblHeader.Text = $"{clsTestType.TestTypeEnumToString(_sceduledTestType.Type)} Test Appointments";
-                _prepareFormAccourdingToTestType();
-
-
-            }
+            _testTypeID = TestTypeID;
+            _localAppID = LocalAppID;
+            
         }
 
         private void frmTestAppointments_Load(object sender, EventArgs e)
         {
+            _sceduledTestType = clsTestType.FindTestTypeByID(_testTypeID);
+
+            if (_sceduledTestType == null)
+            {
+                MessageBox.Show("Invalid Test Type ID" , "Error" ,MessageBoxButtons.OK,MessageBoxIcon.Error);
+                this.Close();
+                return;
+            }
+
+            _localApp = clsLocalApp.FindByID(_localApp.ApplicationID);
+
+            if (_localApp == null)
+            {
+                MessageBox.Show("Local App ID", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+                return;
+            }
+
+            
+
+            lblHeader.Text = $"{clsTestType.TestTypeEnumToString(_sceduledTestType.Type)} Test Appointments";
+            _prepareFormAccourdingToTestType();
+
             publicFormsPanel1.OpenFormButton.BackgroundImage = Resources.AddAppointment_32;
         }
     }
