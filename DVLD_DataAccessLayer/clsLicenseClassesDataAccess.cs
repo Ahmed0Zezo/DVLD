@@ -19,7 +19,7 @@ namespace DVLD_DataAccessLayer
 
         
 
-        public static bool FindLicenseClassByID(int LicenseClasseID,
+        public static bool FindLicenseClassByID(int LicenseClassID,
             ref string ClassName, ref string ClassDescription,ref int MinimumAllowedAge ,ref int DefaulyValidityLength,ref decimal ClassFees)
         {
             bool IsFound = false;
@@ -27,10 +27,10 @@ namespace DVLD_DataAccessLayer
             SqlConnection connection = new SqlConnection(clsPublicSystemInfos.ConnectionString);
 
             string Quere = @"Select * From LicenseClasses
-                             Where LicenseClasseID = @LicenseClasseID";
+                             Where LicenseClassID = @LicenseClassID";
 
             SqlCommand command = new SqlCommand(Quere, connection);
-            command.Parameters.AddWithValue("@LicenseClasseID", LicenseClasseID);
+            command.Parameters.AddWithValue("@LicenseClassID", LicenseClassID);
 
             try
             {
@@ -41,8 +41,8 @@ namespace DVLD_DataAccessLayer
                 {
                     ClassName = (string)reader["ClassName"];
                     ClassDescription = (string)reader["ClassDescription"];
-                    MinimumAllowedAge = (int)reader["MinimumAllowedAge"];
-                    DefaulyValidityLength = (int)reader["DefaulyValidityLength"];
+                    MinimumAllowedAge = Convert.ToInt32(reader["MinimumAllowedAge"]);
+                    DefaulyValidityLength = Convert.ToInt32(reader["DefaultValidityLength"]);
                     ClassFees = (decimal)reader["ClassFees"];
                     IsFound = true;
                 }

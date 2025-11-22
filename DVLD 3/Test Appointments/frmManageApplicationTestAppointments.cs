@@ -1,6 +1,7 @@
 ﻿using DVLD_3.Applications.Controls;
 using DVLD_3.Properties;
 using DVLD_3.UserControls;
+using DVLD_3.Utils;
 using DVLD_BusienessLayer;
 using System;
 using System.Collections.Generic;
@@ -78,9 +79,14 @@ namespace DVLD_3.Test_Appointments
 
             ctrlLDApplicationInfo1.LoadApplicationInfo(_localApp.LocalDrivingLicenseApplicationID);
 
+            publicFormsPanel1.OpenFormButton.Click += OpenFormButtonClicked;
+
             _refresh();
+            publicFormsPanel1.DataViewer.ContextMenuStrip = contextMenuStrip1;
             publicFormsPanel1.DataViewer.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             publicFormsPanel1.DataFilter.Visible = false;
+
+            publicFormsPanel1.TargetFormToClose = this;
 
             lblHeader.Text = $"{clsTestType.TestTypeEnumToString(_sceduledTestType.Type)} Test Appointments";
             _prepareFormAccourdingToTestType();
@@ -88,6 +94,46 @@ namespace DVLD_3.Test_Appointments
             publicFormsPanel1.OpenFormButton.BackgroundImage = Resources.AddAppointment_32;
 
 
+
+        }
+
+        private void OpenFormButtonClicked(object sender , EventArgs e)
+        {
+            if(_localApp.DoesHaveNonLockedTestAppointmentByTestTypeID(_testTypeID))
+            {
+                MessageBox.Show("The Person has already a Non-Locked test appointment already!","Error"
+                    ,MessageBoxButtons.OK,MessageBoxIcon.Error);
+                return;
+            }
+
+            if (_localApp.DoesHavePassedTestsByTestTypeID(_testTypeID))
+            {
+                MessageBox.Show("The Person has passed the test already!", "Error"
+                    , MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            frmAddEditTestAppointment frmAddEditTestAppointment = new frmAddEditTestAppointment(_localAppID,_testTypeID);
+
+            frmAddEditTestAppointment.ShowDialog();
+
+            if (frmAddEditTestAppointment.IsDataSaved)
+            {
+                _refresh();
+            }
+        }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmAddEditTestAppointment frmAddEditTestAppointment = 
+                new frmAddEditTestAppointment(clsDataGridView.GetID_FromDataGridView(publicFormsPanel1.DataViewer,0));
+
+            frmAddEditTestAppointment.ShowDialog();
+
+            if(frmAddEditTestAppointment.IsDataSaved)
+            {
+                _refresh();
+            }
         }
     }
 }

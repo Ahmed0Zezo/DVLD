@@ -88,6 +88,12 @@
     <Compile Include="Applications\LocalDrivingLicenseApplication\ManageLocalApplications.Designer.cs">
       <DependentUpon>ManageLocalApplications.cs</DependentUpon>
     </Compile>
+    <Compile Include="Applications\Retake Test Applications\ctrlRetakeTestApplicationInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Applications\Retake Test Applications\ctrlRetakeTestApplicationInfo.Designer.cs">
+      <DependentUpon>ctrlRetakeTestApplicationInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Drivers\frmDriversDetails.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -258,6 +264,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Applications\LocalDrivingLicenseApplication\ManageLocalApplications.resx">
       <DependentUpon>ManageLocalApplications.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Applications\Retake Test Applications\ctrlRetakeTestApplicationInfo.resx">
+      <DependentUpon>ctrlRetakeTestApplicationInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Drivers\frmDriversDetails.resx">
       <DependentUpon>frmDriversDetails.cs</DependentUpon>

@@ -13,7 +13,7 @@ namespace DVLD_DataAccessLayer
     public static class clsTestAppointmentsDataAccess
     {
         public static bool InsertNewTestAppointment(ref int TestAppointmentID, int TestTypeID, int LocalAppID, DateTime TestAppointmentDate
-            ,double PaidFees,int CreatedByUserID,bool IsLocked,int? RetakeTestApplication)
+            , decimal PaidFees,int CreatedByUserID,bool IsLocked,int? RetakeTestApplication)
         {
             string Quere = @"INSERT INTO TestAppointments
                             (TestTypeID, LocalDrivingLicenseApplicationID
@@ -30,7 +30,7 @@ namespace DVLD_DataAccessLayer
                 Parameters.MakeParameter("PaidFees", PaidFees, false),
                 Parameters.MakeParameter("CreatedByUserID", CreatedByUserID, false),
                 Parameters.MakeParameter("IsLocked", IsLocked, false),
-                Parameters.MakeParameter("IsLocked", RetakeTestApplication, true)
+                Parameters.MakeParameter("RetakeTestApplication", RetakeTestApplication, true)
 
             };
 
@@ -38,7 +38,7 @@ namespace DVLD_DataAccessLayer
         }
 
         public static bool FindTestAppointByID(int TestAppointmentID,ref int TestTypeID,ref int LocalAppID,ref DateTime TestAppointmentDate
-            ,ref double PaidFees,ref int CreatedByUserID,ref bool IsLocked,ref int? RetakeTestApplicationID)
+            ,ref decimal PaidFees,ref int CreatedByUserID,ref bool IsLocked,ref int? RetakeTestApplicationID)
         {
             bool IsFound = false;
             SqlConnection connection = new SqlConnection(clsPublicSystemInfos.ConnectionString);
@@ -57,7 +57,7 @@ namespace DVLD_DataAccessLayer
                     TestTypeID = (int)reader["TestTypeID"];
                     LocalAppID = (int)reader["LocalDrivingLicenseApplicationID"];
                     TestAppointmentDate = (DateTime)reader["AppointmentDate"];
-                    PaidFees = Convert.ToDouble(reader["PaidFees"]);
+                    PaidFees = Convert.ToDecimal(reader["PaidFees"]);
                     CreatedByUserID = (int)reader["CreatedByUserID"];
                     IsLocked = (bool)reader["IsLocked"];
                     RetakeTestApplicationID = reader["RetakeTestApplicationID"] == DBNull.Value ? (int?)null : (int)reader["RetakeTestApplicationID"];
@@ -94,7 +94,7 @@ namespace DVLD_DataAccessLayer
         {
             string Quere = @"Update TestAppointments
                              Set AppointmentDate = @AppointmentDate
-                             Where AppointmentID = @AppointmentID";
+                             Where TestAppointmentID = @AppointmentID";
 
             List<SqlParameter> parameters = new List<SqlParameter>
             {

@@ -17,7 +17,7 @@ namespace DVLD_BusienessLayer
         public int LocalAppID { set; get; }
         public string FullApplicantName { set; get; }
         public DateTime AppointmentDate { set; get; }
-        public double PaidFees { set; get; }
+        public decimal PaidFees { set; get; }
         public int CreatedByUserID { set; get; }
         public bool IsLocked { set; get; }
         public int? RetakeTestApplicationID { set; get; }
@@ -36,11 +36,12 @@ namespace DVLD_BusienessLayer
             }
         }
         private clsTestAppointment(int testAppID , int testTypeID,int localApplicatoinID,DateTime appointmentDate
-            , double paidFees , int createdByUserID,bool isLocked,int? retakeTestAppID)
+            , decimal paidFees , int createdByUserID,bool isLocked,int? retakeTestAppID)
         {
             TestAppointmentID = testAppID; TestTypeID = testTypeID; LocalAppID = localApplicatoinID; AppointmentDate = appointmentDate;
             PaidFees = paidFees; CreatedByUserID = createdByUserID; IsLocked = isLocked; RetakeTestApplicationID = retakeTestAppID;
 
+            
             TestTypeTitle = clsTestType.FindTestTypeByID(TestTypeID).TestTypeTitle;
 
             clsLocalApp localApp = clsLocalApp.FindByID(LocalAppID);
@@ -50,15 +51,24 @@ namespace DVLD_BusienessLayer
 
         }
 
-        public clsTestAppointment()
+        public clsTestAppointment(int localApplicatoinID ,int testAppID)
         {
-            TestAppointmentID = -1; TestTypeID = -1; LocalAppID = -1; AppointmentDate = DateTime.MinValue;
-            PaidFees = 0; CreatedByUserID = -1; IsLocked = false; RetakeTestApplicationID = null;
+            TestAppointmentID = -1; TestTypeID = testAppID; LocalAppID = localApplicatoinID; AppointmentDate = DateTime.Now;
+            CreatedByUserID = -1; IsLocked = false; RetakeTestApplicationID = null;
+
+            clsTestType testType = clsTestType.FindTestTypeByID(TestTypeID);
+
+            TestTypeTitle = testType.TestTypeTitle;
+            PaidFees = testType.TestTypeFees;
+
+            clsLocalApp localApp = clsLocalApp.FindByID(LocalAppID);
+            FullApplicantName = clsPerson.FindByID(localApp.Application.ApplicantPersonID).FullName;
+            LicenseClassName = clsLicenseClass.FindLicenseClassByID(localApp.LicenseClassID).ClassName;
         }
 
         public static clsTestAppointment FindTestAppointByID(int testAppointmentID)
         {
-            int testTypeID = 0; int localAppID = 0; DateTime testAppointmentDate = DateTime.MinValue; double paidFees = 0
+            int testTypeID = 0; int localAppID = 0; DateTime testAppointmentDate = DateTime.MinValue; decimal paidFees = 0
                 ; int createdByUserID = 0; bool isLocked = false; int? retakeTestApplicationID = null;
 
             bool found = clsTestAppointmentsDataAccess.FindTestAppointByID(testAppointmentID, ref testTypeID, ref localAppID
@@ -73,6 +83,7 @@ namespace DVLD_BusienessLayer
         public bool AddNew()
         {
             int NewID = -1;
+            
 
             if (clsTestAppointmentsDataAccess.InsertNewTestAppointment(ref NewID,this.TestTypeID,this.LocalAppID, this.AppointmentDate
                 , this.PaidFees, this.CreatedByUserID, this.IsLocked, this.RetakeTestApplicationID))
@@ -86,7 +97,7 @@ namespace DVLD_BusienessLayer
 
         public bool UpdatedAppointmentDate(DateTime NewDate)
         {
-            return clsTestAppointmentsDataAccess.UpdateTestAppointmentDateIntoDatabase(this.TestAppointmentID,this.AppointmentDate);
+            return clsTestAppointmentsDataAccess.UpdateTestAppointmentDateIntoDatabase(this.TestAppointmentID, NewDate);
         }
         public static DataTable GetAllByApplicationIDAndTestTypeID_ForTable(int localAppID,int testTypeID)
         {
