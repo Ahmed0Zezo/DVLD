@@ -174,6 +174,11 @@ namespace DVLD_3.Applications.LocalDrivingLicenseApplication
                 = new frmManageApplicationTestAppointments(clsDataGridView.GetID_FromDataGridView(publicFormsPanel1.DataViewer,0),1);
 
             frmManageApplicationTestAppointments.ShowDialog();
+
+            if(frmManageApplicationTestAppointments.IsDataSaved)
+            {
+                _refresh();
+            }
         }
 
         private void sceduleWrittenTestToolStripMenuItem_Click(object sender, EventArgs e)
@@ -182,6 +187,11 @@ namespace DVLD_3.Applications.LocalDrivingLicenseApplication
                 = new frmManageApplicationTestAppointments(clsDataGridView.GetID_FromDataGridView(publicFormsPanel1.DataViewer, 0), 2);
 
             frmManageApplicationTestAppointments.ShowDialog();
+
+            if (frmManageApplicationTestAppointments.IsDataSaved)
+            {
+                _refresh();
+            }
         }
 
         private void sceduleStreetTestToolStripMenuItem_Click(object sender, EventArgs e)
@@ -190,6 +200,11 @@ namespace DVLD_3.Applications.LocalDrivingLicenseApplication
                 = new frmManageApplicationTestAppointments(clsDataGridView.GetID_FromDataGridView(publicFormsPanel1.DataViewer, 0), 3);
 
             frmManageApplicationTestAppointments.ShowDialog();
+
+            if (frmManageApplicationTestAppointments.IsDataSaved)
+            {
+                _refresh();
+            }
         }
     }
 }

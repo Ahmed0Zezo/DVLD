@@ -21,6 +21,8 @@ namespace DVLD_3.Test_Appointments
         clsTestType _sceduledTestType;
         clsLocalApp _localApp;
 
+        public bool IsDataSaved = false;
+
         int _testTypeID;
         int _localAppID;
 
@@ -124,6 +126,7 @@ namespace DVLD_3.Test_Appointments
 
             if (frmAddEditTestAppointment.IsDataSaved)
             {
+                IsDataSaved = true;
                 _refresh();
             }
         }
@@ -137,6 +140,7 @@ namespace DVLD_3.Test_Appointments
 
             if(frmAddEditTestAppointment.IsDataSaved)
             {
+                IsDataSaved = true;
                 _refresh();
             }
         }
@@ -150,6 +154,7 @@ namespace DVLD_3.Test_Appointments
 
             if(TakeEditTest.IsDataSaved)
             {
+                IsDataSaved = true;
                 _refresh();
             }
 
