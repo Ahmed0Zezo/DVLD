@@ -146,6 +146,7 @@ namespace DVLD_3.Tests
                 MessageBox.Show("You didn't change the notes,To update test try to change the notes", "Error"
                     , MessageBoxButtons.OK, MessageBoxIcon.Error);
                 IsDataSaved = false;
+                return;
             }
 
             IsDataSaved = _test.UpdateNotes(txtNotes.Text);
