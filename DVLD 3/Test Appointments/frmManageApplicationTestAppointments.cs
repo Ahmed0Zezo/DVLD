@@ -83,7 +83,10 @@ namespace DVLD_3.Test_Appointments
             publicFormsPanel1.OpenFormButton.Click += OpenFormButtonClicked;
 
             _refresh();
-            publicFormsPanel1.DataViewer.Sort(publicFormsPanel1.DataViewer.Columns["Is Locked"], ListSortDirection.Ascending);
+            if (publicFormsPanel1.DataViewer.Rows.Count > 0)
+            {
+                publicFormsPanel1.DataViewer.Sort(publicFormsPanel1.DataViewer.Columns["Is Locked"], ListSortDirection.Ascending);
+            }
             publicFormsPanel1.DataViewer.ContextMenuStrip = contextMenuStrip1;
             publicFormsPanel1.DataViewer.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             publicFormsPanel1.DataFilter.Visible = false;

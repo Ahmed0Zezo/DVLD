@@ -59,7 +59,12 @@ namespace DVLD_3.Applications.LocalDrivingLicenseApplication
             publicFormsPanel1.AddColumnsToTheDataGridView(dataGridViewColumns);
             publicFormsPanel1.LinkDataToGridView(_localDrvingLicenseApplications);
 
-            publicFormsPanel1.DataViewer.Sort(publicFormsPanel1.DataViewer.Columns["dataclmnStatus"], ListSortDirection.Descending);
+           
+            if (publicFormsPanel1.DataViewer.Rows.Count > 0)
+            {
+                publicFormsPanel1.DataViewer.Sort(publicFormsPanel1.DataViewer.Columns["dataclmnStatus"], ListSortDirection.Descending);
+            }
+
             publicFormsPanel1.DataViewer.Columns[0].Width = 100;
             publicFormsPanel1.DataViewer.Columns[1].Width = 200;
             publicFormsPanel1.DataViewer.Columns[2].Width = 100;
@@ -79,17 +84,26 @@ namespace DVLD_3.Applications.LocalDrivingLicenseApplication
             
             publicFormsPanel1.DataFilter.AddItemsToTheFilter(filteritems);
             publicFormsPanel1.DataFilter.FilterComboBox.SelectedIndex = 0;
+            
 
-           
+
         }
 
         private void addNewLocalAppFormOpen_Click(object sender , EventArgs e)
         {
             AddEditLocalDrivingLicenseApplication _addEditLocalDrivingLicenseApplication = new AddEditLocalDrivingLicenseApplication();
 
+            _addEditLocalDrivingLicenseApplication.ApplicationSavedSuccessfully += ApplicationSaved;
+
             _addEditLocalDrivingLicenseApplication.ShowDialog();
+
+            
         }
 
+        private void ApplicationSaved(int AppID)
+        {
+            _refresh();
+        }
         private void updateApplicationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AddEditLocalDrivingLicenseApplication addEditLocalDrivingLicenseApplication
