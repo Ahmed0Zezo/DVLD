@@ -47,6 +47,7 @@ namespace DVLD_BusienessLayer
             if (result)
             {
                 this.TestAppointment.Lock();
+                //
                 TestID = newID;
                 return true;
             }
