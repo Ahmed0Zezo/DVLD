@@ -46,6 +46,10 @@ namespace DVLD_BusienessLayer
             bool result = clsTestsDataAccess.InsertNewTest(ref newID, TestAppointmentID, TestResult, Notes, CreatedByUserID);
             if (result)
             {
+                if(this.TestResult == true)
+                {
+                    this.TestAppointment.Lock();
+                }
                 TestID = newID;
                 return true;
             }
