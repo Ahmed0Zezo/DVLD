@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DVLD_3
 {
-    internal class clsEnumsUtil
+    public class clsEnumsUtil
     {
         public enum enFormMode { eAddNew = 0, eUpdate = 1 }
 

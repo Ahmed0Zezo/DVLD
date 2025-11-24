@@ -53,6 +53,7 @@
     <Compile Include="clsPublicSystemInfos.cs" />
     <Compile Include="clsPeopleDataAccess.cs" />
     <Compile Include="clsTestAppointmentsDataAccess.cs" />
+    <Compile Include="clsTestsDataAccess.cs" />
     <Compile Include="clsTestTypesDataAccess.cs" />
     <Compile Include="clsUsersDataAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

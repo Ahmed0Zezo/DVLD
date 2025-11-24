@@ -59,6 +59,7 @@ namespace DVLD_3.Applications.LocalDrivingLicenseApplication
             publicFormsPanel1.AddColumnsToTheDataGridView(dataGridViewColumns);
             publicFormsPanel1.LinkDataToGridView(_localDrvingLicenseApplications);
 
+            publicFormsPanel1.DataViewer.Sort(publicFormsPanel1.DataViewer.Columns["dataclmnStatus"], ListSortDirection.Descending);
             publicFormsPanel1.DataViewer.Columns[0].Width = 100;
             publicFormsPanel1.DataViewer.Columns[1].Width = 200;
             publicFormsPanel1.DataViewer.Columns[2].Width = 100;

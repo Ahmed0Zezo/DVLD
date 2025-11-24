@@ -180,6 +180,12 @@
     <Compile Include="Test Appointments\Controls\ctrlTestAppointment.Designer.cs">
       <DependentUpon>ctrlTestAppointment.cs</DependentUpon>
     </Compile>
+    <Compile Include="Tests\frmTakeEditTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tests\frmTakeEditTest.Designer.cs">
+      <DependentUpon>frmTakeEditTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="Tests\TestTypes\frmTestTypes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -319,6 +325,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Test Appointments\Controls\ctrlTestAppointment.resx">
       <DependentUpon>ctrlTestAppointment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tests\frmTakeEditTest.resx">
+      <DependentUpon>frmTakeEditTest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Tests\TestTypes\frmTestTypes.resx">
       <DependentUpon>frmTestTypes.cs</DependentUpon>

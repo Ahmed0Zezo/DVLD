@@ -105,6 +105,22 @@ namespace DVLD_DataAccessLayer
             return clsCRUD.UpdateAndDeleteRecordFromTable(clsPublicSystemInfos.ConnectionString, Quere, parameters) > 0;
         }
 
+        public static bool UpdateIsLockedCoulmnIntoDatabase(int AppointmentID, bool IsLocked)
+        {
+            string Quere = @"Update TestAppointments
+                             Set IsLocked = @IsLocked
+                             Where TestAppointmentID = @AppointmentID";
+
+            List<SqlParameter> parameters = new List<SqlParameter>
+            {
+                Parameters.MakeParameter("AppointmentID", AppointmentID, false),
+                Parameters.MakeParameter("IsLocked", IsLocked, false)
+            };
+
+            return clsCRUD.UpdateAndDeleteRecordFromTable(clsPublicSystemInfos.ConnectionString, Quere, parameters) > 0;
+        }
+
+
         public static int GetTestAppointmentTrialsByLocalAppIDAndTestTypeID(int LocalAppID,int TestTypeID)
         {
             string Quere = @"select Count(Tests.TestID) as Trials 

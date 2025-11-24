@@ -112,7 +112,7 @@ namespace DVLD_3.Test_Appointments
             }
         }
 
-        void _prepareFormForAddUpdate()
+        void _prepareFormForUpdateMode()
         {
             _fillFormsDataFromTestAppointment();
 
@@ -161,18 +161,21 @@ namespace DVLD_3.Test_Appointments
             lblHeader.Text = $"Scedule{IsRetake}Test";
         }
 
-        void _changeHeaderPictureAccourdingToTestType()
+        void _changeHeadersAccourdingToTestType()
         {
             switch (_testAppointment.TestTypeID)
             {
                 case 1 :
                     picBoxControlImage.Image = Resources.Vision_512;
+                    groupBox1.Text = "Vision Test";
                     break;
                 case 2:
                     picBoxControlImage.Image = Resources.Written_Test_512;
+                    groupBox1.Text = "Writing Test";
                     break;
                 case 3:
                     picBoxControlImage.Image = Resources.driving_test_512;
+                    groupBox1.Text = "driving Test";
                     break;
             }
 
@@ -185,7 +188,7 @@ namespace DVLD_3.Test_Appointments
 
 
             _changeHeaderTextAccourdingToTestAttempt();
-            _changeHeaderPictureAccourdingToTestType();
+            _changeHeadersAccourdingToTestType();
 
 
 
@@ -195,7 +198,7 @@ namespace DVLD_3.Test_Appointments
                     _prepareFormForAddNewMode();
                     break;
                 case clsEnumsUtil.enFormMode.eUpdate:
-                    _prepareFormForAddUpdate();
+                    _prepareFormForUpdateMode();
                     break;
                 default:
                     MessageBox.Show("Can't Find Test Appointment with Selected ID\nChoose another one","Error" 

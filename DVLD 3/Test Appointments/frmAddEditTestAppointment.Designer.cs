@@ -42,6 +42,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lblHeader = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ctrlRetakeTestApplicationInfo1 = new DVLD_3.Applications.Retake_Test_Applications.ctrlRetakeTestApplicationInfo();
             this.btnSave = new System.Windows.Forms.Button();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
@@ -50,7 +51,6 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.picBoxControlImage = new System.Windows.Forms.PictureBox();
-            this.ctrlRetakeTestApplicationInfo1 = new DVLD_3.Applications.Retake_Test_Applications.ctrlRetakeTestApplicationInfo();
             this.lblAppontmentLocked = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
@@ -224,6 +224,13 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Test Type";
             // 
+            // ctrlRetakeTestApplicationInfo1
+            // 
+            this.ctrlRetakeTestApplicationInfo1.Location = new System.Drawing.Point(3, 413);
+            this.ctrlRetakeTestApplicationInfo1.Name = "ctrlRetakeTestApplicationInfo1";
+            this.ctrlRetakeTestApplicationInfo1.Size = new System.Drawing.Size(468, 108);
+            this.ctrlRetakeTestApplicationInfo1.TabIndex = 27;
+            // 
             // btnSave
             // 
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -306,13 +313,6 @@
             this.picBoxControlImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picBoxControlImage.TabIndex = 6;
             this.picBoxControlImage.TabStop = false;
-            // 
-            // ctrlRetakeTestApplicationInfo1
-            // 
-            this.ctrlRetakeTestApplicationInfo1.Location = new System.Drawing.Point(3, 413);
-            this.ctrlRetakeTestApplicationInfo1.Name = "ctrlRetakeTestApplicationInfo1";
-            this.ctrlRetakeTestApplicationInfo1.Size = new System.Drawing.Size(468, 108);
-            this.ctrlRetakeTestApplicationInfo1.TabIndex = 27;
             // 
             // lblAppontmentLocked
             // 

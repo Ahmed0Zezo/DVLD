@@ -106,9 +106,12 @@
             // 
             // takeTestToolStripMenuItem
             // 
+            this.takeTestToolStripMenuItem.Image = global::DVLD_3.Properties.Resources.Test_32;
+            this.takeTestToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.takeTestToolStripMenuItem.Name = "takeTestToolStripMenuItem";
-            this.takeTestToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.takeTestToolStripMenuItem.Size = new System.Drawing.Size(196, 38);
             this.takeTestToolStripMenuItem.Text = "Take Test";
+            this.takeTestToolStripMenuItem.Click += new System.EventHandler(this.takeTestToolStripMenuItem_Click);
             // 
             // frmManageApplicationTestAppointments
             // 
@@ -116,7 +119,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(661, 500);
+            this.ClientSize = new System.Drawing.Size(661, 542);
             this.Controls.Add(this.lblHeader);
             this.Controls.Add(this.ctrlLDApplicationInfo1);
             this.Controls.Add(this.picBoxControlImage);

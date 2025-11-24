@@ -95,6 +95,15 @@ namespace DVLD_BusienessLayer
             return false ;
         }
 
+        public bool Lock()
+        {
+            return clsTestAppointmentsDataAccess.UpdateIsLockedCoulmnIntoDatabase(this.TestAppointmentID,true);
+        }
+
+        public bool LockTestAppointment()
+        {
+            return clsTestAppointmentsDataAccess.UpdateIsLockedCoulmnIntoDatabase(this.TestAppointmentID, true);
+        }
         public bool UpdatedAppointmentDate(DateTime NewDate)
         {
             return clsTestAppointmentsDataAccess.UpdateTestAppointmentDateIntoDatabase(this.TestAppointmentID, NewDate);
