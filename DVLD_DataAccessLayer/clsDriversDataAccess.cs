@@ -12,6 +12,16 @@ namespace DVLD_DataAccessLayer
 {
     public static class clsDriversDataAccess
     {
+
+        public static bool IsDriverExistByPersonID(int PersonID)
+        {
+            string Quere = @"select Count(DriverID) from Drivers
+                             where PersonID = @PersonID";
+
+            List<SqlParameter> parameters = new List<SqlParameter> { Parameters.MakeParameter("PersonID", PersonID, false) };
+
+            return clsCRUD.IsRecordExistInByQuereCondition(Quere,parameters,clsPublicSystemInfos.ConnectionString);
+        }
         public static bool InsertNewDriver(ref int DriverID, int PersonID, int CreatedByUserID, DateTime CreatedDate)
         {
             string Quere = @"INSERT INTO Drivers
@@ -60,6 +70,8 @@ namespace DVLD_DataAccessLayer
 
             return IsFound;
         }
+
+
         public static DataTable GetAllDrivers()
         {
             return clsCRUD.GetAllDataFromTable("Drivers_View", clsPublicSystemInfos.ConnectionString);

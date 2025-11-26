@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.pictureBox7 = new System.Windows.Forms.PictureBox();
+            this.lblTestID = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
@@ -42,16 +45,13 @@
             this.lblDLAppID = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.lblDate = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.picBoxControlImage = new System.Windows.Forms.PictureBox();
             this.lblHeader = new System.Windows.Forms.Label();
-            this.lblDate = new System.Windows.Forms.Label();
-            this.pictureBox7 = new System.Windows.Forms.PictureBox();
-            this.lblTestID = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.txtNotes = new System.Windows.Forms.TextBox();
@@ -61,6 +61,7 @@
             this.rbtnFail = new System.Windows.Forms.RadioButton();
             this.lblCantChangeResult = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
@@ -68,7 +69,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxControlImage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             this.SuspendLayout();
             // 
@@ -104,6 +104,36 @@
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Test Type";
+            // 
+            // pictureBox7
+            // 
+            this.pictureBox7.Image = global::DVLD_3.Properties.Resources.Number_32;
+            this.pictureBox7.Location = new System.Drawing.Point(117, 417);
+            this.pictureBox7.Name = "pictureBox7";
+            this.pictureBox7.Size = new System.Drawing.Size(23, 23);
+            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox7.TabIndex = 28;
+            this.pictureBox7.TabStop = false;
+            // 
+            // lblTestID
+            // 
+            this.lblTestID.AutoSize = true;
+            this.lblTestID.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTestID.Location = new System.Drawing.Point(155, 420);
+            this.lblTestID.Name = "lblTestID";
+            this.lblTestID.Size = new System.Drawing.Size(106, 16);
+            this.lblTestID.TabIndex = 26;
+            this.lblTestID.Text = "Not Taken Yet";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(27, 420);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(57, 16);
+            this.label5.TabIndex = 27;
+            this.label5.Text = "Test ID";
             // 
             // pictureBox5
             // 
@@ -235,6 +265,16 @@
             this.label10.TabIndex = 22;
             this.label10.Text = "Fees";
             // 
+            // lblDate
+            // 
+            this.lblDate.AutoSize = true;
+            this.lblDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDate.Location = new System.Drawing.Point(155, 336);
+            this.lblDate.Name = "lblDate";
+            this.lblDate.Size = new System.Drawing.Size(40, 16);
+            this.lblDate.TabIndex = 22;
+            this.lblDate.Text = "Date";
+            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -295,46 +335,6 @@
             this.lblHeader.TabIndex = 5;
             this.lblHeader.Text = "Sceduled Test";
             this.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblDate
-            // 
-            this.lblDate.AutoSize = true;
-            this.lblDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDate.Location = new System.Drawing.Point(155, 336);
-            this.lblDate.Name = "lblDate";
-            this.lblDate.Size = new System.Drawing.Size(40, 16);
-            this.lblDate.TabIndex = 22;
-            this.lblDate.Text = "Date";
-            // 
-            // pictureBox7
-            // 
-            this.pictureBox7.Image = global::DVLD_3.Properties.Resources.Number_32;
-            this.pictureBox7.Location = new System.Drawing.Point(117, 417);
-            this.pictureBox7.Name = "pictureBox7";
-            this.pictureBox7.Size = new System.Drawing.Size(23, 23);
-            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox7.TabIndex = 28;
-            this.pictureBox7.TabStop = false;
-            // 
-            // lblTestID
-            // 
-            this.lblTestID.AutoSize = true;
-            this.lblTestID.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTestID.Location = new System.Drawing.Point(155, 420);
-            this.lblTestID.Name = "lblTestID";
-            this.lblTestID.Size = new System.Drawing.Size(106, 16);
-            this.lblTestID.TabIndex = 26;
-            this.lblTestID.Text = "Not Taken Yet";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(27, 420);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(57, 16);
-            this.label5.TabIndex = 27;
-            this.label5.Text = "Test ID";
             // 
             // label3
             // 
@@ -446,6 +446,7 @@
             this.Load += new System.EventHandler(this.frmTakeEditTest_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
@@ -453,7 +454,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBoxControlImage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

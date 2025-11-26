@@ -66,5 +66,10 @@ namespace DVLD_BusienessLayer
 
             return driverID;
         }
+
+        public static bool IsDriverExistByPersonID(int PersonID)
+        {
+            return clsDriversDataAccess.IsDriverExistByPersonID(PersonID);
+        }
     }
 }
