@@ -71,5 +71,16 @@ namespace DVLD_BusienessLayer
         {
             return clsDriversDataAccess.IsDriverExistByPersonID(PersonID);
         }
+
+        public static bool DeleteDriverByID(int DrivierID)
+        {
+            return clsDriversDataAccess.DeleteDriver(DrivierID);
+        }
+
+        public static bool IsDriverHasActiveLicenseWithClassID(int DriverID , int ClassID)
+        {
+            return clsDriversDataAccess.IsDriverHasActiveLicenseWithClassID(DriverID, ClassID);
+
+        }
     }
 }

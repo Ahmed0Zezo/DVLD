@@ -42,9 +42,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(653, 341);
             this.Controls.Add(this.ctrlLDApplicationInfo1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmShowLocalAppInfos";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmShowLocalAppInfos";
             this.Load += new System.EventHandler(this.frmShowLocalAppInfos_Load);
             this.ResumeLayout(false);

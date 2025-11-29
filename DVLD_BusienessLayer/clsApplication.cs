@@ -113,6 +113,26 @@ namespace DVLD_BusienessLayer
                 ,StatusEnumToByte(ApplicationStatus),LastStatusDate,PaidFees,CreatedByUserID);
         }
 
+        public bool CompleteApplication()
+        {
+            return CompleteApplication(this.ApplicationID);
+        }
+
+        public bool CancelApplication()
+        {
+            return CancelApplication(this.ApplicationID);
+        }
+
+        public static bool CompleteApplication(int ApplicationID)
+        {
+            return clsApplicationsDataAccess.UpdateApplicationStatus(ApplicationID, 3);
+        }
+
+        public static bool CancelApplication(int ApplicationID)
+        {
+            return clsApplicationsDataAccess.UpdateApplicationStatus(ApplicationID, 2);
+        }
+
         public static bool DeleteApplicationByID(int ApplicationID)
         {
             return clsApplicationsDataAccess.DeleteApplicationByID(ApplicationID);

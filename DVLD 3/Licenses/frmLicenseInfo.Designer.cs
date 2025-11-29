@@ -28,18 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ctrlLicneseInfo1 = new DVLD_3.Licenses.Controls.ctrlLicneseInfo();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.ctrlLicneseInfo1 = new DVLD_3.Licenses.Controls.ctrlLicneseInfo();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // ctrlLicneseInfo1
-            // 
-            this.ctrlLicneseInfo1.Location = new System.Drawing.Point(4, 138);
-            this.ctrlLicneseInfo1.Name = "ctrlLicneseInfo1";
-            this.ctrlLicneseInfo1.Size = new System.Drawing.Size(739, 278);
-            this.ctrlLicneseInfo1.TabIndex = 0;
             // 
             // label1
             // 
@@ -62,16 +55,27 @@
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
+            // ctrlLicneseInfo1
+            // 
+            this.ctrlLicneseInfo1.Location = new System.Drawing.Point(4, 138);
+            this.ctrlLicneseInfo1.Name = "ctrlLicneseInfo1";
+            this.ctrlLicneseInfo1.Size = new System.Drawing.Size(739, 278);
+            this.ctrlLicneseInfo1.TabIndex = 0;
+            // 
             // frmLicenseInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(747, 418);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ctrlLicneseInfo1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmLicenseInfo";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmLicenseInfo";
+            this.Load += new System.EventHandler(this.frmLicenseInfo_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

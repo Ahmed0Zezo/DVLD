@@ -106,6 +106,12 @@
     <Compile Include="Licenses\Controls\ctrlLicneseInfo.Designer.cs">
       <DependentUpon>ctrlLicneseInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Licenses\frmIssueNewLicense.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Licenses\frmIssueNewLicense.Designer.cs">
+      <DependentUpon>frmIssueNewLicense.cs</DependentUpon>
+    </Compile>
     <Compile Include="Licenses\frmLicenseInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -279,6 +285,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Licenses\Controls\ctrlLicneseInfo.resx">
       <DependentUpon>ctrlLicneseInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Licenses\frmIssueNewLicense.resx">
+      <DependentUpon>frmIssueNewLicense.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Licenses\frmLicenseInfo.resx">
       <DependentUpon>frmLicenseInfo.cs</DependentUpon>

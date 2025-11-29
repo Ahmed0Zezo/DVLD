@@ -131,6 +131,20 @@ namespace DVLD_DataAccessLayer
             return clsCRUD.ReturnbyteValueFromTableByQuere(Quere,parameters,clsPublicSystemInfos.ConnectionString);
         }
 
+        public static bool UpdateApplicationStatus(int ApplicationID , byte ApplicationStatus)
+        {
+            string Quere = @"Update Applications
+                             set ApplicationStatus = @ApplicationStatus
+                             where ApplicationID = @ApplicationID";
+            List<SqlParameter> parameters = new List<SqlParameter>
+            {
+                Parameters.MakeParameter("ApplicationID", ApplicationID, false),
+                 Parameters.MakeParameter("ApplicationStatus", ApplicationStatus, false)
+            };
+
+            return clsCRUD.UpdateAndDeleteRecordFromTable(clsPublicSystemInfos.ConnectionString, Quere, parameters) > 0;
+        }
+
         
     }
 }

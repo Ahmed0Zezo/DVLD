@@ -72,10 +72,66 @@ namespace DVLD_DataAccessLayer
         }
 
 
+        public static bool FindDriverByID(int DriverID, ref int PersonID)
+        {
+            bool IsFound = false;
+            SqlConnection connection = new SqlConnection(clsPublicSystemInfos.ConnectionString);
+
+            string Quere = @"SELECT DriverID FROM Drivers WHERE PersonID = @PersonID";
+            SqlCommand command = new SqlCommand(Quere, connection);
+            command.Parameters.AddWithValue("@PersonID", PersonID);
+
+            try
+            {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    DriverID = (int)reader["DriverID"];
+                    IsFound = true;
+                }
+            }
+            catch
+            {
+                // Handle exceptions if necessary
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return IsFound;
+        }
+
         public static DataTable GetAllDrivers()
         {
             return clsCRUD.GetAllDataFromTable("Drivers_View", clsPublicSystemInfos.ConnectionString);
         }
 
+        public static bool DeleteDriver(int DriverID)
+        {
+            string Quere = @"delete from Drivers where DriverID = @DriverID";
+
+            List<SqlParameter> parameters = new List<SqlParameter>
+            {
+                Parameters.MakeParameter("DriverID", DriverID, false),
+            };
+
+            return clsCRUD.UpdateAndDeleteRecordFromTable(clsPublicSystemInfos.ConnectionString,Quere,parameters) > 0;
+        }
+
+        public static bool IsDriverHasActiveLicenseWithClassID(int DriverID , int ClassID)
+        {
+            string Quere = @"select Count(LicenseID) from Licenses
+                            where DriverID = @DriverID and LicenseClass = @ClassID and IsActive = 1";
+
+            List<SqlParameter> parameters = new List<SqlParameter>
+            { Parameters.MakeParameter("DriverID", DriverID, false),
+              Parameters.MakeParameter("ClassID", ClassID, false)
+            };
+
+            return clsCRUD.IsRecordExistInByQuereCondition(Quere, parameters, clsPublicSystemInfos.ConnectionString);
+        }
     }
 }

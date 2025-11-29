@@ -1,4 +1,5 @@
-﻿using DVLD_3.Properties;
+﻿using DVLD_3.Licenses;
+using DVLD_3.Properties;
 using DVLD_3.Test_Appointments;
 using DVLD_3.UserControls;
 using DVLD_3.Utils;
@@ -134,8 +135,10 @@ namespace DVLD_3.Applications.LocalDrivingLicenseApplication
 
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
-            bool IsApplicationNew 
-                = (clsLocalApp.GetAppStatusByLocalAppID(clsDataGridView.GetID_FromDataGridView(publicFormsPanel1.DataViewer, 0)) == 1);
+            clsLocalApp localApp
+                = (clsLocalApp.FindByID(clsDataGridView.GetID_FromDataGridView(publicFormsPanel1.DataViewer, 0)) );
+
+            bool IsApplicationNew = localApp.Application.ApplicationStatus == clsApplication.ApplicationStatusEnum.New;
 
             updateApplicationToolStripMenuItem.Enabled = IsApplicationNew;
             deleteApplicationToolStripMenuItem.Enabled = IsApplicationNew;
@@ -153,19 +156,28 @@ namespace DVLD_3.Applications.LocalDrivingLicenseApplication
                     sceduleVisionTestToolStripMenuItem.Enabled = WhatTestTypeIDToTake.TestTypeID == 1;
                     sceduleWrittenTestToolStripMenuItem.Enabled = WhatTestTypeIDToTake.TestTypeID == 2;
                     sceduleStreetTestToolStripMenuItem.Enabled = WhatTestTypeIDToTake.TestTypeID == 3;
+                    sceduleTestToolStripMenuItem.Enabled = true;
                 }
                 else
                 {
                     sceduleVisionTestToolStripMenuItem.Enabled = false;
                     sceduleWrittenTestToolStripMenuItem.Enabled = false;
                     sceduleStreetTestToolStripMenuItem.Enabled = false;
+                    sceduleTestToolStripMenuItem.Enabled = false;
                 }
+
+
+                issueDrivingLicenseFirstTimeToolStripMenuItem.Enabled = localApp.PassedTests == 3;
                 
             }
-            
-            //issureDrivingLicenseFirstTimeToolStripMenuItem.Enabled = IsApplicationNew;
-            //showLicenseToolStripMenuItem.Enabled = IsApplicationNew;
-            //showPersonLicensesHistoryToolStripMenuItem.Enabled = IsApplicationNew;
+            else
+            {
+                issueDrivingLicenseFirstTimeToolStripMenuItem.Enabled = false;
+            }
+
+                showLicenseToolStripMenuItem.Enabled = localApp.Application.ApplicationStatus == clsApplication.ApplicationStatusEnum.Completed;
+           
+            showPersonLicensesHistoryToolStripMenuItem.Enabled = true;
         }
 
         private void sceduleVisionTestToolStripMenuItem_Click(object sender, EventArgs e)
@@ -202,6 +214,19 @@ namespace DVLD_3.Applications.LocalDrivingLicenseApplication
             frmManageApplicationTestAppointments.ShowDialog();
 
             if (frmManageApplicationTestAppointments.IsDataSaved)
+            {
+                _refresh();
+            }
+        }
+
+        private void issueDrivingLicenseFirstTimeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmIssueNewLicenseForFirstTime IssueLicenseForFirstTimeForm =
+                new frmIssueNewLicenseForFirstTime(clsDataGridView.GetID_FromDataGridView(publicFormsPanel1.DataViewer, 0));
+
+            IssueLicenseForFirstTimeForm.ShowDialog();
+
+            if(IssueLicenseForFirstTimeForm.IsSavedSuccessfully)
             {
                 _refresh();
             }

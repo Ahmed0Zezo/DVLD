@@ -1,4 +1,5 @@
-﻿using DVLD_BusienessLayer;
+﻿using DVLD_3.Licenses;
+using DVLD_BusienessLayer;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +14,10 @@ namespace DVLD_3.Applications.Controls
 {
     public partial class ctrlLDApplicationInfo : UserControl
     {
+
+        int _localAppID;
+
+        clsLocalApp _localApp;
         public ctrlLDApplicationInfo()
         {
             InitializeComponent();
@@ -21,6 +26,13 @@ namespace DVLD_3.Applications.Controls
         public event Action PersonDataUpdated;
 
 
+        public clsLocalApp LocalApplication
+        {
+            get
+            {
+                return _localApp;
+            }
+        }
 
         private void _refreshDefaultValues()
         {
@@ -43,8 +55,11 @@ namespace DVLD_3.Applications.Controls
             lblPassedTests.Text = $"{app.PassedTests}/3";
             lblAppliedForLicense.Text = clsLicenseClass.GetLiceseClassNameByItsID(app.LicenseClassID);
 
-            //handel Show License at another time
-            lnklblShowLicenseInfo.Enabled = false;
+
+            lnklblShowLicenseInfo.Enabled = clsLicense.IsLicenseExistByApplicationID(app.ApplicationID);
+            
+            
+            
         }
 
         private void _faildToFindApplication(int AppID)
@@ -55,20 +70,21 @@ namespace DVLD_3.Applications.Controls
 
         public bool LoadApplicationInfo(int AppID)
         {
-            if (AppID == -1)
+            _localAppID = AppID;
+            if (_localAppID == -1)
             {
-                _faildToFindApplication(AppID);
+                _faildToFindApplication(_localAppID);
                 return false;
             }
-            clsLocalApp app = clsLocalApp.FindByID(AppID);
+            _localApp = clsLocalApp.FindByID(_localAppID);
 
-            if (app == null)
+            if (_localApp == null)
             {
-                _faildToFindApplication(AppID);
+                _faildToFindApplication(_localAppID);
                 return false;
             }
 
-            _fillControlsWithData(app);
+            _fillControlsWithData(_localApp);
 
             return true;
         }
@@ -80,6 +96,13 @@ namespace DVLD_3.Applications.Controls
         private void ctrlLDApplicationInfo_Load(object sender, EventArgs e)
         {
             ctrlApplicationInfo1.PersonDataUpdated += _personDataUpdated;
+        }
+
+        private void lnklblShowLicenseInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            frmLicenseInfo LicenseInfoForm = new frmLicenseInfo(_localApp.ApplicationID);
+
+            LicenseInfoForm.ShowDialog();
         }
     }
 }
