@@ -254,5 +254,43 @@ namespace DVLD_3.Applications.LocalDrivingLicenseApplication
                 _refresh();
             }
         }
+
+        private void deleteApplicationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(MessageBox.Show("Are you sure that you want to delete this application ?"
+                ,"Deleting Application" ,MessageBoxButtons.YesNo ,MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                if (clsLocalApp.DeleteByID(clsDataGridView.GetID_FromDataGridView(publicFormsPanel1.DataViewer, 0)))
+                {
+                    MessageBox.Show("Application deleted successfully"
+                , "Succeded", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    _refresh();
+                }
+                else
+                {
+                    MessageBox.Show("Somethimg went wrong during deleting application"
+               , "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void cancelApplicationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure that you want to cancel this application ?"
+                , "Cancling Application", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                if (clsLocalApp.CancelApplication(clsDataGridView.GetID_FromDataGridView(publicFormsPanel1.DataViewer, 0)))
+                {
+                    MessageBox.Show("Application cancled successfully"
+                , "Succeded", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    _refresh();
+                }
+                else
+                {
+                    MessageBox.Show("Somethimg went wrong during cancling application"
+               , "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
     }
 }

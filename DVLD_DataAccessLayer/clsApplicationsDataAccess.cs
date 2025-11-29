@@ -134,12 +134,13 @@ namespace DVLD_DataAccessLayer
         public static bool UpdateApplicationStatus(int ApplicationID , byte ApplicationStatus)
         {
             string Quere = @"Update Applications
-                             set ApplicationStatus = @ApplicationStatus
+                             set ApplicationStatus = @ApplicationStatus ,LastStatusDate = @LastStatusDate
                              where ApplicationID = @ApplicationID";
             List<SqlParameter> parameters = new List<SqlParameter>
             {
                 Parameters.MakeParameter("ApplicationID", ApplicationID, false),
-                 Parameters.MakeParameter("ApplicationStatus", ApplicationStatus, false)
+                 Parameters.MakeParameter("ApplicationStatus", ApplicationStatus, false),
+                 Parameters.MakeParameter("LastStatusDate", DateTime.Now, false)
             };
 
             return clsCRUD.UpdateAndDeleteRecordFromTable(clsPublicSystemInfos.ConnectionString, Quere, parameters) > 0;

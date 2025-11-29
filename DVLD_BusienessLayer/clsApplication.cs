@@ -115,12 +115,26 @@ namespace DVLD_BusienessLayer
 
         public bool CompleteApplication()
         {
-            return CompleteApplication(this.ApplicationID);
+            if(CompleteApplication(this.ApplicationID))
+            {
+                this.ApplicationStatus = ApplicationStatusEnum.Completed;
+                this.LastStatusDate = DateTime.Now;
+                return true;
+            }
+            return false;
+
         }
 
         public bool CancelApplication()
         {
-            return CancelApplication(this.ApplicationID);
+            if (CancelApplication(this.ApplicationID))
+            {
+                this.ApplicationStatus = ApplicationStatusEnum.Cancled;
+                this.LastStatusDate = DateTime.Now;
+                return true;
+            }
+            return false;
+           
         }
 
         public static bool CompleteApplication(int ApplicationID)

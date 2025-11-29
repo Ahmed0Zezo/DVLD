@@ -199,5 +199,17 @@ namespace DVLD_DataAccessLayer
 
             return clsCRUD.ReturnIntValueFromTableByQuere(Quere, parameters, clsPublicSystemInfos.ConnectionString);
         }
+
+        public static int GetBaseApplicationIDByLocalAppID(int LocalAppID)
+        {
+            string Quere = @"select ApplicationID from LocalDrivingLicenseApplications 
+                             where LocalDrivingLicenseApplicationID = @LocalAppID";
+
+            List<SqlParameter> parameters = new List<SqlParameter> {
+                Parameters.MakeParameter("LocalAppID" , LocalAppID , false)
+            };
+
+            return clsCRUD.ReturnIntValueFromTableByQuere(Quere, parameters, clsPublicSystemInfos.ConnectionString);
+        }
     }
 }

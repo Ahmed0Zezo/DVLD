@@ -139,17 +139,22 @@ please choose another class");
             
         }
 
-        public bool DeleteByID(int LocalAppID)
+        public static bool DeleteByID(int LocalAppID)
         {
-            if(!clsApplication.DeleteApplicationByID(this.ApplicationID))
+            int BaseAppID = GetBaseApplicationIDByLocalAppID(LocalAppID);
+            if (!clsLocalAppsDataAccess.DeleteLocalDrivingLicenseApplication(LocalAppID))
             {
                 return false;
             }
 
 
-            return clsLocalAppsDataAccess.DeleteLocalDrivingLicenseApplication(LocalAppID);
+            return clsApplication.DeleteApplicationByID(BaseAppID);
         }
 
+        public static int GetBaseApplicationIDByLocalAppID(int LocalAppID)
+        {
+            return clsLocalAppsDataAccess.GetBaseApplicationIDByLocalAppID(LocalAppID);
+        }
         public static DataTable GetAll()
         {
             return clsLocalAppsDataAccess.GetAllLocalDrivingLicenseApplication();
@@ -168,6 +173,10 @@ please choose another class");
             return new clsLocalApp(localDrivingLicenseApplicationID, applicationID, licenseClassID);
         }
 
+        public static bool CancelApplication(int LocalAppID)
+        {
+            return clsApplication.CancelApplication(GetBaseApplicationIDByLocalAppID(LocalAppID));
+        }
         public static int GetAppStatusByLocalAppID(int LocalAppID)
         {
             return clsApplicationsDataAccess.GetAppStatusByID(LocalAppID);
