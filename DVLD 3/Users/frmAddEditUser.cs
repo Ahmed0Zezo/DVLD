@@ -104,7 +104,7 @@ namespace DVLD_3.Users
             personDetailsWithFilter1.FilterEnabled = false;
 
 
-            personDetailsWithFilter1.PersonAdded(_currentUser.PersonID);
+            personDetailsWithFilter1.SearchForPerson(_currentUser.PersonID);
             lblUserID.Text = _currentUser.UserID.ToString();
             txtUsername.Text = _currentUser.UserName;
             txtPassword.Text = _currentUser.Password;

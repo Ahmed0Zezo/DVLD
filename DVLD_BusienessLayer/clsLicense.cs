@@ -139,7 +139,7 @@ namespace DVLD_BusienessLayer
 
         public static DataTable GetAllByPersonID(int personID)
         {
-            return clsLicensesDataAccess.GetAllByPersonID(personID);
+            return clsLicensesDataAccess.GetPersonLocalLicensesHistroyInfo(personID);
         }
 
         public static clsLicense FindByApplicationID(int applicationID,ref string ClassName , ref string ApplicantName ,ref bool Gender 
@@ -197,6 +197,11 @@ namespace DVLD_BusienessLayer
         public static bool IsLicenseExistByApplicationID(int applicationID)
         {
             return clsLicensesDataAccess.IsLicenseExistByApplicationID(applicationID);
+        }
+
+        public static DataTable GetPersonLocalLicensesHistroy(int PersonID)
+        {
+            return clsLicensesDataAccess.GetPersonLocalLicensesHistroyInfo(PersonID);
         }
     }
 }

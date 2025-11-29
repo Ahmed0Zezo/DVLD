@@ -40,11 +40,11 @@ namespace DVLD_DataAccessLayer
             return clsCRUD.AddNewRecordToTable(ref LicenseID, clsPublicSystemInfos.ConnectionString, Quere, parameters);
         }
                 
-        public static DataTable GetAllByPersonID(int PersonID)
+        public static DataTable GetPersonLocalLicensesHistroyInfo(int PersonID)
         {
-            string Quere = @"select Licenses.* from 
-                            Licenses inner join Drivers on Licenses.DriverID = Drivers.DriverID
-                            where Drivers.PersonID = @PersonID"; 
+
+            string Quere = @"select * from PersonLicensesHistory_View
+                            where ApplicantPersonID = @PersonID"; 
             List<SqlParameter> parameters = new List<SqlParameter>
             {
                 Parameters.MakeParameter("PersonID", PersonID, false)

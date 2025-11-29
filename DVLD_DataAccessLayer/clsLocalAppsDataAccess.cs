@@ -185,5 +185,19 @@ namespace DVLD_DataAccessLayer
 
             return clsCRUD.IsRecordExistInByQuereCondition(Quere, parameters, clsPublicSystemInfos.ConnectionString);
         }
+
+        public static int GetApplicantPersonID(int LocalAppID)
+        {
+            string Quere = @"select Applications.ApplicantPersonID from
+                             LocalDrivingLicenseApplications inner join Applications 
+                             on LocalDrivingLicenseApplications.ApplicationID = Applications.ApplicationID
+                             where LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID = @LocalAppID";
+
+            List<SqlParameter> parameters = new List<SqlParameter> {
+                Parameters.MakeParameter("LocalAppID" , LocalAppID , false)
+            };
+
+            return clsCRUD.ReturnIntValueFromTableByQuere(Quere, parameters, clsPublicSystemInfos.ConnectionString);
+        }
     }
 }

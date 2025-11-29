@@ -192,5 +192,10 @@ please choose another class");
         {
             return clsLocalAppsDataAccess.DoesApplicationHavePassTestsByTestTypeID(LocalAppID, TestTypeID);
         }
+
+        public static int GetApplicantPersonIDFromByLocalAppID(int LocalAppID)
+        {
+            return clsLocalAppsDataAccess.GetApplicantPersonID(LocalAppID);
+        }
     }
 }

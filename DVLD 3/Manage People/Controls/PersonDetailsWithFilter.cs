@@ -15,6 +15,8 @@ namespace DVLD_3.MangePeople.Controls
     public partial class PersonDetailsWithFilter : UserControl
     {
         public event Action<int> OnPersonSelected;
+
+        public event Action OnPersonUpdated;
         public PersonDetailsWithFilter()
         {
             InitializeComponent();
@@ -72,7 +74,7 @@ namespace DVLD_3.MangePeople.Controls
 
             dataGridViewFilter1.AddItemsToTheFilter(filterItems);
             dataGridViewFilter1.FilterComboBox.SelectedIndex = 0;
-
+            showPersonDetails1.PersonUpdated += PersonDataUpdated;
         }
 
 
@@ -106,8 +108,13 @@ namespace DVLD_3.MangePeople.Controls
 
         }
 
-        public void PersonAdded(int PersonID)
+        private void PersonDataUpdated()
         {
+            OnPersonUpdated?.Invoke();
+        }
+        public void SearchForPerson(int PersonID)
+        {
+            //search for the given person id
             showPersonDetails1.LoadPersonInfo(PersonID);
             dataGridViewFilter1.FilterBox.Text = PersonID.ToString();
             _currentPersonID = PersonID;
@@ -117,7 +124,7 @@ namespace DVLD_3.MangePeople.Controls
         {
             AddEditPeopleForm addEditPeopleForm = new AddEditPeopleForm();
 
-            addEditPeopleForm.OnPersonSavedSuccessfully += PersonAdded;
+            addEditPeopleForm.OnPersonSavedSuccessfully += SearchForPerson;
 
             addEditPeopleForm.ShowDialog();
         }

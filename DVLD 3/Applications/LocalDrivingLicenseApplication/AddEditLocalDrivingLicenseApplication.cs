@@ -93,7 +93,7 @@ namespace DVLD_3
             lblHeader.Text = "Update Local Driving License Application";
             personDetailsWithFilter1.FilterEnabled = false;
 
-            personDetailsWithFilter1.PersonAdded(_localApp.Application.ApplicantPersonID);
+            personDetailsWithFilter1.SearchForPerson(_localApp.Application.ApplicantPersonID);
 
             lblApplicationID.Text = _localApp.ApplicationID.ToString();
             cbLicenseClass.SelectedIndex = _localApp.LicenseClassID -1;

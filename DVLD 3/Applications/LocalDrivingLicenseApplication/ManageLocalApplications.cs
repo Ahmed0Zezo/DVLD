@@ -231,5 +231,28 @@ namespace DVLD_3.Applications.LocalDrivingLicenseApplication
                 _refresh();
             }
         }
+
+        private void showLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int ApplicaitonID = clsLocalApp.FindByID(clsDataGridView.GetID_FromDataGridView(publicFormsPanel1.DataViewer, 0)).ApplicationID;
+
+            frmLicenseInfo LicenseInformationForm = new frmLicenseInfo(ApplicaitonID);
+
+            LicenseInformationForm.ShowDialog();
+        }
+
+        private void showPersonLicensesHistoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int PersonID = clsLocalApp.GetApplicantPersonIDFromByLocalAppID(clsDataGridView.GetID_FromDataGridView(publicFormsPanel1.DataViewer, 0));
+
+            frmPersonLicensesHistory PersonLicensesHistoryForm = new frmPersonLicensesHistory(PersonID);
+
+            PersonLicensesHistoryForm.ShowDialog();
+
+            if(PersonLicensesHistoryForm.IsDateUpdated)
+            {
+                _refresh();
+            }
+        }
     }
 }

@@ -226,6 +226,7 @@
             this.showLicenseToolStripMenuItem.Name = "showLicenseToolStripMenuItem";
             this.showLicenseToolStripMenuItem.Size = new System.Drawing.Size(281, 38);
             this.showLicenseToolStripMenuItem.Text = "Show License";
+            this.showLicenseToolStripMenuItem.Click += new System.EventHandler(this.showLicenseToolStripMenuItem_Click);
             // 
             // toolStripSeparator6
             // 
@@ -239,6 +240,7 @@
             this.showPersonLicensesHistoryToolStripMenuItem.Name = "showPersonLicensesHistoryToolStripMenuItem";
             this.showPersonLicensesHistoryToolStripMenuItem.Size = new System.Drawing.Size(281, 38);
             this.showPersonLicensesHistoryToolStripMenuItem.Text = "Show Person Licenses History";
+            this.showPersonLicensesHistoryToolStripMenuItem.Click += new System.EventHandler(this.showPersonLicensesHistoryToolStripMenuItem_Click);
             // 
             // publicFormsPanel1
             // 
