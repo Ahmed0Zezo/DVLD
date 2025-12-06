@@ -1,5 +1,6 @@
 ﻿using DVLD_3.Applications;
 using DVLD_3.Applications.LocalDrivingLicenseApplication;
+using DVLD_3.Applications.Renew_License_Application;
 using DVLD_3.Drivers;
 using DVLD_3.Tests.TestTypes;
 using DVLD_3.Users;
@@ -101,6 +102,13 @@ namespace DVLD_3
                 = new AddEditLocalDrivingLicenseApplication();
 
             addEditLocalDrivingLicenseApplication.ShowDialog();
+        }
+
+        private void renewDrivingLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmRenewLicense frmRenewLicense = new frmRenewLicense();
+
+            frmRenewLicense.ShowDialog();
         }
     }
 }

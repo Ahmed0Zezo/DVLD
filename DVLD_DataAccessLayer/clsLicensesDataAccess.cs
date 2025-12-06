@@ -105,6 +105,102 @@ namespace DVLD_DataAccessLayer
             return IsFound;
         }
 
+        public static bool FindByLicenseID(int LicenseID, ref int ApplicationID, ref int DriverID, ref int LicenseClassID, ref DateTime IssueDate,
+            ref DateTime ExpirationDate, ref string Notes, ref decimal PaidFees, ref bool IsActive, ref byte IssueReason, ref int CreatedByUserID
+            , ref string ApplicantName, ref string ClassName, ref string NationalNo, ref bool Gender, ref bool IsDetained, ref DateTime DateOfBirth
+            , ref string ImagePath)
+        {
+            bool IsFound = false;
+            SqlConnection connection = new SqlConnection(clsPublicSystemInfos.ConnectionString);
+
+            string Quere = @"SELECT * FROM Licenses_View WHERE LicenseID = @LicenseID";
+            SqlCommand command = new SqlCommand(Quere, connection);
+            command.Parameters.AddWithValue("@LicenseID", LicenseID);
+
+            try
+            {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    ApplicationID = (int)reader["LicenseID"];
+                    DriverID = (int)reader["DriverID"];
+                    LicenseClassID = (int)reader["LicenseClass"];
+                    IssueDate = (DateTime)reader["IssueDate"];
+                    ExpirationDate = (DateTime)reader["ExpirationDate"];
+                    Notes = reader["Notes"] == DBNull.Value ? null : (string)reader["Notes"];
+                    PaidFees = Convert.ToDecimal(reader["PaidFees"]);
+                    IsActive = (bool)reader["IsActive"];
+                    IssueReason = Convert.ToByte(reader["IssueReason"]);
+                    CreatedByUserID = (int)reader["CreatedByUserID"];
+
+                    ApplicantName = (string)reader["Name"];
+                    ClassName = (string)reader["ClassName"];
+                    NationalNo = (string)reader["NationalNo"];
+                    Gender = (byte)reader["Gendor"] == 1 ? true : false;
+                    IsDetained = (bool)reader["IsDetained"];
+                    DateOfBirth = (DateTime)reader["DateOfBirth"];
+                    ImagePath = reader["ImagePath"] != DBNull.Value ? (string)reader["ImagePath"] : "";
+
+                    IsFound = true;
+                }
+            }
+            catch
+            {
+                // Handle exceptions if necessary
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return IsFound;
+        }
+
+        public static bool FindByLicenseID(int LicenseID, ref int ApplicationID, ref int DriverID, ref int LicenseClassID, ref DateTime IssueDate,
+            ref DateTime ExpirationDate, ref string Notes, ref decimal PaidFees, ref bool IsActive, ref byte IssueReason, ref int CreatedByUserID)
+        {
+            bool IsFound = false;
+            SqlConnection connection = new SqlConnection(clsPublicSystemInfos.ConnectionString);
+
+            string Quere = @"SELECT * FROM Licenses WHERE LicenseID = @LicenseID";
+            SqlCommand command = new SqlCommand(Quere, connection);
+            command.Parameters.AddWithValue("@LicenseID", LicenseID);
+
+            try
+            {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    ApplicationID = (int)reader["LicenseID"];
+                    DriverID = (int)reader["DriverID"];
+                    LicenseClassID = (int)reader["LicenseClass"];
+                    IssueDate = (DateTime)reader["IssueDate"];
+                    ExpirationDate = (DateTime)reader["ExpirationDate"];
+                    Notes = reader["Notes"] == DBNull.Value ? null : (string)reader["Notes"];
+                    PaidFees = Convert.ToDecimal(reader["PaidFees"]);
+                    IsActive = (bool)reader["IsActive"];
+                    IssueReason = Convert.ToByte(reader["IssueReason"]);
+                    CreatedByUserID = (int)reader["CreatedByUserID"];
+
+                    IsFound = true;
+                }
+            }
+            catch
+            {
+                // Handle exceptions if necessary
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return IsFound;
+        }
+
         public static bool FindByLocalApplicationID(int LocalAppID,ref int ApplicationID, ref int LicenseID
             , ref int DriverID, ref int LicenseClassID, ref DateTime IssueDate,
             ref DateTime ExpirationDate, ref string Notes, ref decimal PaidFees
@@ -167,6 +263,20 @@ namespace DVLD_DataAccessLayer
         public static bool IsLicenseExistByApplicationID(int ApplicationID)
         {
             return clsCRUD.IsRecordExistInTableByID(ApplicationID, "ApplicationID", "Licenses", clsPublicSystemInfos.ConnectionString);
+        }
+
+        public static bool UpdateIsActiveCoulmn(int LicenseID,bool value)
+        {
+            string Quere = @"update Licenses
+                            set IsActive = @IsActive
+                            where LicenseID = @LicenseID";
+
+            List<SqlParameter> parameters = new List<SqlParameter> {
+                Parameters.MakeParameter("LicenseID",LicenseID,false),
+                Parameters.MakeParameter("IsActive",value,false)
+            };
+
+            return clsCRUD.UpdateAndDeleteRecordFromTable(clsPublicSystemInfos.ConnectionString, Quere, parameters) > 0;
         }
     }
 }

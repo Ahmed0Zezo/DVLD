@@ -302,5 +302,10 @@ namespace DVLD_BusienessLayer
         {
             return clsPeopleDataAccess.IsPersonHasActiveLicenseWithClassID(PersonID, ClassID);
         }
+
+        public static int GetPersonID_ByNationalNo(string NationalNo)
+        {
+            return clsPeopleDataAccess.GetPersonIDByNationalNo(NationalNo);
+        }
     }
 }

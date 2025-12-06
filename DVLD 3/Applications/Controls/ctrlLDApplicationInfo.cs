@@ -57,9 +57,7 @@ namespace DVLD_3.Applications.Controls
 
 
             lnklblShowLicenseInfo.Enabled = clsLicense.IsLicenseExistByApplicationID(app.ApplicationID);
-            
-            
-            
+
         }
 
         private void _faildToFindApplication(int AppID)
@@ -68,9 +66,9 @@ namespace DVLD_3.Applications.Controls
             _refreshDefaultValues();
         }
 
-        public bool LoadApplicationInfo(int AppID)
+        public bool LoadApplicationInfo(int LocalAppID)
         {
-            _localAppID = AppID;
+            _localAppID = LocalAppID;
             if (_localAppID == -1)
             {
                 _faildToFindApplication(_localAppID);

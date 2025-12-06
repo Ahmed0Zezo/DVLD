@@ -228,7 +228,7 @@
             // 
             // picBoxDriverImage
             // 
-            this.picBoxDriverImage.Image = global::DVLD_3.Properties.Resources.Number_32;
+            this.picBoxDriverImage.Image = global::DVLD_3.Properties.Resources.Male_512;
             this.picBoxDriverImage.Location = new System.Drawing.Point(583, 58);
             this.picBoxDriverImage.Name = "picBoxDriverImage";
             this.picBoxDriverImage.Size = new System.Drawing.Size(150, 174);

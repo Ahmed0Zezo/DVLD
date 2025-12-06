@@ -30,7 +30,7 @@ namespace DVLD_BusienessLayer
             ApplicationType = clsApplicationType.FindApplicationTypeByID(ApplicationTypeID);
             ApplicationStatus = ApplicationStatusEnum.New;
             LastStatusDate = DateTime.Now;
-            PaidFees = 0;
+            PaidFees = ApplicationType.ApplicationFees;
             CreatedByUserID = 0;
         }
 
@@ -101,7 +101,7 @@ namespace DVLD_BusienessLayer
             }
             else
             {
-                this.ApplicantPersonID = -1;
+                this.ApplicationID = -1;
                 return false ;
             }
                 
@@ -109,6 +109,7 @@ namespace DVLD_BusienessLayer
 
         public bool Update()
         {
+            this.LastStatusDate = DateTime.Now;
             return clsApplicationsDataAccess.UpdateApplication(ApplicationID,ApplicantPersonID,ApplicationDate,ApplicationTypeID
                 ,StatusEnumToByte(ApplicationStatus),LastStatusDate,PaidFees,CreatedByUserID);
         }

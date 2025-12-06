@@ -100,9 +100,9 @@ namespace DVLD_BusienessLayer
             return clsTestAppointmentsDataAccess.UpdateIsLockedCoulmnIntoDatabase(this.TestAppointmentID,true);
         }
 
-        public bool LockTestAppointment()
+        public static bool LockTestAppointment(int TestAppointmentID)
         {
-            return clsTestAppointmentsDataAccess.UpdateIsLockedCoulmnIntoDatabase(this.TestAppointmentID, true);
+            return clsTestAppointmentsDataAccess.UpdateIsLockedCoulmnIntoDatabase(TestAppointmentID, true);
         }
         public bool UpdatedAppointmentDate(DateTime NewDate)
         {

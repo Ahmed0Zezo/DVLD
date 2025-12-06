@@ -58,6 +58,12 @@
     <Compile Include="Applications\Controls\ctrlLDApplicationInfo.Designer.cs">
       <DependentUpon>ctrlLDApplicationInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Licenses\Controls\ctrlLicenseInfoWithFilter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Licenses\Controls\ctrlLicenseInfoWithFilter.Designer.cs">
+      <DependentUpon>ctrlLicenseInfoWithFilter.cs</DependentUpon>
+    </Compile>
     <Compile Include="Applications\LocalDrivingLicenseApplication\AddEditLocalDrivingLicenseApplication.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,6 +93,12 @@
     </Compile>
     <Compile Include="Applications\LocalDrivingLicenseApplication\ManageLocalApplications.Designer.cs">
       <DependentUpon>ManageLocalApplications.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Applications\Renew License Application\frmRenewLicense.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Applications\Renew License Application\frmRenewLicense.Designer.cs">
+      <DependentUpon>frmRenewLicense.cs</DependentUpon>
     </Compile>
     <Compile Include="Applications\Retake Test Applications\ctrlRetakeTestApplicationInfo.cs">
       <SubType>UserControl</SubType>
@@ -180,18 +192,6 @@
     <Compile Include="Test Appointments\frmManageApplicationTestAppointments.Designer.cs">
       <DependentUpon>frmManageApplicationTestAppointments.cs</DependentUpon>
     </Compile>
-    <Compile Include="Test Appointments\Controls\ctrlTestAppointmentInfo.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Test Appointments\Controls\ctrlTestAppointmentInfo.Designer.cs">
-      <DependentUpon>ctrlTestAppointmentInfo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Test Appointments\Controls\ctrlTestAppointment.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Test Appointments\Controls\ctrlTestAppointment.Designer.cs">
-      <DependentUpon>ctrlTestAppointment.cs</DependentUpon>
-    </Compile>
     <Compile Include="Tests\frmTakeEditTest.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -274,6 +274,9 @@
     <EmbeddedResource Include="Applications\Controls\ctrlLDApplicationInfo.resx">
       <DependentUpon>ctrlLDApplicationInfo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Licenses\Controls\ctrlLicenseInfoWithFilter.resx">
+      <DependentUpon>ctrlLicenseInfoWithFilter.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Applications\LocalDrivingLicenseApplication\AddEditLocalDrivingLicenseApplication.resx">
       <DependentUpon>AddEditLocalDrivingLicenseApplication.cs</DependentUpon>
     </EmbeddedResource>
@@ -282,6 +285,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Applications\LocalDrivingLicenseApplication\ManageLocalApplications.resx">
       <DependentUpon>ManageLocalApplications.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Applications\Renew License Application\frmRenewLicense.resx">
+      <DependentUpon>frmRenewLicense.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Applications\Retake Test Applications\ctrlRetakeTestApplicationInfo.resx">
       <DependentUpon>ctrlRetakeTestApplicationInfo.cs</DependentUpon>
@@ -337,12 +343,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Test Appointments\frmManageApplicationTestAppointments.resx">
       <DependentUpon>frmManageApplicationTestAppointments.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Test Appointments\Controls\ctrlTestAppointmentInfo.resx">
-      <DependentUpon>ctrlTestAppointmentInfo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Test Appointments\Controls\ctrlTestAppointment.resx">
-      <DependentUpon>ctrlTestAppointment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Tests\frmTakeEditTest.resx">
       <DependentUpon>frmTakeEditTest.cs</DependentUpon>
@@ -745,6 +745,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Test Appointments\Controls\" />
     <Folder Include="Tests\Controls\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

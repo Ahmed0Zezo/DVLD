@@ -84,10 +84,8 @@ namespace DVLD_3.Test_Appointments
             {
                 datePickerTestDate.MinDate = _testAppointment.AppointmentDate;
             }
-           
 
-
-                lblDLAppID.Text = _testAppointment.LocalAppID.ToString();
+            lblDLAppID.Text = _testAppointment.LocalAppID.ToString();
             lblDClass.Text = _testAppointment.LicenseClassName;
             lblName.Text = _testAppointment.FullApplicantName;
             lblTrial.Text = _trials.ToString();
@@ -106,8 +104,8 @@ namespace DVLD_3.Test_Appointments
             else
             {
                 ctrlRetakeTestApplicationInfo1.Enabled = true;
-                //7 => Application With Type Retake (ID)
-                ctrlRetakeTestApplicationInfo1.LoadInfo(_testAppointment.PaidFees,7);
+                
+                ctrlRetakeTestApplicationInfo1.LoadDataForNewRetakeTestApplication(_testAppointment.PaidFees);
 
             }
         }
@@ -130,7 +128,7 @@ namespace DVLD_3.Test_Appointments
                 else
                 {
                     ctrlRetakeTestApplicationInfo1.Enabled = true;
-                    ctrlRetakeTestApplicationInfo1.LoadInfo((int)_testAppointment.RetakeTestApplicationID, _testAppointment.PaidFees);
+                    ctrlRetakeTestApplicationInfo1.LoadDataForExistRetakeTestApplication((int)_testAppointment.RetakeTestApplicationID, _testAppointment.PaidFees);
                 }
 
                     

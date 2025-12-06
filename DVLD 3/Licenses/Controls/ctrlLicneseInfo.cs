@@ -10,24 +10,88 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace DVLD_3.Licenses.Controls
 {
     public partial class ctrlLicneseInfo : UserControl
     {
         clsLicense _license;
+
+        public delegate void LicenseSelected(int LicenseID);
+
+        public event LicenseSelected OnLicenseSelected;
         public ctrlLicneseInfo()
         {
             InitializeComponent();
         }
 
-        string _name = "";
-        string _className = "";
-        string _nationalNo = "";
-        bool _gender = false;
-        bool _isDetained = false;
-        DateTime _dateOfBirth = DateTime.MinValue;
-        string _imagePath = "";
+        public clsLicense SelectedLicense
+        {
+            get
+            {
+                return _license;
+            }
+        }
+        // we could got the data by Composite the data into License class
+        //but that will load unneccessary data in different senarios
+        public string   _name = "";
+        public string   _className = "";
+        public string   _nationalNo = "";
+        public bool     _gender = false;
+        public bool     _isDetained = false;
+        public DateTime _dateOfBirth = DateTime.MinValue;
+        public string   _imagePath = "";
+
+        public string PersonName {
+            get
+            {
+                return _name;
+            } 
+        }
+        public string ClassName {
+            get
+            {
+                return _className;
+            }
+        }
+        public string NationalNo {
+            
+            get
+            {
+                return _nationalNo;
+            }
+        }
+        public bool Gender {
+           
+            get
+            {
+                return _gender;
+            }
+        }
+        public bool IsDetained {
+            
+            get
+            {
+                return _isDetained;
+            }
+        }
+        public DateTime DateOfBirth {
+            
+            get
+            {
+                return _dateOfBirth;
+            }
+        }
+        public string ImagePath {
+            
+            get
+            {
+                return _imagePath;
+            }
+        }
+
+
         private void _fillControlWithDefaultValus()
         {
             lblClass.Text = "???";
@@ -42,7 +106,7 @@ namespace DVLD_3.Licenses.Controls
             lblDriverID.Text = "???";
             lblExpirationDate.Text = "???";
             lblIsDetained.Text = "???";
-            
+            lblNotes.Text = "???";
             picBoxDriverImage.Image = Resources.Male_512;
         }
 
@@ -52,7 +116,7 @@ namespace DVLD_3.Licenses.Controls
             lblName.Text = _name;
             lblLicenseID.Text = _license.LicenseID.ToString();
             lblNationaoNo.Text = _nationalNo;
-            lblGender.Text = _gender ? "Male": "Female";
+            lblGender.Text = _gender ? "Female" : "Male";
             lblIssueDate.Text = _license.IssueDate.ToShortDateString();
             lblIssueReason.Text = _license.IssueReasonString;
             lblIsActive.Text = _license.IsActive ? "Yes" : "No";
@@ -64,7 +128,7 @@ namespace DVLD_3.Licenses.Controls
 
             if (string.IsNullOrEmpty(_imagePath))
             {
-                picBoxDriverImage.Image = Resources.Male_512;
+                picBoxDriverImage.Image = _gender == false ? Resources.Male_512 : Resources.Female_512;
             }
             else
             {
@@ -74,10 +138,25 @@ namespace DVLD_3.Licenses.Controls
                 }
                 else
                 {
-                    picBoxDriverImage.Image = Resources.Male_512;
+                    picBoxDriverImage.Image = _gender == false ? Resources.Male_512 : Resources.Female_512;
                 }
             }
             
+        }
+
+
+        private void _LoadData(string ErrorMessage)
+        {
+            if (_license == null)
+            {
+                MessageBox.Show($"{ErrorMessage}"
+                    , "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _fillControlWithDefaultValus();
+                OnLicenseSelected?.Invoke(-1);
+                return;
+            }
+            OnLicenseSelected?.Invoke(_license.LicenseID);
+            _fillControlWithLicenseData();
         }
 
         public void LoadLicenseInfo(int ApplicationID)
@@ -85,17 +164,15 @@ namespace DVLD_3.Licenses.Controls
             _license = clsLicense.FindByApplicationID(ApplicationID,ref _className
                 ,ref _name,ref _gender,ref _isDetained,ref _nationalNo,ref _dateOfBirth,ref _imagePath);
 
-            if(_license == null)
-            {
-                MessageBox.Show($"Can't find License with givin Application ID ({ApplicationID})"
-                    ,"Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
-                _fillControlWithDefaultValus();
-                return;
-            }
+            _LoadData($"Can't find License with givin Application ID ({ApplicationID})");
+        }
 
-            _fillControlWithLicenseData();
+        public void LoadLicenseInfoByLicenseID(int LicenseID)
+        {
+            _license = clsLicense.FindByLicenseID(LicenseID, ref _className
+                , ref _name, ref _gender, ref _isDetained, ref _nationalNo, ref _dateOfBirth, ref _imagePath);
 
-
+            _LoadData($"Can't find License with givin License ID ({LicenseID})");
         }
     }
 }

@@ -167,6 +167,54 @@ namespace DVLD_BusienessLayer
                 , expirationDate, notes, paidFees, isActive, issueReason, createdByUserID);
         }
 
+        public static clsLicense FindByLicenseID(int LicenseID, ref string ClassName, ref string ApplicantName, ref bool Gender
+            , ref bool IsDetained, ref string NationalNo, ref DateTime DateOfBirth, ref string ImageLocation)
+        {
+            int applicationID = 0;
+            int driverID = 0;
+            int licenseClassID = 0;
+            DateTime issueDate = DateTime.MinValue;
+            DateTime expirationDate = DateTime.MinValue;
+            string notes = null;
+            decimal paidFees = 0;
+            bool isActive = false;
+            byte issueReason = 0;
+            int createdByUserID = 0;
+
+            bool found = clsLicensesDataAccess.FindByLicenseID(LicenseID, ref applicationID, ref driverID, ref licenseClassID,
+                ref issueDate, ref expirationDate, ref notes, ref paidFees, ref isActive, ref issueReason, ref createdByUserID
+                , ref ApplicantName, ref ClassName, ref NationalNo, ref Gender, ref IsDetained, ref DateOfBirth, ref ImageLocation);
+
+            if (!found)
+                return null;
+
+            return new clsLicense(LicenseID, applicationID, driverID, licenseClassID, issueDate
+                , expirationDate, notes, paidFees, isActive, issueReason, createdByUserID);
+        }
+
+        public static clsLicense FindByLicenseID(int LicenseID)
+        {
+            int applicationID = 0;
+            int driverID = 0;
+            int licenseClassID = 0;
+            DateTime issueDate = DateTime.MinValue;
+            DateTime expirationDate = DateTime.MinValue;
+            string notes = null;
+            decimal paidFees = 0;
+            bool isActive = false;
+            byte issueReason = 0;
+            int createdByUserID = 0;
+
+            bool found = clsLicensesDataAccess.FindByLicenseID(LicenseID, ref applicationID, ref driverID, ref licenseClassID,
+                ref issueDate, ref expirationDate, ref notes, ref paidFees, ref isActive, ref issueReason, ref createdByUserID);
+
+            if (!found)
+                return null;
+
+            return new clsLicense(LicenseID, applicationID, driverID, licenseClassID, issueDate
+                , expirationDate, notes, paidFees, isActive, issueReason, createdByUserID);
+        }
+
         public static clsLicense FindByLocalApplicationID(int LocalAppID
             , ref string ClassName, ref string ApplicantName, ref bool Gender
             , ref bool IsDetained, ref string NationalNo, ref DateTime DateOfBirth,ref string ImagePath)
@@ -203,5 +251,106 @@ namespace DVLD_BusienessLayer
         {
             return clsLicensesDataAccess.GetPersonLocalLicensesHistroyInfo(PersonID);
         }
+
+        public static bool DeActivateLicenseByID(int LicenseID)
+        {
+            return UpdateIsActiveMember(LicenseID, false);
+        }
+
+        public static bool ActivateLicenseByID(int LicenseID)
+        {
+            return UpdateIsActiveMember(LicenseID, true);
+        }
+
+        public static bool UpdateIsActiveMember(int LicenseID,bool Value)
+        {
+            return clsLicensesDataAccess.UpdateIsActiveCoulmn(LicenseID,Value);
+        }
+
+        public static clsRenewLicenseInfoResult RenewLicense(int OldLicenseID
+            ,int ApplicantPersonID,string NewLicenseNotes)
+        {
+            clsRenewLicenseInfoResult Result = new clsRenewLicenseInfoResult();
+            Result.Status = true;
+
+            clsLicense oldLicese = clsLicense.FindByLicenseID(OldLicenseID);
+
+            if (oldLicese == null)
+            {
+                Result.Status = false;
+                Result.FaildReason = clsRenewLicenseInfoResult.RenewLicenseFaildReason.OldLicenseDoesNotExist;
+                return Result;
+            }
+
+            if (!oldLicese.IsActive)
+            {
+                Result.Status = false;
+                Result.FaildReason = clsRenewLicenseInfoResult.RenewLicenseFaildReason.OldLicenseIsNotActive;
+                return Result;
+            }
+
+            if (oldLicese.ExpirationDate > DateTime.Today)
+            {
+                Result.Status = false;
+                Result.FaildReason = clsRenewLicenseInfoResult.RenewLicenseFaildReason.OldLicenseNotExpired;
+                return Result;
+            }
+
+            if (!clsLicense.DeActivateLicenseByID(oldLicese.LicenseID))
+            {
+                Result.Status = false;
+                Result.FaildReason = clsRenewLicenseInfoResult.RenewLicenseFaildReason.FaildToDeActivateOldLicense;
+                return Result;
+            }
+
+            clsApplication RenewApplication = new clsApplication(2);// 2=> Renew License Application Type ID
+
+            RenewApplication.ApplicantPersonID = ApplicantPersonID;
+            RenewApplication.ApplicationDate = DateTime.Now;
+            RenewApplication.ApplicationStatus = clsApplication.ApplicationStatusEnum.Completed;// 
+            RenewApplication.LastStatusDate = DateTime.Now;
+            RenewApplication.PaidFees = RenewApplication.ApplicationType.ApplicationFees;
+            RenewApplication.CreatedByUserID = clsGlobalInformations.CurrentLoggedUserID;
+
+            if(!RenewApplication.Add())
+            {
+                //Activate the olf License 
+                ActivateLicenseByID(OldLicenseID);
+
+
+                Result.Status = false;
+                Result.FaildReason = clsRenewLicenseInfoResult.RenewLicenseFaildReason.FaildToAddRenewApplication;
+                return Result;
+            }
+
+            Result.NewApplication = RenewApplication;
+
+            clsLicense NewLicense = new clsLicense(oldLicese.LicenseClassID);
+            NewLicense.DriverID = oldLicese.DriverID;
+            NewLicense.ApplicationID = RenewApplication.ApplicationID;
+            NewLicense.IssueDate = DateTime.Now;
+            NewLicense.ExpirationDate = NewLicense.IssueDate.AddYears(oldLicese.LicenseClass.DefaultValidityLength);
+            NewLicense.Notes = NewLicenseNotes;
+            NewLicense.PaidFees = oldLicese.LicenseClass.ClassFees;
+            NewLicense.IssueReason = 2;// 2 => Issue Reason : Renew
+            NewLicense.IsActive = true;
+            NewLicense.CreatedByUserID = clsGlobalInformations.CurrentLoggedUserID;
+
+            if (!NewLicense.Issue())
+            {
+                //activate old license and delete the application
+                ActivateLicenseByID(OldLicenseID);
+                clsApplication.DeleteApplicationByID(RenewApplication.ApplicationID);
+
+                Result.Status = false;
+                Result.FaildReason = clsRenewLicenseInfoResult.RenewLicenseFaildReason.FaildToCreateNewLicense;
+                return Result;
+            }
+
+            Result.NewLicense = NewLicense;
+
+            return Result;
+        }
+
     }
 }

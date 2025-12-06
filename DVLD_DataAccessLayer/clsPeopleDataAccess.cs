@@ -212,5 +212,14 @@ namespace DVLD_DataAccessLayer
 
             return clsCRUD.IsRecordExistInByQuereCondition(Quere, parameters, clsPublicSystemInfos.ConnectionString);
         }
+
+        public static int GetPersonIDByNationalNo(string NationalNo)
+        {
+            string Quere = "select PersonID from People where NationalNo = @NationalNo";
+
+            List<SqlParameter> parameters = new List<SqlParameter> { Parameters.MakeParameter("NationalNo", NationalNo, false) };
+
+            return clsCRUD.ReturnIntValueFromTableByQuere(Quere,parameters, clsPublicSystemInfos.ConnectionString);
+        }
     }
 }

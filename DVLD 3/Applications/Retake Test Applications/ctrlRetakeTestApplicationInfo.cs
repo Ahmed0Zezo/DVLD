@@ -18,7 +18,7 @@ namespace DVLD_3.Applications.Retake_Test_Applications
         {
             InitializeComponent();
         }
-        public void LoadInfo(int RetakeTestApplicationID,decimal OriginalTestFees)
+        public void LoadDataForExistRetakeTestApplication(int RetakeTestApplicationID,decimal OriginalTestFees)
         {
             //Loading data of exist RetakeTestApplication
             clsApplication _application = clsApplication.FindByID(RetakeTestApplicationID);
@@ -27,10 +27,10 @@ namespace DVLD_3.Applications.Retake_Test_Applications
             lblTotalFees.Text = $"{OriginalTestFees + _application.PaidFees}";
         }
 
-        public void LoadInfo(decimal OriginalTestFees,int ApplicationTypeID)
+        public void LoadDataForNewRetakeTestApplication(decimal OriginalTestFees)
         {
             //Loading data for New RetakeTestApplicationn
-            clsApplicationType _applicationType = clsApplicationType.FindApplicationTypeByID(ApplicationTypeID);
+            clsApplicationType _applicationType = clsApplicationType.FindApplicationTypeByID(7);
             lblRetakeTestAppID.Text = "N/A";
             lblRetakeAppFees.Text = _applicationType.ApplicationFees.ToString();
             lblTotalFees.Text = $"{OriginalTestFees + _applicationType.ApplicationFees}";

@@ -118,9 +118,11 @@ please choose another class");
 
             if (clsPerson.IsPersonHasActiveLicenseWithClassID(this.Application.ApplicantPersonID, LicenseClassID))
             {
-                SavingLocalDrivingLicenseAppFaild?.Invoke($@"The Person with ID ({this.Application.ApplicantPersonID}) has an active License
-with License Class Type ({clsLicenseClass.GetLiceseClassNameByItsID(LicenseClassID)}) already
-please choose another class");
+                SavingLocalDrivingLicenseAppFaild?.Invoke
+                ($@"The Person with ID ({this.Application.ApplicantPersonID}) has an active License
+                with License Class Type ({clsLicenseClass.GetLiceseClassNameByItsID(LicenseClassID)}) already
+                please choose another class");
+
                 return false;
             }
 

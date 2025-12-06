@@ -103,11 +103,9 @@ namespace DVLD_DataAccessLayer
         public static int GetPassedTestsByLocalAppID(int LocalAppID)
         {
             string Quere = @"select Count(TestID) from Tests
-                                where TestAppointmentID in
-                                (select TestAppointments.TestAppointmentID from
-                                TestAppointments inner join LocalDrivingLicenseApplications
-                                on TestAppointments.LocalDrivingLicenseApplicationID = LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID
-                                where LocalDrivingLicenseApplications.LocalDrivingLicenseApplicationID = @LocalAppID) and TestResult = 1";
+                                inner join TestAppointments on TestAppointments.TestAppointmentID = Tests.TestAppointmentID
+                                where TestAppointments.LocalDrivingLicenseApplicationID = @LocalAppID and Tests.TestResult = 1
+                                ";
 
             List<SqlParameter> parameters = new List<SqlParameter> { Parameters.MakeParameter("LocalAppID", LocalAppID, false) };
 

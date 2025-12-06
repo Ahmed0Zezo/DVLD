@@ -27,13 +27,7 @@ namespace DVLD_3
             {
                 _localApp = clsLocalApp.FindByID(_applicationID);
 
-                if (_localApp == null)
-                {
-                    _localApp = new clsLocalApp();
-                    _mode = clsEnumsUtil.enFormMode.eAddNew;
-                    _localApp.SavingLocalDrivingLicenseAppFaild += _addingLocalApplicationFaild;
-                }
-                else
+                if (_localApp != null)
                 {
                     _mode = clsEnumsUtil.enFormMode.eUpdate;
                     _localApp.SavingLocalDrivingLicenseAppFaild += _updatingLocalApplicationFaild;
@@ -51,24 +45,7 @@ namespace DVLD_3
         }
 
 
-        private void _enableApplicationInfoControls(bool Enabled)
-        {
-            tabPage2.Enabled = Enabled;
-        }
-        private void btnNext_Click(object sender, EventArgs e)
-        {
-            if (personDetailsWithFilter1.SelectedPerson == null)
-            {
-                MessageBox.Show("Please select a person", "Person not selected", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            tabControl1.SelectedIndex = 1;
-            btnSave.Enabled = true;
-            _enableApplicationInfoControls(true);
-
-        }
-
+        //////////Form Loading
         private void _prepareUIForAddMode()
         {
             btnSave.Enabled = false;
@@ -80,7 +57,7 @@ namespace DVLD_3
 
             lblApplicationID.Text = "???";
             cbLicenseClass.SelectedIndex = 2;
-            lblApplicationDate.Text = _localApp.Application.ApplicationDate.ToShortDateString();
+            lblApplicationDate.Text = DateTime.Now.ToShortDateString();
             lblApplicationFees.Text = _localApp.Application.PaidFees.ToString();
             lblCreatedBy.Text = clsUser.FindUserByID(_localApp.Application.CreatedByUserID).UserName;
         }
@@ -118,45 +95,47 @@ namespace DVLD_3
             
 
         }
-        private void AddEditLocalDrivingLicenseApplication_Load(object sender, EventArgs e)
-        {
-            tabControl1.SelectedIndex = 0;
-            personDetailsWithFilter1.OnPersonSelected += _personSelectedChanged;
-            _fillComboBoxWithLicenseClasses();
-            _fillApplicationInfoForAddNew();
-
-            switch (_mode)
-            {
-                case clsEnumsUtil.enFormMode.eAddNew:
-                    _prepareUIForAddMode();
-                    break;
-                case clsEnumsUtil.enFormMode.eUpdate:
-                    _prepareUIForUpdateMode();
-                    break;
-            }
-        }
 
         private void _personSelectedChanged(int PersonID)
         {
-
+            //disable App Controls until choosing a person 
+            //will ebabled after clicking on (Next) button
             if (PersonID == -1)
             {
                 btnSave.Enabled = false;
                 _enableApplicationInfoControls(false);
 
             }
-
         }
-        private void _addingLocalApplicationFaild(string FailingMessage)
+        private void AddEditLocalDrivingLicenseApplication_Load(object sender, EventArgs e)
         {
-            MessageBox.Show(FailingMessage,"Add New Application",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            tabControl1.SelectedIndex = 0;
+            personDetailsWithFilter1.OnPersonSelected += _personSelectedChanged;
+            _fillComboBoxWithLicenseClasses();
+            
+
+            switch (_mode)
+            {
+                case clsEnumsUtil.enFormMode.eAddNew:
+                    _fillApplicationInfoForAddNew();
+                    _prepareUIForAddMode();
+                    break;
+                case clsEnumsUtil.enFormMode.eUpdate:
+                    _prepareUIForUpdateMode();
+                    break;
+                default:
+                    MessageBox.Show("Invalid Local App ID", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.Close();
+                    return;
+                    
+            }
         }
 
-        private void _updatingLocalApplicationFaild(string FailingMessage)
-        {
-            MessageBox.Show(FailingMessage, "Update Application", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
+        
 
+
+
+       /////////////////// Save Proccess and functions
         private void _fillLocalAppInfoFromFormForAdding()
         {
             _fillLocalAppInfoFromFormForUpdating();
@@ -206,9 +185,39 @@ namespace DVLD_3
                 ApplicationSavedSuccessfully?.Invoke(_localApp.LocalDrivingLicenseApplicationID);
                 this.Close();
             }
-               
+        }
+
+        ////////Next Button
+        private void _enableApplicationInfoControls(bool Enabled)
+        {
+            tabPage2.Enabled = Enabled;
+        }
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            if (personDetailsWithFilter1.SelectedPerson == null)
+            {
+                MessageBox.Show("Please select a person", "Person not selected", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            tabControl1.SelectedIndex = 1;
+            btnSave.Enabled = true;
+            _enableApplicationInfoControls(true);
 
         }
+
+
+        //////Faild in add local application subscribed functions
+        private void _addingLocalApplicationFaild(string FailingMessage)
+        {
+            MessageBox.Show(FailingMessage, "Add New Application", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void _updatingLocalApplicationFaild(string FailingMessage)
+        {
+            MessageBox.Show(FailingMessage, "Update Application", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
 
     }
 }

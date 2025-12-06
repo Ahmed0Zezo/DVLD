@@ -135,10 +135,22 @@ namespace DVLD_3.Applications.LocalDrivingLicenseApplication
 
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
-            clsLocalApp localApp
-                = (clsLocalApp.FindByID(clsDataGridView.GetID_FromDataGridView(publicFormsPanel1.DataViewer, 0)) );
+            int LocalAppID = clsDataGridView.GetID_FromDataGridView(publicFormsPanel1.DataViewer, 0);
 
-            bool IsApplicationNew = localApp.Application.ApplicationStatus == clsApplication.ApplicationStatusEnum.New;
+            clsLocalApp localApp
+                = clsLocalApp.FindByID(LocalAppID);
+
+            if (localApp == null)
+            {
+                contextMenuStrip1.Enabled = false;
+                return;
+            }
+            else
+            {
+                contextMenuStrip1.Enabled = true;
+            }
+
+                bool IsApplicationNew = localApp.Application.ApplicationStatus == clsApplication.ApplicationStatusEnum.New;
 
             updateApplicationToolStripMenuItem.Enabled = IsApplicationNew;
             deleteApplicationToolStripMenuItem.Enabled = IsApplicationNew;
@@ -148,22 +160,19 @@ namespace DVLD_3.Applications.LocalDrivingLicenseApplication
             if(IsApplicationNew)
             {
 
-                clsTestType WhatTestTypeIDToTake = clsTestType.WhatTestTypeToTakeByLocalAppID
-                (clsDataGridView.GetID_FromDataGridView(publicFormsPanel1.DataViewer, 0));
+                clsTestType WhatTestTypeIDToTake = clsTestType.WhatTestTypeToTakeByLocalAppID(localApp.LocalDrivingLicenseApplicationID);
 
                 if(WhatTestTypeIDToTake != null)
                 {
                     sceduleVisionTestToolStripMenuItem.Enabled = WhatTestTypeIDToTake.TestTypeID == 1;
                     sceduleWrittenTestToolStripMenuItem.Enabled = WhatTestTypeIDToTake.TestTypeID == 2;
                     sceduleStreetTestToolStripMenuItem.Enabled = WhatTestTypeIDToTake.TestTypeID == 3;
-                    sceduleTestToolStripMenuItem.Enabled = true;
                 }
                 else
                 {
                     sceduleVisionTestToolStripMenuItem.Enabled = false;
                     sceduleWrittenTestToolStripMenuItem.Enabled = false;
                     sceduleStreetTestToolStripMenuItem.Enabled = false;
-                    sceduleTestToolStripMenuItem.Enabled = false;
                 }
 
 
@@ -175,7 +184,7 @@ namespace DVLD_3.Applications.LocalDrivingLicenseApplication
                 issueDrivingLicenseFirstTimeToolStripMenuItem.Enabled = false;
             }
 
-                showLicenseToolStripMenuItem.Enabled = localApp.Application.ApplicationStatus == clsApplication.ApplicationStatusEnum.Completed;
+            showLicenseToolStripMenuItem.Enabled = localApp.Application.ApplicationStatus == clsApplication.ApplicationStatusEnum.Completed;
            
             showPersonLicensesHistoryToolStripMenuItem.Enabled = true;
         }
