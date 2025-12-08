@@ -10,6 +10,8 @@ namespace DVLD_BusienessLayer
 {
     public class clsApplicationType
     {
+        public enum enApplicationTypes {NewLocalDrivingLicense = 1,RenewDrivingLicense =2 
+                ,ReplacementForLostLicense =3, ReplacementForDamagedLicense= 4,ReleaseDetainedLicense= 5,NewInternationalLicense = 6,RetakeTest = 7 }
         public int ApplicationTypeID { get; set; }
         public string ApplicationTypeTitle { get; set; }
         public decimal ApplicationFees { get; set; }
@@ -19,6 +21,12 @@ namespace DVLD_BusienessLayer
             this.ApplicationTypeID = ApplicatoinTypeID;this.ApplicationTypeTitle = ApplicationTypeTitle;
             this.ApplicationFees = ApplicationFees;
         }
+
+        public static int ConvertFromEnumTypeToID_Type(enApplicationTypes TheEnum)
+        {
+            return (int)TheEnum;
+        }
+
         public static DataTable GetAllApplicationTypes()
         {
             return clsApplicationTypesDataAccess.GetAllApplicationTypes();

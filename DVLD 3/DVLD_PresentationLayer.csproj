@@ -58,6 +58,12 @@
     <Compile Include="Applications\Controls\ctrlLDApplicationInfo.Designer.cs">
       <DependentUpon>ctrlLDApplicationInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Applications\Replacement For Damaged Or Lost Licenses\frmReplacementForDamagedOrLostLicenses.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Applications\Replacement For Damaged Or Lost Licenses\frmReplacementForDamagedOrLostLicenses.Designer.cs">
+      <DependentUpon>frmReplacementForDamagedOrLostLicenses.cs</DependentUpon>
+    </Compile>
     <Compile Include="Licenses\Controls\ctrlLicenseInfoWithFilter.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -273,6 +279,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Applications\Controls\ctrlLDApplicationInfo.resx">
       <DependentUpon>ctrlLDApplicationInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Applications\Replacement For Damaged Or Lost Licenses\frmReplacementForDamagedOrLostLicenses.resx">
+      <DependentUpon>frmReplacementForDamagedOrLostLicenses.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Licenses\Controls\ctrlLicenseInfoWithFilter.resx">
       <DependentUpon>ctrlLicenseInfoWithFilter.cs</DependentUpon>

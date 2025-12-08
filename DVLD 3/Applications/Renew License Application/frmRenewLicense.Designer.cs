@@ -65,7 +65,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnRenew = new System.Windows.Forms.Button();
-            this.ctrlLicnseInfoWithFilter1 = new DVLD_3.Applications.Controls.ctrlLicenseInfoWithFilter();
+            this.ctrlLicenseInfoWithFilter1 = new DVLD_3.Applications.Controls.ctrlLicenseInfoWithFilter();
             this.lnklblShowPersonLicensesHistory = new System.Windows.Forms.LinkLabel();
             this.lnklblShowNewLicenseInfo = new System.Windows.Forms.LinkLabel();
             this.groupBox1.SuspendLayout();
@@ -475,6 +475,7 @@
             this.btnClose.TabIndex = 23;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // btnRenew
             // 
@@ -489,12 +490,12 @@
             this.btnRenew.UseVisualStyleBackColor = true;
             this.btnRenew.Click += new System.EventHandler(this.btnRenew_Click);
             // 
-            // ctrlLicnseInfoWithFilter1
+            // ctrlLicenseInfoWithFilter1
             // 
-            this.ctrlLicnseInfoWithFilter1.Location = new System.Drawing.Point(2, 37);
-            this.ctrlLicnseInfoWithFilter1.Name = "ctrlLicnseInfoWithFilter1";
-            this.ctrlLicnseInfoWithFilter1.Size = new System.Drawing.Size(742, 389);
-            this.ctrlLicnseInfoWithFilter1.TabIndex = 1;
+            this.ctrlLicenseInfoWithFilter1.Location = new System.Drawing.Point(2, 37);
+            this.ctrlLicenseInfoWithFilter1.Name = "ctrlLicenseInfoWithFilter1";
+            this.ctrlLicenseInfoWithFilter1.Size = new System.Drawing.Size(742, 389);
+            this.ctrlLicenseInfoWithFilter1.TabIndex = 1;
             // 
             // lnklblShowPersonLicensesHistory
             // 
@@ -531,7 +532,7 @@
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnRenew);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.ctrlLicnseInfoWithFilter1);
+            this.Controls.Add(this.ctrlLicenseInfoWithFilter1);
             this.Controls.Add(this.label1);
             this.Name = "frmRenewLicense";
             this.Text = "frmRenewLicense";
@@ -557,7 +558,7 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private Controls.ctrlLicenseInfoWithFilter ctrlLicnseInfoWithFilter1;
+        private Controls.ctrlLicenseInfoWithFilter ctrlLicenseInfoWithFilter1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.PictureBox pictureBox10;
         private System.Windows.Forms.PictureBox pictureBox6;

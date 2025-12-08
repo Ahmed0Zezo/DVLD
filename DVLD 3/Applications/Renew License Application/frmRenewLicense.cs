@@ -16,7 +16,7 @@ namespace DVLD_3.Applications.Renew_License_Application
     {
         decimal _applicationFees;
 
-        clsRenewLicenseInfoResult renewInfo;
+        clsLicenseReplacementResultsInfo renewInfo;
         public frmRenewLicense()
         {
             InitializeComponent();
@@ -32,7 +32,7 @@ namespace DVLD_3.Applications.Renew_License_Application
             btnRenew.Enabled = false;
             lnklblShowNewLicenseInfo.Enabled = false;
             lnklblShowPersonLicensesHistory.Enabled = false;
-            ctrlLicnseInfoWithFilter1.OnLicenseSelected = LicenseSelected;
+            ctrlLicenseInfoWithFilter1.OnLicenseSelected = LicenseSelected;
         }
         private void LicenseSelected(int LicenseID)
         {
@@ -60,9 +60,9 @@ namespace DVLD_3.Applications.Renew_License_Application
 
         private void _loadRenewAppData()
         {
-            lblExpirationDate.Text = DateTime.Today.AddYears(ctrlLicnseInfoWithFilter1.SelectedLicense.LicenseClass.DefaultValidityLength).ToShortDateString();
-            lblLicenseFees.Text = ctrlLicnseInfoWithFilter1.SelectedLicense.PaidFees.ToString();
-            lblTotalFees.Text = $"{ctrlLicnseInfoWithFilter1.SelectedLicense.PaidFees + _applicationFees}";
+            lblExpirationDate.Text = DateTime.Today.AddYears(ctrlLicenseInfoWithFilter1.SelectedLicense.LicenseClass.DefaultValidityLength).ToShortDateString();
+            lblLicenseFees.Text = ctrlLicenseInfoWithFilter1.SelectedLicense.PaidFees.ToString();
+            lblTotalFees.Text = $"{ctrlLicenseInfoWithFilter1.SelectedLicense.PaidFees + _applicationFees}";
         }
 
         private void _loadNewApplicationAndLicenseData()
@@ -80,30 +80,30 @@ namespace DVLD_3.Applications.Renew_License_Application
                 return;
 
 
-            renewInfo = clsLicense.RenewLicense(ctrlLicnseInfoWithFilter1.SelectedLicense.LicenseID
-                , clsPerson.GetPersonID_ByNationalNo(ctrlLicnseInfoWithFilter1.NationalNo), txtNotes.Text);
+            renewInfo = clsLicense.RenewLicense(ctrlLicenseInfoWithFilter1.SelectedLicense.LicenseID
+                , clsPerson.GetPersonID_ByNationalNo(ctrlLicenseInfoWithFilter1.NationalNo), txtNotes.Text);
 
             if(!renewInfo.Status)
             {
                 string ErrorMessage = "";
                 switch (renewInfo.FaildReason)
                 {
-                    case clsRenewLicenseInfoResult.RenewLicenseFaildReason.OldLicenseDoesNotExist:
+                    case clsLicenseReplacementResultsInfo.LicenseReplacementFaildReason.OldLicenseDoesNotExist:
                         ErrorMessage = "Old License ID Is Not Exist!";
                         break;
-                    case clsRenewLicenseInfoResult.RenewLicenseFaildReason.OldLicenseNotExpired:
+                    case clsLicenseReplacementResultsInfo.LicenseReplacementFaildReason.OldLicenseNotExpired:
                         ErrorMessage = "Old License Is Not Expired Yet!";
                         break;
-                    case clsRenewLicenseInfoResult.RenewLicenseFaildReason.FaildToDeActivateOldLicense:
+                    case clsLicenseReplacementResultsInfo.LicenseReplacementFaildReason.FaildToDeActivateOldLicense:
                         ErrorMessage = "Something Went Wrong During Deactivating The Old License!";
                         break;
-                    case clsRenewLicenseInfoResult.RenewLicenseFaildReason.FaildToAddRenewApplication:
+                    case clsLicenseReplacementResultsInfo.LicenseReplacementFaildReason.FaildToAddReplacementApplication:
                         ErrorMessage = "Something Went Wrong During Creating Renew License Application";
                         break;
-                    case clsRenewLicenseInfoResult.RenewLicenseFaildReason.FaildToCreateNewLicense:
+                    case clsLicenseReplacementResultsInfo.LicenseReplacementFaildReason.FaildToCreateNewLicense:
                         ErrorMessage = "Something Went Wrong During Creating The New License";
                         break;
-                    case clsRenewLicenseInfoResult.RenewLicenseFaildReason.OldLicenseIsNotActive
+                    case clsLicenseReplacementResultsInfo.LicenseReplacementFaildReason.OldLicenseIsNotActive
 :
                         ErrorMessage = "Old License Is Not Active";
                         break;
@@ -120,7 +120,7 @@ namespace DVLD_3.Applications.Renew_License_Application
             _loadNewApplicationAndLicenseData();
             MessageBox.Show($"License Renewd Successfully With ID ({renewInfo.NewLicense.LicenseID})"
                 , "Succedded", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            ctrlLicnseInfoWithFilter1.FilterEnable = false;
+            ctrlLicenseInfoWithFilter1.FilterEnable = false;
             btnRenew.Enabled = false;
             lnklblShowNewLicenseInfo.Enabled = true;
         }
@@ -128,7 +128,7 @@ namespace DVLD_3.Applications.Renew_License_Application
         private void lnklblShowPersonLicensesHistory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             frmPersonLicensesHistory showPersonLicensesHistory 
-                = new frmPersonLicensesHistory(clsPerson.GetPersonID_ByNationalNo(ctrlLicnseInfoWithFilter1.NationalNo));
+                = new frmPersonLicensesHistory(clsPerson.GetPersonID_ByNationalNo(ctrlLicenseInfoWithFilter1.NationalNo));
 
             showPersonLicensesHistory.ShowDialog();
 
@@ -139,6 +139,11 @@ namespace DVLD_3.Applications.Renew_License_Application
             frmLicenseInfo frmLicenseInfo = new frmLicenseInfo(renewInfo.NewApplication.ApplicationID);
 
             frmLicenseInfo.ShowDialog();
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

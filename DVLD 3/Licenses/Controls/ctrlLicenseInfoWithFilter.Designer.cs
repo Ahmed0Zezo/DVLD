@@ -53,7 +53,7 @@
             // 
             this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSearch.Image = global::DVLD_3.Properties.Resources.License_View_32;
-            this.btnSearch.Location = new System.Drawing.Point(584, 30);
+            this.btnSearch.Location = new System.Drawing.Point(411, 28);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 52);
             this.btnSearch.TabIndex = 2;
@@ -63,9 +63,9 @@
             // txtFilterValue
             // 
             this.txtFilterValue.Font = new System.Drawing.Font("Cairo", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFilterValue.Location = new System.Drawing.Point(202, 42);
+            this.txtFilterValue.Location = new System.Drawing.Point(121, 42);
             this.txtFilterValue.Name = "txtFilterValue";
-            this.txtFilterValue.Size = new System.Drawing.Size(326, 28);
+            this.txtFilterValue.Size = new System.Drawing.Size(275, 28);
             this.txtFilterValue.TabIndex = 0;
             this.txtFilterValue.TextChanged += new System.EventHandler(this.txtFilterValue_TextChanged);
             // 

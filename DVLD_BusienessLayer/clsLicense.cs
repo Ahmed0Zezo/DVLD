@@ -267,10 +267,10 @@ namespace DVLD_BusienessLayer
             return clsLicensesDataAccess.UpdateIsActiveCoulmn(LicenseID,Value);
         }
 
-        public static clsRenewLicenseInfoResult RenewLicense(int OldLicenseID
+        public static clsLicenseReplacementResultsInfo RenewLicense(int OldLicenseID
             ,int ApplicantPersonID,string NewLicenseNotes)
         {
-            clsRenewLicenseInfoResult Result = new clsRenewLicenseInfoResult();
+            clsLicenseReplacementResultsInfo Result = new clsLicenseReplacementResultsInfo();
             Result.Status = true;
 
             clsLicense oldLicese = clsLicense.FindByLicenseID(OldLicenseID);
@@ -278,36 +278,38 @@ namespace DVLD_BusienessLayer
             if (oldLicese == null)
             {
                 Result.Status = false;
-                Result.FaildReason = clsRenewLicenseInfoResult.RenewLicenseFaildReason.OldLicenseDoesNotExist;
+                Result.FaildReason = clsLicenseReplacementResultsInfo.LicenseReplacementFaildReason.OldLicenseDoesNotExist;
                 return Result;
             }
 
             if (!oldLicese.IsActive)
             {
                 Result.Status = false;
-                Result.FaildReason = clsRenewLicenseInfoResult.RenewLicenseFaildReason.OldLicenseIsNotActive;
+                Result.FaildReason = clsLicenseReplacementResultsInfo.LicenseReplacementFaildReason.OldLicenseIsNotActive;
                 return Result;
             }
 
             if (oldLicese.ExpirationDate > DateTime.Today)
             {
                 Result.Status = false;
-                Result.FaildReason = clsRenewLicenseInfoResult.RenewLicenseFaildReason.OldLicenseNotExpired;
+                Result.FaildReason = clsLicenseReplacementResultsInfo.LicenseReplacementFaildReason.OldLicenseNotExpired;
                 return Result;
             }
 
             if (!clsLicense.DeActivateLicenseByID(oldLicese.LicenseID))
             {
                 Result.Status = false;
-                Result.FaildReason = clsRenewLicenseInfoResult.RenewLicenseFaildReason.FaildToDeActivateOldLicense;
+                Result.FaildReason = clsLicenseReplacementResultsInfo.LicenseReplacementFaildReason.FaildToDeActivateOldLicense;
                 return Result;
             }
+
+
 
             clsApplication RenewApplication = new clsApplication(2);// 2=> Renew License Application Type ID
 
             RenewApplication.ApplicantPersonID = ApplicantPersonID;
             RenewApplication.ApplicationDate = DateTime.Now;
-            RenewApplication.ApplicationStatus = clsApplication.ApplicationStatusEnum.Completed;// 
+            RenewApplication.ApplicationStatus = clsApplication.ApplicationStatusEnum.Completed;
             RenewApplication.LastStatusDate = DateTime.Now;
             RenewApplication.PaidFees = RenewApplication.ApplicationType.ApplicationFees;
             RenewApplication.CreatedByUserID = clsGlobalInformations.CurrentLoggedUserID;
@@ -319,7 +321,7 @@ namespace DVLD_BusienessLayer
 
 
                 Result.Status = false;
-                Result.FaildReason = clsRenewLicenseInfoResult.RenewLicenseFaildReason.FaildToAddRenewApplication;
+                Result.FaildReason = clsLicenseReplacementResultsInfo.LicenseReplacementFaildReason.FaildToAddReplacementApplication;
                 return Result;
             }
 
@@ -343,7 +345,101 @@ namespace DVLD_BusienessLayer
                 clsApplication.DeleteApplicationByID(RenewApplication.ApplicationID);
 
                 Result.Status = false;
-                Result.FaildReason = clsRenewLicenseInfoResult.RenewLicenseFaildReason.FaildToCreateNewLicense;
+                Result.FaildReason = clsLicenseReplacementResultsInfo.LicenseReplacementFaildReason.FaildToCreateNewLicense;
+                return Result;
+            }
+
+            Result.NewLicense = NewLicense;
+
+            return Result;
+        }
+
+        public static clsLicenseReplacementResultsInfo ReplacementForDamagedOrLost(int OldLicenseID
+            , int ApplicantPersonID, int ApplicationTypeID)
+        {
+            clsLicenseReplacementResultsInfo Result = new clsLicenseReplacementResultsInfo();
+            Result.Status = true;
+
+            clsLicense oldLicese = clsLicense.FindByLicenseID(OldLicenseID);
+
+            if (oldLicese == null)
+            {
+                Result.Status = false;
+                Result.FaildReason = clsLicenseReplacementResultsInfo.LicenseReplacementFaildReason.OldLicenseDoesNotExist;
+                return Result;
+            }
+
+            if (!oldLicese.IsActive)
+            {
+                Result.Status = false;
+                Result.FaildReason = clsLicenseReplacementResultsInfo.LicenseReplacementFaildReason.OldLicenseIsNotActive;
+                return Result;
+            }
+
+            if (!clsLicense.DeActivateLicenseByID(oldLicese.LicenseID))
+            {
+                Result.Status = false;
+                Result.FaildReason = clsLicenseReplacementResultsInfo.LicenseReplacementFaildReason.FaildToDeActivateOldLicense;
+                return Result;
+            }
+
+            clsApplicationType.enApplicationTypes ApplicationType = (clsApplicationType.enApplicationTypes)ApplicationTypeID;
+
+            if(ApplicationType != clsApplicationType.enApplicationTypes.ReplacementForLostLicense 
+                && ApplicationType != clsApplicationType.enApplicationTypes.ReplacementForDamagedLicense)
+            {
+                Result.Status = false;
+                Result.FaildReason = clsLicenseReplacementResultsInfo.LicenseReplacementFaildReason.FaildToAddReplacementApplication;
+                return Result;
+            }
+
+
+
+            clsApplication ReplacementApplication = new clsApplication(ApplicationTypeID);
+
+            ReplacementApplication.ApplicantPersonID = ApplicantPersonID;
+            ReplacementApplication.ApplicationDate = DateTime.Now;
+            ReplacementApplication.ApplicationStatus = clsApplication.ApplicationStatusEnum.Completed;// 
+            ReplacementApplication.LastStatusDate = DateTime.Now;
+            ReplacementApplication.PaidFees = ReplacementApplication.ApplicationType.ApplicationFees;
+            ReplacementApplication.CreatedByUserID = clsGlobalInformations.CurrentLoggedUserID;
+
+            if (!ReplacementApplication.Add())
+            {
+                //Activate the old License again
+                ActivateLicenseByID(OldLicenseID);
+
+                Result.Status = false;
+                Result.FaildReason = clsLicenseReplacementResultsInfo.LicenseReplacementFaildReason.FaildToAddReplacementApplication;
+                return Result;
+            }
+
+            Result.NewApplication = ReplacementApplication;
+
+            clsLicense NewLicense = new clsLicense(oldLicese.LicenseClassID);
+
+            NewLicense.DriverID = oldLicese.DriverID;
+            NewLicense.ApplicationID = ReplacementApplication.ApplicationID;
+            NewLicense.IssueDate = DateTime.Now;
+            NewLicense.ExpirationDate = oldLicese.ExpirationDate;
+            NewLicense.Notes = oldLicese.Notes;
+            NewLicense.PaidFees = oldLicese.LicenseClass.ClassFees;
+
+            NewLicense.IssueReason = ApplicationType 
+                == clsApplicationType.enApplicationTypes.ReplacementForDamagedLicense ? (byte)3 : (byte)4;// 3 => Issue Reason : Damaged
+            //4 => Lost
+
+            NewLicense.IsActive = true;
+            NewLicense.CreatedByUserID = clsGlobalInformations.CurrentLoggedUserID;
+
+            if (!NewLicense.Issue())
+            {
+                //activate old license and delete the application
+                ActivateLicenseByID(OldLicenseID);
+                clsApplication.DeleteApplicationByID(ReplacementApplication.ApplicationID);
+
+                Result.Status = false;
+                Result.FaildReason = clsLicenseReplacementResultsInfo.LicenseReplacementFaildReason.FaildToCreateNewLicense;
                 return Result;
             }
 
