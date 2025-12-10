@@ -139,6 +139,12 @@ namespace DVLD_3.Applications.Controls
             
         }
 
+        public void LoadLicenseInfoByLicenseID(int LicenseID)
+        {
+            txtFilterValue.Text = LicenseID.ToString();
+            btnSearch_Click(null, null);
+        }
+
         private void ctrlLicneseInfo1_OnLicenseSelected(int LicenseID)
         {
             _selectedLicenseID = LicenseID;

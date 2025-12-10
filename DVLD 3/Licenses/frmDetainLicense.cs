@@ -13,9 +13,18 @@ namespace DVLD_3.Licenses
 {
     public partial class frmDetainLicense : Form
     {
+        private bool _isLicenseDetained;
+        public bool IsLicenseDetained 
+        { 
+            get
+            {
+                return _isLicenseDetained;
+            }
+        }
         public frmDetainLicense()
         {
             InitializeComponent();
+            _isLicenseDetained = false;
         }
 
         private void txtFineFees_TextChanged(object sender, EventArgs e)
@@ -72,8 +81,11 @@ namespace DVLD_3.Licenses
                 return;
             }
 
+            
             MessageBox.Show($"License Detained Successfully With Detain ID ({detainResult.DetaineRecord.DetainID})", "Succedded"
                 , MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            _isLicenseDetained = true;
             ctrlLicenseInfoWithFilter1.FilterEnable = false;
             btnDetainLicense.Enabled = false;
             lnklblShowNewLicenseInfo.Enabled = true;

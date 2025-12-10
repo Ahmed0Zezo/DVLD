@@ -72,6 +72,7 @@ namespace DVLD_3.MangePeople
         {
             lblHeader.Text = "Update Person Info";
 
+            lblPersonID.Text = _person.PersonID.ToString();
             txtFirstName.Text = _person.FirstName;
             txtSecondName.Text = _person.SecondName;
             txtThirdName.Text = _person.ThirdName;

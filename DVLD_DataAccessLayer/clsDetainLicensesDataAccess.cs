@@ -3,6 +3,7 @@ using DataAccessLib;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -112,7 +113,7 @@ namespace DVLD_DataAccessLayer
             SqlConnection connection = new SqlConnection(clsPublicSystemInfos.ConnectionString);
 
             string Quere = @"select * from DetainedLicenses
-                             where DetainID = @DetainID and IsReleased = 0";
+                             where DetainID = @DetainID ";
 
             SqlCommand command = new SqlCommand(Quere, connection);
             command.Parameters.AddWithValue("@DetainID", DetainID);
@@ -159,5 +160,16 @@ namespace DVLD_DataAccessLayer
 
             return clsCRUD.IsRecordExistInByQuereCondition(Quere, parameters, clsPublicSystemInfos.ConnectionString);
         }
+
+        public static DataTable GetAllDetainedLicenses()
+        {
+            string Quere = @"select * from DetainedLicenses_View
+                                order by IsReleased asc";
+
+            return clsCRUD.GetAllDataFromTableByQuere(Quere, clsPublicSystemInfos.ConnectionString);
+        }
+
+
+
     }
 }

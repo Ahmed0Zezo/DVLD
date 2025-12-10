@@ -139,7 +139,9 @@ namespace DVLD_3
 
         private void manageDetainedLicensesToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            frmManageDetainedLicenses manageDetainedLicenses = new frmManageDetainedLicenses();
 
+            manageDetainedLicenses.ShowDialog();
         }
 
         private void detainLicenseToolStripMenuItem_Click(object sender, EventArgs e)

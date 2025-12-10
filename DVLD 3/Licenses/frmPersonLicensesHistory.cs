@@ -18,13 +18,19 @@ namespace DVLD_3.Licenses
     {
         int _personID;
 
-        public bool IsDateUpdated { get; set; }
+        private bool _isDataUpdated;
+        public bool IsDateUpdated {
+            get 
+            {
+                return _isDataUpdated;
+            }
+        }
        
         public frmPersonLicensesHistory(int PersonID)
         {
             InitializeComponent();
             _personID = PersonID;
-            IsDateUpdated = false;
+            _isDataUpdated = false;
         }
 
         private void PrepareLocalPublicPanelColumns()
@@ -96,7 +102,7 @@ namespace DVLD_3.Licenses
 
         private void PersonUpdated()
         {
-            IsDateUpdated = true;
+            _isDataUpdated = true;
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)

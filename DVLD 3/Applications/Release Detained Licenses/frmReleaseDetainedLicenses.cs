@@ -14,12 +14,33 @@ namespace DVLD_3.Applications.Release_Detained_Licenses
 {
     public partial class frmReleaseDetainedLicenses : Form
     {
+        private bool _isLicenseReleased;
+        public bool IsLicenseReleased
+        {
+            get
+            {
+                return _isLicenseReleased;
+            }
+        }
+
+        int licenseID;
+
         private clsDetaineLicenseInfo _detainInfo;
 
         private decimal _appFees;
         public frmReleaseDetainedLicenses()
         {
             InitializeComponent();
+
+            licenseID = -1;
+        }
+
+        public frmReleaseDetainedLicenses(int LicenseID)
+        {
+            InitializeComponent();
+
+            licenseID = LicenseID;
+
         }
 
         private void _resetBasicDetainInfoToDefaultValues()
@@ -81,7 +102,19 @@ namespace DVLD_3.Applications.Release_Detained_Licenses
 
             lblApplicationFees.Text = _appFees.ToString();
 
-            btnReleaseLicense.Enabled = false;
+            if (licenseID == -1)
+            {
+                btnReleaseLicense.Enabled = false;
+
+                return;
+            }
+            
+            ctrlLicenseInfoWithFilter1.LoadLicenseInfoByLicenseID(licenseID);
+
+            if(_detainInfo != null)
+            {
+                ctrlLicenseInfoWithFilter1.FilterEnable = false;
+            }
 
         }
 
@@ -137,6 +170,8 @@ namespace DVLD_3.Applications.Release_Detained_Licenses
             MessageBox.Show($"License Released Successfully Release Application ID ({releaseResult.ReleaseApplication.ApplicantPersonID})"
                 , "Succedded"
                 , MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            _isLicenseReleased = true;
             ctrlLicenseInfoWithFilter1.FilterEnable = false;
             btnReleaseLicense.Enabled = false;
             lnklblShowNewLicenseInfo.Enabled = true;
