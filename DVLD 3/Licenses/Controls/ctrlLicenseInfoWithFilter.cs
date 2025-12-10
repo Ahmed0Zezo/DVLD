@@ -24,6 +24,7 @@ namespace DVLD_3.Applications.Controls
             }
         }
 
+       
         public clsLicense SelectedLicense
         {
             get 
@@ -96,7 +97,7 @@ namespace DVLD_3.Applications.Controls
             }
         }
 
-        public Action<int> OnLicenseSelected;
+        public event Action<int> OnLicenseSelected;
 
 
         public ctrlLicenseInfoWithFilter()

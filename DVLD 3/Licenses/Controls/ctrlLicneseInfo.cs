@@ -169,7 +169,7 @@ namespace DVLD_3.Licenses.Controls
 
         public void LoadLicenseInfoByLicenseID(int LicenseID)
         {
-            _license = clsLicense.FindByLicenseID(LicenseID, ref _className
+            _license = clsLicense.FindByLicenseIDWithMoreLicenseInfoData(LicenseID, ref _className
                 , ref _name, ref _gender, ref _isDetained, ref _nationalNo, ref _dateOfBirth, ref _imagePath);
 
             _LoadData($"Can't find License with givin License ID ({LicenseID})");

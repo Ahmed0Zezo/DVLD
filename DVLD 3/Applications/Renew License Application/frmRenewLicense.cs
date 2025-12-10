@@ -32,7 +32,7 @@ namespace DVLD_3.Applications.Renew_License_Application
             btnRenew.Enabled = false;
             lnklblShowNewLicenseInfo.Enabled = false;
             lnklblShowPersonLicensesHistory.Enabled = false;
-            ctrlLicenseInfoWithFilter1.OnLicenseSelected = LicenseSelected;
+            ctrlLicenseInfoWithFilter1.OnLicenseSelected += LicenseSelected;
         }
         private void LicenseSelected(int LicenseID)
         {

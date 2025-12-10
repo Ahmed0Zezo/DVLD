@@ -58,6 +58,12 @@
     <Compile Include="Applications\Controls\ctrlLDApplicationInfo.Designer.cs">
       <DependentUpon>ctrlLDApplicationInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Applications\Release Detained Licenses\frmReleaseDetainedLicenses.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Applications\Release Detained Licenses\frmReleaseDetainedLicenses.Designer.cs">
+      <DependentUpon>frmReleaseDetainedLicenses.cs</DependentUpon>
+    </Compile>
     <Compile Include="Applications\Replacement For Damaged Or Lost Licenses\frmReplacementForDamagedOrLostLicenses.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -123,6 +129,12 @@
     </Compile>
     <Compile Include="Licenses\Controls\ctrlLicneseInfo.Designer.cs">
       <DependentUpon>ctrlLicneseInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Licenses\frmDetainLicense.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Licenses\frmDetainLicense.Designer.cs">
+      <DependentUpon>frmDetainLicense.cs</DependentUpon>
     </Compile>
     <Compile Include="Licenses\frmIssueNewLicense.cs">
       <SubType>Form</SubType>
@@ -280,6 +292,9 @@
     <EmbeddedResource Include="Applications\Controls\ctrlLDApplicationInfo.resx">
       <DependentUpon>ctrlLDApplicationInfo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Applications\Release Detained Licenses\frmReleaseDetainedLicenses.resx">
+      <DependentUpon>frmReleaseDetainedLicenses.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Applications\Replacement For Damaged Or Lost Licenses\frmReplacementForDamagedOrLostLicenses.resx">
       <DependentUpon>frmReplacementForDamagedOrLostLicenses.cs</DependentUpon>
     </EmbeddedResource>
@@ -306,6 +321,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Licenses\Controls\ctrlLicneseInfo.resx">
       <DependentUpon>ctrlLicneseInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Licenses\frmDetainLicense.resx">
+      <DependentUpon>frmDetainLicense.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Licenses\frmIssueNewLicense.resx">
       <DependentUpon>frmIssueNewLicense.cs</DependentUpon>

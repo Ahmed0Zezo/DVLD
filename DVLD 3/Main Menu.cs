@@ -1,8 +1,10 @@
 ﻿using DVLD_3.Applications;
 using DVLD_3.Applications.LocalDrivingLicenseApplication;
+using DVLD_3.Applications.Release_Detained_Licenses;
 using DVLD_3.Applications.Renew_License_Application;
 using DVLD_3.Applications.Replacement_For_Damaged_Or_Lost_Licenses;
 using DVLD_3.Drivers;
+using DVLD_3.Licenses;
 using DVLD_3.Tests.TestTypes;
 using DVLD_3.Users;
 using DVLD_BusienessLayer;
@@ -118,6 +120,40 @@ namespace DVLD_3
 
             forDamagedOrLostLicenses.ShowDialog();
 
+        }
+
+        private void retakeTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ManageLocalApplications manageLocalApplications = new ManageLocalApplications();
+
+            manageLocalApplications.ShowDialog();
+        }
+
+        private void releaseDeatinedLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmReleaseDetainedLicenses releaseDetainedLicenses = new frmReleaseDetainedLicenses();
+
+            releaseDetainedLicenses.ShowDialog();
+
+        }
+
+        private void manageDetainedLicensesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void detainLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmDetainLicense detainLicense = new frmDetainLicense();
+
+            detainLicense.ShowDialog();
+        }
+
+        private void releaseLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmReleaseDetainedLicenses releaseDetainedLicenses = new frmReleaseDetainedLicenses();
+
+            releaseDetainedLicenses.ShowDialog();
         }
     }
 }

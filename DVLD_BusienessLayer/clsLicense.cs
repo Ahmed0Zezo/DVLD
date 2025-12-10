@@ -167,7 +167,8 @@ namespace DVLD_BusienessLayer
                 , expirationDate, notes, paidFees, isActive, issueReason, createdByUserID);
         }
 
-        public static clsLicense FindByLicenseID(int LicenseID, ref string ClassName, ref string ApplicantName, ref bool Gender
+        public static clsLicense FindByLicenseIDWithMoreLicenseInfoData(int LicenseID,  ref string ClassName
+            , ref string ApplicantName, ref bool Gender
             , ref bool IsDetained, ref string NationalNo, ref DateTime DateOfBirth, ref string ImageLocation)
         {
             int applicationID = 0;
@@ -181,7 +182,7 @@ namespace DVLD_BusienessLayer
             byte issueReason = 0;
             int createdByUserID = 0;
 
-            bool found = clsLicensesDataAccess.FindByLicenseID(LicenseID, ref applicationID, ref driverID, ref licenseClassID,
+            bool found = clsLicensesDataAccess.FindByLicenseIDWithMoreData(LicenseID, ref applicationID, ref driverID, ref licenseClassID,
                 ref issueDate, ref expirationDate, ref notes, ref paidFees, ref isActive, ref issueReason, ref createdByUserID
                 , ref ApplicantName, ref ClassName, ref NationalNo, ref Gender, ref IsDetained, ref DateOfBirth, ref ImageLocation);
 
@@ -447,6 +448,60 @@ namespace DVLD_BusienessLayer
 
             return Result;
         }
+
+        public static clsLicenseDetainResultsInfo DetainLicenseByID(int LicenseID,decimal FineFees)
+        {
+            clsLicenseDetainResultsInfo DetainResultInfo = new clsLicenseDetainResultsInfo();
+            DetainResultInfo.Status = true;
+
+            clsLicense license = clsLicense.FindByLicenseID(LicenseID);
+
+            if (license == null)
+            {
+                DetainResultInfo.Status = false;
+                DetainResultInfo.FaildReason = clsLicenseDetainResultsInfo.LicenseDetainFaildReason.LicenseIsNotFound;
+                return DetainResultInfo;
+            }
+
+            if (!license.IsActive)
+            {
+                DetainResultInfo.Status = false;
+                DetainResultInfo.FaildReason = clsLicenseDetainResultsInfo.LicenseDetainFaildReason.LicenseIsNotActive;
+                return DetainResultInfo;
+            }
+
+            if (clsDetaineLicenseInfo.IsLicenseDetainedByID(LicenseID))
+            {
+                DetainResultInfo.Status = false;
+                DetainResultInfo.FaildReason = clsLicenseDetainResultsInfo.LicenseDetainFaildReason.LicenseAlreadyDetained;
+                return DetainResultInfo;
+            }
+
+            DetainResultInfo.DetainedLicense = license;
+
+
+            clsDetaineLicenseInfo detaineRecord = new clsDetaineLicenseInfo();
+
+
+            detaineRecord.LicenseID = LicenseID;
+            detaineRecord.FineFees = FineFees;
+            detaineRecord.DetainDate = DateTime.Today;
+            detaineRecord.CreatedByUserID = clsGlobalInformations.CurrentLoggedUserID;
+
+            if(!detaineRecord.AddNew())
+            {
+                DetainResultInfo.Status = false;
+                DetainResultInfo.FaildReason = clsLicenseDetainResultsInfo.LicenseDetainFaildReason.FaildToCreateDetainRecord;
+                return DetainResultInfo;
+            }
+
+            DetainResultInfo.DetaineRecord = detaineRecord;
+
+
+            return DetainResultInfo;
+        }
+
+
 
     }
 }

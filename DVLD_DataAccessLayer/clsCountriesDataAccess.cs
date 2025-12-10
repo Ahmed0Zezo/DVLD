@@ -13,9 +13,7 @@ namespace DVLD_DataAccessLayer
 {
     public class clsCountriesDataAccess
     {
-        public int CountryID { set; get; }
-
-        public string CountruyName { set; get; }
+        
 
         public static int GetCountryIDByName(string CountryName)
         {

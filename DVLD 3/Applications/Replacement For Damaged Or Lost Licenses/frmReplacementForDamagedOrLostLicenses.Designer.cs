@@ -1,4 +1,6 @@
-﻿namespace DVLD_3.Applications.Replacement_For_Damaged_Or_Lost_Licenses
+﻿using DVLD_3.Applications.Controls;
+
+namespace DVLD_3.Applications.Replacement_For_Damaged_Or_Lost_Licenses
 {
     partial class frmReplacementForDamagedOrLostLicenses
     {

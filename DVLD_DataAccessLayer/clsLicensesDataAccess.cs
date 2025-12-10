@@ -105,7 +105,8 @@ namespace DVLD_DataAccessLayer
             return IsFound;
         }
 
-        public static bool FindByLicenseID(int LicenseID, ref int ApplicationID, ref int DriverID, ref int LicenseClassID, ref DateTime IssueDate,
+        public static bool FindByLicenseIDWithMoreData(int LicenseID, ref int ApplicationID, ref int DriverID
+            , ref int LicenseClassID, ref DateTime IssueDate,
             ref DateTime ExpirationDate, ref string Notes, ref decimal PaidFees, ref bool IsActive, ref byte IssueReason, ref int CreatedByUserID
             , ref string ApplicantName, ref string ClassName, ref string NationalNo, ref bool Gender, ref bool IsDetained, ref DateTime DateOfBirth
             , ref string ImagePath)
@@ -124,7 +125,7 @@ namespace DVLD_DataAccessLayer
 
                 if (reader.Read())
                 {
-                    ApplicationID = (int)reader["LicenseID"];
+                    ApplicationID = (int)reader["ApplicationID"];
                     DriverID = (int)reader["DriverID"];
                     LicenseClassID = (int)reader["LicenseClass"];
                     IssueDate = (DateTime)reader["IssueDate"];
@@ -175,7 +176,7 @@ namespace DVLD_DataAccessLayer
 
                 if (reader.Read())
                 {
-                    ApplicationID = (int)reader["LicenseID"];
+                    ApplicationID = (int)reader["ApplicationID"];
                     DriverID = (int)reader["DriverID"];
                     LicenseClassID = (int)reader["LicenseClass"];
                     IssueDate = (DateTime)reader["IssueDate"];
