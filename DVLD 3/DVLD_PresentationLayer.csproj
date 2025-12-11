@@ -58,6 +58,30 @@
     <Compile Include="Applications\Controls\ctrlLDApplicationInfo.Designer.cs">
       <DependentUpon>ctrlLDApplicationInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Applications\International License Application\Controls\ctrlInternationalLicenseInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Applications\International License Application\Controls\ctrlInternationalLicenseInfo.Designer.cs">
+      <DependentUpon>ctrlInternationalLicenseInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Applications\International License Application\frmAddInternationalLicenses.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Applications\International License Application\frmAddInternationalLicenses.Designer.cs">
+      <DependentUpon>frmAddInternationalLicenses.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Applications\International License Application\frmInternationalLicenseInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Applications\International License Application\frmInternationalLicenseInfo.Designer.cs">
+      <DependentUpon>frmInternationalLicenseInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Applications\International License Application\frmManageInternationalLicenses.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Applications\International License Application\frmManageInternationalLicenses.Designer.cs">
+      <DependentUpon>frmManageInternationalLicenses.cs</DependentUpon>
+    </Compile>
     <Compile Include="Applications\Release Detained Licenses\frmReleaseDetainedLicenses.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -297,6 +321,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Applications\Controls\ctrlLDApplicationInfo.resx">
       <DependentUpon>ctrlLDApplicationInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Applications\International License Application\Controls\ctrlInternationalLicenseInfo.resx">
+      <DependentUpon>ctrlInternationalLicenseInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Applications\International License Application\frmAddInternationalLicenses.resx">
+      <DependentUpon>frmAddInternationalLicenses.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Applications\International License Application\frmInternationalLicenseInfo.resx">
+      <DependentUpon>frmInternationalLicenseInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Applications\International License Application\frmManageInternationalLicenses.resx">
+      <DependentUpon>frmManageInternationalLicenses.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Applications\Release Detained Licenses\frmReleaseDetainedLicenses.resx">
       <DependentUpon>frmReleaseDetainedLicenses.cs</DependentUpon>

@@ -44,7 +44,8 @@ namespace DVLD_DataAccessLayer
         {
 
             string Quere = @"select * from PersonLicensesHistory_View
-                            where ApplicantPersonID = @PersonID"; 
+                            where ApplicantPersonID = @PersonID
+                            order by IsActive desc,ClassName asc"; 
             List<SqlParameter> parameters = new List<SqlParameter>
             {
                 Parameters.MakeParameter("PersonID", PersonID, false)

@@ -59,7 +59,27 @@ namespace DVLD_3.Licenses
 
         private void PrepareInternationalPublicPanelColumns()
         {
+            DataTable InternationalLicenses = clsInternationalLicense.GetPersonInternationalLicensesHistory(_personID);
+            List<DataGridViewColumn> dataGridViewColumns = new List<DataGridViewColumn>();
 
+            dataGridViewColumns.Add
+                (PublicFormsPanel.MakeTextBoxColumn("dataclmnInternationalLicenseID", "Int.License.ID", "InternationalLicenseID"));
+
+            dataGridViewColumns.Add(PublicFormsPanel.MakeTextBoxColumn("dataclmnApplicationID", "Application ID", "ApplicationID"));
+            dataGridViewColumns.Add(PublicFormsPanel.MakeTextBoxColumn("dataclmnLocalLicenseID", "Local License ID", "IssuedUsingLocalLicenseID"));
+            dataGridViewColumns.Add(PublicFormsPanel.MakeTextBoxColumn("dataclmnIssueDate", "Issue Date", "IssueDate"));
+            dataGridViewColumns.Add(PublicFormsPanel.MakeTextBoxColumn("dataclmnExpirationDate", "Expiration Date", "ExpirationDate"));
+            dataGridViewColumns.Add(PublicFormsPanel.MakeCheckColumn("dataclmnIsActive", "Is Active", "IsActive"));
+
+            publicFormsPanelInternational.AddColumnsToTheDataGridView(dataGridViewColumns);
+            publicFormsPanelInternational.LinkDataToGridView(InternationalLicenses);
+
+            publicFormsPanelInternational.DataViewer.Columns[0].Width = 100;
+            publicFormsPanelInternational.DataViewer.Columns[1].Width = 100;
+            publicFormsPanelInternational.DataViewer.Columns[2].Width = 100;
+            publicFormsPanelInternational.DataViewer.Columns[3].Width = 175;
+            publicFormsPanelInternational.DataViewer.Columns[4].Width = 175;
+            publicFormsPanelInternational.DataViewer.Columns[5].Width = 100;
         }
         private void PreparePublicPanels()
         {
@@ -73,17 +93,18 @@ namespace DVLD_3.Licenses
             publicFormsPanelInternational.DataFilter.Visible = false;
 
             publicFormsPanelLocal.DataViewer.AutoGenerateColumns = false;
-            //publicFormsPanelInternational.DataViewer.AutoGenerateColumns = false;
+            publicFormsPanelInternational.DataViewer.AutoGenerateColumns = false;
 
             publicFormsPanelLocal.DataViewer.SelectionMode=  DataGridViewSelectionMode.FullRowSelect;
             publicFormsPanelInternational.DataViewer.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
             publicFormsPanelLocal.DataViewer.ContextMenuStrip = contextMenuStrip1;
-            publicFormsPanelInternational.DataViewer.ContextMenuStrip = contextMenuStrip1;
+            publicFormsPanelInternational.DataViewer.ContextMenuStrip = contextMenuStrip2;
 
 
 
             PrepareLocalPublicPanelColumns();
+            PrepareInternationalPublicPanelColumns();
         }
         private void frmPersonLicensesHistory_Load(object sender, EventArgs e)
         {
